@@ -1,0 +1,60 @@
+## Fichier : docker-compose.yml
+version: '3'
+services:
+  front:
+    container_name: front
+    build:
+      context: ./Front
+      # dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+    # stdin_open: true
+    volumes:
+      - ./Front:/usr/src/app/front
+      - /usr/src/app/front/node_modules
+
+  back:
+    container_name: back
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: ./Back
+      target: back
+    volumes:
+      - ./Back:/srv/app
+    links:
+      - php
+    ports:
+      - '8888:80'
+  php:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: ./Back
+      target: php_dev
+    volumes:
+      - ./.docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ~/.config/composer:/home/prod/.composer
+      - ./Back:/srv/app
+  database:
+    image: postgres:15.4-alpine
+    environment:
+      POSTGRES_DB: symfony
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+
+  ###> symfony/mailer ###
+  mailer:
+    image: schickling/mailcatcher
+    ports: [ "1025:1025", "1080:1080" ]
+###< symfony/mailer ###
+
+volumes:
+  database_data:
+
+
