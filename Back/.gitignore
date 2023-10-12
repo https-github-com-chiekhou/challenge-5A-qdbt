@@ -1,4 +1,4 @@
-.env
+/Back/.env
 .no-docker
 Makefile.local.mk
 
