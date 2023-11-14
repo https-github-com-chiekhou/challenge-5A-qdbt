@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { FormContainer } from '../components/FormContainer';
 
 
-export const LoginScreen = () => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -54,4 +54,6 @@ export const LoginScreen = () => {
         </FormContainer>
     );
 };
+
+export default Login;
 
