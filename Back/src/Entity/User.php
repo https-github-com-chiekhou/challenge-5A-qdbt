@@ -11,6 +11,8 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
 use App\State\UserPasswordHasher;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,6 +20,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
+    normalizationContext: ['groups' => ['user:read']],
+    denormalizationContext: ['groups' => ['user:create', 'user:update']],
     operations: [
         new GetCollection(),
         new Get(),
@@ -26,8 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Patch(processor: UserPasswordHasher::class),
         new Delete()
     ],
-    normalizationContext: ['groups' => ['user:read']],
-    denormalizationContext: ['groups' => ['user:create', 'user:update']],
+   
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -59,10 +62,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-
     #[Groups(['user:read'])]
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $telephone = null;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: FeedBack::class)]
+    private Collection $feedBacks;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+
 
     public function getId(): ?int
     {
@@ -80,8 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
+    
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -166,5 +184,103 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->roles =  ['ROLE_USER'];
+        $this->feedBacks = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FeedBack>
+     */
+    public function getFeedBacks(): Collection
+    {
+        return $this->feedBacks;
+    }
+
+    public function addFeedBack(FeedBack $feedBack): static
+    {
+        if (!$this->feedBacks->contains($feedBack)) {
+            $this->feedBacks->add($feedBack);
+            $feedBack->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedBack(FeedBack $feedBack): static
+    {
+        if ($this->feedBacks->removeElement($feedBack)) {
+            // set the owning side to null (unless already changed)
+            if ($feedBack->getClient() === $this) {
+                $feedBack->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setIdClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getIdClient() === $this) {
+                $reservation->setIdClient(null);
+            }
+        }
+        return $this;
+    }
+
 }
