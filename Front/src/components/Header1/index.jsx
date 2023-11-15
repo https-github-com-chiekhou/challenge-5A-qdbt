@@ -9,12 +9,12 @@ const Header1 = (props) => {
         <div className="flex md:flex-col flex-row md:gap-10 items-center justify-between w-full">
           <div className="header-row my-px">
             <div className="flex flex-row gap-[11px] items-center justify-start">
-              <Img className="h-10 w-10" src="images/img_home.svg" alt="home" />
+              <Img className="h-10 w-10" src="./src/assets/logo/logo.png" alt="qdbt logo" />
               <Text
-                className="text-orange-A700 text-xl w-auto"
+                className="text-cyan-800 text-xl w-auto"
                 size="txtMarkoOneRegular20"
               >
-                Relasto
+                QDBT
               </Text>
             </div>
             <div className="mobile-menu">
@@ -33,7 +33,7 @@ const Header1 = (props) => {
                   className="text-base text-gray-900 w-auto"
                   size="txtManropeSemiBold16Gray900"
                 >
-                  Home
+                  Accueil
                 </Text>
                 <Img
                   className="h-4 w-4"
@@ -81,8 +81,8 @@ const Header1 = (props) => {
               Blog
             </Text>
           </div>
-          <div className="flex flex-row gap-10 h-[42px] md:h-auto sm:hidden items-center justify-start w-[228px]">
-            <Button
+          <div className="flex flex-row h-[42px] md:h-auto sm:hidden items-center justify-start w-[228px]">
+            {/* <Button
               className="bg-transparent cursor-pointer flex items-center justify-center min-w-[94px]"
               leftIcon={
                 <Img
@@ -95,16 +95,16 @@ const Header1 = (props) => {
               <div className="font-bold font-manrope text-gray-900 text-left text-lg">
                 Search
               </div>
-            </Button>
-            <Button
-              className="cursor-pointer font-manrope font-semibold h-[42px] text-base text-center w-full"
-              shape="round"
-              color="gray_900"
-              size="xs"
-              variant="fill"
-            >
-              Log in
-            </Button>
+            </Button> */}
+            <a href="https://seinfeldquotes.com" class="text-cyan-800 visited:text-cyan-800 hover:text-cyan-800">
+              Pour votre entreprise
+            </a>
+            <p>
+              ||
+            </p>
+            <a href="https://seinfeldquotes.com" class="text-purple-400 visited:text-purple-400 hover:text-purple-400">
+              S'identifier
+            </a>
           </div>
         </div>
       </header>

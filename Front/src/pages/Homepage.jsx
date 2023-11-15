@@ -16,8 +16,8 @@ const Homepage = () => {
                     size="txtManropeExtraBold54"
                   >
                     <>
-                      Reimagining real estate to <br />
-                      make it easier to unlock.
+                      Réserver facilement votre séance de massage <br />
+                      avec Que du bon temps.
                     </>
                   </Text>
                   <Text
@@ -38,25 +38,29 @@ const Homepage = () => {
                   <div className="flex md:flex-col flex-row gap-6 items-start justify-start w-full">
                     <Img
                       className="flex-1 md:flex-none h-[400px] sm:h-auto max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      src="images/img_rectangle5592.png"
-                      alt="rectangle5592"
+                      src="./src/assets/images/salons/salon3.jpg"
+                      id="imageaccueil"
+                      alt="image accueil"
                     />
                     <Img
                       className="md:h-[400px] sm:h-auto h-full max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      src="images/img_rectangle5593.png"
-                      alt="rectangle5593"
+                      id="imageaccueil"
+                      src="./src/assets/images/salons/salon1.jpg"
+                      alt="image accueil"
                     />
                   </div>
                   <div className="flex md:flex-col flex-row gap-6 items-start justify-start w-full">
                     <Img
                       className="md:h-[400px] sm:h-auto h-full max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      src="images/img_rectangle5595.png"
-                      alt="rectangle5595"
+                      id="imageaccueil"
+                      src="./src/assets/images/salons/massage1.jpg"
+                      alt="image accueil"
                     />
                     <Img
                       className="flex-1 md:flex-none h-[400px] sm:h-auto max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      src="images/img_rectangle5594.png"
-                      alt="rectangle5594"
+                      id="imageaccueil"
+                      src="./src/assets/images/salons/salon4.jpg"
+                      alt="image accueil"
                     />
                   </div>
                 </div>
@@ -331,272 +335,7 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] w-full">
-              <div className="flex flex-col md:gap-10 gap-[60px] items-center justify-start max-w-[1200px] mx-auto w-full">
-                <Text
-                  className="text-4xl sm:text-[32px] md:text-[34px] text-center text-gray-900 tracking-[-0.72px] w-full"
-                  size="txtManropeExtraBold36"
-                >
-                  Relasto Team members
-                </Text>
-                <div className="flex flex-col items-start justify-start w-full">
-                  <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-4 justify-center min-h-[auto] w-full">
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5596.png"
-                        alt="rectangle5596"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Kausar Pial
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          CEO
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5597.png"
-                        alt="rectangle5597"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Floyd Miles
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          President of Sales
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5598.png"
-                        alt="rectangle5598"
-                      />
-                      <div className="flex flex-col gap-[5px] items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Darlene Robertson
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5599_282x282.png"
-                        alt="rectangle5599"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Guy Hawkins
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5600.png"
-                        alt="rectangle5600"
-                      />
-                      <div className="flex flex-col gap-[5px] items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Jerome Bell
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5601.png"
-                        alt="rectangle5601"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Ralph Edwards
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5602.png"
-                        alt="rectangle5602"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Arlene McCoy
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5603.png"
-                        alt="rectangle5603"
-                      />
-                      <div className="flex flex-col gap-[5px] items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Devon Lane
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5604.png"
-                        alt="rectangle5604"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Courtney Henry
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5605.png"
-                        alt="rectangle5605"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Bessie Cooper
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5606.png"
-                        alt="rectangle5606"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Cody Fisher
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-4 items-start justify-start w-full">
-                      <Img
-                        className="h-[282px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
-                        src="images/img_rectangle5607.png"
-                        alt="rectangle5607"
-                      />
-                      <div className="flex flex-col items-start justify-start w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                          size="txtManropeSemiBold20"
-                        >
-                          Cody Fisher
-                        </Text>
-                        <Text
-                          className="text-gray-700 text-lg w-full"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Marketing Coordinator
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
             <div className="bg-gray-900 flex flex-col font-manrope items-center justify-center p-[120px] md:px-10 sm:px-5 w-full">
               <div className="flex flex-col md:gap-10 gap-[120px] items-center justify-start max-w-[1200px] mx-auto w-full">
                 <div className="flex flex-col md:gap-10 gap-[60px] items-start justify-start w-full">

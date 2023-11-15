@@ -12,14 +12,14 @@ const Footer = (props) => {
               <div className="flex flex-row gap-[11px] h-10 md:h-auto items-center justify-start w-[341px]">
                 <Img
                   className="h-10 w-10"
-                  src="images/img_home.svg"
+                  src="./src/assets/logo/logo.png"
                   alt="home_One"
                 />
                 <Text
-                  className="text-orange-A700 text-xl w-auto"
+                  className="text-cyan-800 text-xl w-auto"
                   size="txtMarkoOneRegular20"
                 >
-                  Relasto
+                  Que du bon temps
                 </Text>
               </div>
               <div className="flex flex-col gap-7 h-[194px] md:h-auto items-start justify-start w-full">
@@ -28,9 +28,9 @@ const Footer = (props) => {
                   size="txtManropeSemiBold16Gray900"
                 >
                   <>
-                    59 Bervely Hill Ave, Brooklyn Town,
+                    242 rue du Feaubourg Saint-Antoine
                     <br />
-                    New York, NY 5630, CA, US
+                    75012 Paris
                   </>
                 </Text>
                 <div className="flex flex-col gap-1 items-start justify-start w-auto">
@@ -38,13 +38,13 @@ const Footer = (props) => {
                     className="text-base text-gray-900 w-auto"
                     size="txtManropeSemiBold16Gray900"
                   >
-                    +(123) 456-7890
+                    01 02 03 04 05
                   </Text>
                   <Text
                     className="text-base text-gray-900 w-auto"
                     size="txtManropeSemiBold16Gray900"
                   >
-                    info@mail.com
+                    quedubontemps@contact.com
                   </Text>
                 </div>
                 <div className="flex flex-row gap-3 items-start justify-start w-full">
@@ -88,7 +88,7 @@ const Footer = (props) => {
                   className="text-gray-900 text-lg w-full"
                   size="txtManropeBold18Gray900"
                 >
-                  Features
+                  Pages
                 </Text>
                 <ul className="flex flex-col gap-3.5 items-start justify-start w-full common-column-list">
                   <li>
@@ -230,7 +230,7 @@ const Footer = (props) => {
                   className="text-gray-900 text-lg w-full"
                   size="txtManropeBold18Gray900"
                 >
-                  Others
+                  Autres
                 </Text>
                 <ul className="flex flex-col gap-3.5 items-start justify-start w-full common-column-list">
                   <li>
@@ -281,7 +281,7 @@ const Footer = (props) => {
             className="text-base text-gray-900 w-full"
             size="txtManropeSemiBold16Gray900"
           >
-            © 2022. All rights reserved.
+            © 2023. All rights reserved.
           </Text>
         </div>
       </footer>

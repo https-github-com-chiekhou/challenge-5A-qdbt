@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   mode: "jit",
   content: [
@@ -42,5 +42,7 @@ module.exports = {
       boxShadow: { bs: "0px 30px  30px 0px #91aebb33" },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 };
