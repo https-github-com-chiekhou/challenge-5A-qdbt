@@ -8,7 +8,6 @@ export default {
   ],
   darkMode: "class",
   theme: {
-    screens: { md: { max: "1050px" }, sm: { max: "550px" } },
     extend: {
       colors: {
         deep_orange: { 50: "#fbeee6", 400: "#ff8b46", 900: "#883301" },
@@ -42,5 +41,9 @@ export default {
       boxShadow: { bs: "0px 30px  30px 0px #91aebb33" },
     },
   },
-  plugins: [],
+  plugins: [
+  ],
 };
+
+
+

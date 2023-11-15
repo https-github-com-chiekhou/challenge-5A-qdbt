@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
-import LoginScreen from "./pages/Login";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Register from "./pages/Register"
 //const Error = React.lazy(() => import("pages/Error"));
 const ProjectRoutes = () => {
   return (
@@ -11,7 +12,8 @@ const ProjectRoutes = () => {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </React.Suspense>

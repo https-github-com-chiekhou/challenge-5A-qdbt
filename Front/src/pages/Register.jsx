@@ -1,23 +1,8 @@
-
-const Login = () => {
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-
-    // const submitHandler = async (e) => {
-    //     e.preventDefault();
-    //     console.log('submit')
-    // };
-
+const Register = () => {
     return (
         <>
-            {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
+
+
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
@@ -26,12 +11,62 @@ const Login = () => {
                         alt="Your Company"
                     />
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                        Sign in to your account
+                        Register
                     </h2>
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" action="#" method="POST">
+
+                        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+                                    First name
+                                </label>
+                                <div className="mt-2">
+                                    <input
+                                        type="text"
+                                        name="first-name"
+                                        id="first-name"
+                                        autoComplete="given-name"
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
+                                    Last name
+                                </label>
+                                <div className="mt-2">
+                                    <input
+                                        type="text"
+                                        name="last-name"
+                                        id="last-name"
+                                        autoComplete="family-name"
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <label htmlFor="telephone" className="block text-sm font-medium leading-6 text-gray-900">
+                                Telephone
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    id="telephone"
+                                    name="telephone"
+                                    type="telephone"
+                                    autoComplete="telephone"
+                                    required
+                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                            </div>
+                        </div>
+
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                 Email address
@@ -82,8 +117,8 @@ const Login = () => {
                     </form>
 
                     <p className="mt-10 text-center text-sm text-gray-500">
-                        Not a member?{' '}
-                        <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                        You are a member?{' '}
+                        <a href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                             Register
                         </a>
                     </p>
@@ -93,5 +128,5 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
 
