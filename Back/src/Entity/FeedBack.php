@@ -2,32 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\FeedBackRepository;
+use App\Repository\FeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Put;
 
-#[ApiResource(
-    normalizationContext: ['groups' => ['feedback:read']],
-    denormalizationContext: ['groups' => ['feedback:read']],
-    operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(),
-        new Put(),
-        new Patch(),
-        new Delete()
-    ],
-   
-)]
-#[ORM\Entity(repositoryClass: FeedBackRepository::class)]
-#[ORM\Table(name: '`feedback`')]
-class FeedBack
+#[ORM\Entity(repositoryClass: FeedbackRepository::class)]
+class Feedback
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -40,10 +19,12 @@ class FeedBack
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[ORM\ManyToOne(inversedBy: 'feedBacks')]
+    #[ORM\ManyToOne(inversedBy: 'feedback')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[ORM\ManyToOne(inversedBy: 'feedBacks')]
+    #[ORM\ManyToOne(inversedBy: 'feedback')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
 
     public function getId(): ?int

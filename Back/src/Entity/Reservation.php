@@ -3,33 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Put;
-
-#[ApiResource(
-    normalizationContext: ['groups' => ['reservation:read']],
-    denormalizationContext: ['groups' => ['reservation:read']],
-    operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(),
-        new Put(),
-        new Patch(),
-        new Delete()
-    ],
-   
-)]
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
-#[ORM\Table(name: '`reservation`')]
 class Reservation
 {
     #[ORM\Id]
@@ -43,20 +20,26 @@ class Reservation
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $startTime = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $endTime = null;
+
     #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Creneau $creneau = null;
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Salarie $salarie = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
-
-
-    public function __construct()
-    {
-        $this->prestataire = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -87,6 +70,42 @@ class Reservation
         return $this;
     }
 
+    public function getDate(): ?\DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeImmutable $date): static
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getStartTime(): ?\DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(\DateTimeInterface $startTime): static
+    {
+        $this->startTime = $startTime;
+
+        return $this;
+    }
+
+    public function getEndTime(): ?\DateTimeInterface
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime(\DateTimeInterface $endTime): static
+    {
+        $this->endTime = $endTime;
+
+        return $this;
+    }
+
     public function getClient(): ?User
     {
         return $this->client;
@@ -99,14 +118,14 @@ class Reservation
         return $this;
     }
 
-    public function getCreneau(): ?Creneau
+    public function getSalarie(): ?Salarie
     {
-        return $this->creneau;
+        return $this->salarie;
     }
 
-    public function seCreneau(?Creneau $creneau): static
+    public function setSalarie(?Salarie $salarie): static
     {
-        $this->creneau = $creneau;
+        $this->salarie = $salarie;
 
         return $this;
     }
@@ -122,6 +141,4 @@ class Reservation
 
         return $this;
     }
-
-   
 }

@@ -6,30 +6,8 @@ use App\Repository\PrestataireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Put;
 
-
-#[ApiResource(
-    normalizationContext: ['groups' => ['prestataire:read']],
-    denormalizationContext: ['groups' => ['prestataire:read']],
-    operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(),
-        new Put(),
-        new Patch(),
-        new Delete()
-    ],
-   
-)]
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
-#[ORM\Table(name: '`prestataire`')]
 class Prestataire
 {
     #[ORM\Id]
@@ -50,37 +28,37 @@ class Prestataire
     private ?string $kbis = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $statistiques = null;
-
-    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: FeedBack::class)]
-    private Collection $feedBacks;
-
-    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Creneau::class)]
-    private Collection $creneaux;
-
-    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Service::class)]
-    private Collection $services;
+    private ?string $statistique = null;
 
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Etablissement::class)]
     private Collection $etablissements;
 
+    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Feedback::class)]
+    private Collection $feedback;
+
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Salarie::class)]
     private Collection $salaries;
 
-    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Reservation::class)]
-    private Collection $reservations;
+    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Service::class)]
+    private Collection $services;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $client = null;
 
+   
+
+  
+
     public function __construct()
     {
-        $this->feedBacks = new ArrayCollection();
-        $this->creneaux = new ArrayCollection();
-        $this->services = new ArrayCollection();
         $this->etablissements = new ArrayCollection();
-        $this->salaries = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
+        $this->salaries = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,106 +114,14 @@ class Prestataire
         return $this;
     }
 
-    public function getStatistiques(): ?string
+    public function getStatistique(): ?string
     {
-        return $this->statistiques;
+        return $this->statistique;
     }
 
-    public function setStatistiques(string $statistiques): static
+    public function setStatistique(string $statistique): static
     {
-        $this->statistiques = $statistiques;
-
-        return $this;
-    }
-
-
-    /**
-     * @return Collection<int, FeedBack>
-     */
-    public function getFeedBacks(): Collection
-    {
-        return $this->feedBacks;
-    }
-
-    public function addFeedBack(FeedBack $feedBack): static
-    {
-        if (!$this->feedBacks->contains($feedBack)) {
-            $this->feedBacks->add($feedBack);
-            $feedBack->setPrestataire($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFeedBack(FeedBack $feedBack): static
-    {
-        if ($this->feedBacks->removeElement($feedBack)) {
-            // set the owning side to null (unless already changed)
-            if ($feedBack->getPrestataire() === $this) {
-                $feedBack->setPrestataire(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * @return Collection<int, Creneau>
-     */
-    public function getCreneaux(): Collection
-    {
-        return $this->creneaux;
-    }
-
-    public function addCreneaux(Creneau $creneaux): static
-    {
-        if (!$this->creneaux->contains($creneaux)) {
-            $this->creneaux->add($creneaux);
-            $creneaux->setPrestataire($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCreneaux(Creneau $creneaux): static
-    {
-        if ($this->creneaux->removeElement($creneaux)) {
-            // set the owning side to null (unless already changed)
-            if ($creneaux->getPrestataire() === $this) {
-                $creneaux->setPrestataire(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Service>
-     */
-    public function getServices(): Collection
-    {
-        return $this->services;
-    }
-
-    public function addService(Service $service): static
-    {
-        if (!$this->services->contains($service)) {
-            $this->services->add($service);
-            $service->setPrestataire($this);
-        }
-
-        return $this;
-    }
-
-    public function removeService(Service $service): static
-    {
-        if ($this->services->removeElement($service)) {
-            // set the owning side to null (unless already changed)
-            if ($service->getPrestataire() === $this) {
-                $service->setPrestataire(null);
-            }
-        }
+        $this->statistique = $statistique;
 
         return $this;
     }
@@ -264,36 +150,6 @@ class Prestataire
             // set the owning side to null (unless already changed)
             if ($etablissement->getPrestataire() === $this) {
                 $etablissement->setPrestataire(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Salarie>
-     */
-    public function getSalaries(): Collection
-    {
-        return $this->salaries;
-    }
-
-    public function addSalary(Salarie $salary): static
-    {
-        if (!$this->salaries->contains($salary)) {
-            $this->salaries->add($salary);
-            $salary->setPrestataire($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalary(Salarie $salary): static
-    {
-        if ($this->salaries->removeElement($salary)) {
-            // set the owning side to null (unless already changed)
-            if ($salary->getPrestataire() === $this) {
-                $salary->setPrestataire(null);
             }
         }
 
@@ -330,6 +186,36 @@ class Prestataire
         return $this;
     }
 
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setPrestataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getPrestataire() === $this) {
+                $feedback->setPrestataire(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getClient(): ?User
     {
         return $this->client;
@@ -342,4 +228,75 @@ class Prestataire
         return $this;
     }
 
+    public function getSalarie(): ?Salarie
+    {
+        return $this->salarie;
+    }
+
+    public function setSalarie(?Salarie $salarie): static
+    {
+        $this->salarie = $salarie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Salarie>
+     */
+    public function getSalaries(): Collection
+    {
+        return $this->salaries;
+    }
+
+    public function addSalary(Salarie $salary): static
+    {
+        if (!$this->salaries->contains($salary)) {
+            $this->salaries->add($salary);
+            $salary->setPrestataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalary(Salarie $salary): static
+    {
+        if ($this->salaries->removeElement($salary)) {
+            // set the owning side to null (unless already changed)
+            if ($salary->getPrestataire() === $this) {
+                $salary->setPrestataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->setPrestataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        if ($this->services->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getPrestataire() === $this) {
+                $service->setPrestataire(null);
+            }
+        }
+
+        return $this;
+    }
 }

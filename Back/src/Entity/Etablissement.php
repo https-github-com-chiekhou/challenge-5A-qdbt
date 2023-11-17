@@ -4,29 +4,8 @@ namespace App\Entity;
 
 use App\Repository\EtablissementRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Put;
 
-#[ApiResource(
-    normalizationContext: ['groups' => ['etablissement:read']],
-    denormalizationContext: ['groups' => ['etablissement:read']],
-    operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(),
-        new Put(),
-        new Patch(),
-        new Delete()
-    ],
-   
-)]
 #[ORM\Entity(repositoryClass: EtablissementRepository::class)]
-#[ORM\Table(name: '`etablissement`')]
 class Etablissement
 {
     #[ORM\Id]
@@ -35,12 +14,13 @@ class Etablissement
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
 
     #[ORM\ManyToOne(inversedBy: 'etablissements')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
 
     public function getId(): ?int
@@ -48,14 +28,14 @@ class Etablissement
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }

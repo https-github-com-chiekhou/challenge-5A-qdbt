@@ -30,7 +30,6 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Patch(processor: UserPasswordHasher::class),
         new Delete()
     ],
-   
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -66,21 +65,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
-
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: FeedBack::class)]
-    private Collection $feedBacks;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Reservation::class)]
     private Collection $reservations;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Feedback::class)]
+    private Collection $feedback;
 
 
     public function getId(): ?int
@@ -186,6 +187,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles =  ['ROLE_USER'];
         $this->feedBacks = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function getNom(): ?string
@@ -225,36 +227,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, FeedBack>
-     */
-    public function getFeedBacks(): Collection
-    {
-        return $this->feedBacks;
-    }
-
-    public function addFeedBack(FeedBack $feedBack): static
-    {
-        if (!$this->feedBacks->contains($feedBack)) {
-            $this->feedBacks->add($feedBack);
-            $feedBack->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFeedBack(FeedBack $feedBack): static
-    {
-        if ($this->feedBacks->removeElement($feedBack)) {
-            // set the owning side to null (unless already changed)
-            if ($feedBack->getClient() === $this) {
-                $feedBack->setClient(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Reservation>
      */
     public function getReservations(): Collection
@@ -266,7 +238,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations->add($reservation);
-            $reservation->setIdClient($this);
+            $reservation->setClient($this);
         }
 
         return $this;
@@ -276,11 +248,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)
-            if ($reservation->getIdClient() === $this) {
-                $reservation->setIdClient(null);
+            if ($reservation->getClient() === $this) {
+                $reservation->setClient(null);
             }
         }
+
         return $this;
     }
 
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getClient() === $this) {
+                $feedback->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }

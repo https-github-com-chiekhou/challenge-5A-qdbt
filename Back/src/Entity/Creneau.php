@@ -2,33 +2,31 @@
 
 namespace App\Entity;
 
-use App\Repository\CreneauRepository;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
+use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
+use App\Repository\CreneauRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity(repositoryClass: CreneauRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['crenau:read']],
-    denormalizationContext: ['groups' => ['crenau:read']],
+    normalizationContext: ['groups' => ['creneau:read']],
+    denormalizationContext: ['groups' => ['creneau:create', 'user:update']],
     operations: [
         new GetCollection(),
         new Get(),
-        new Post(),
-        new Put(),
+        new Post(denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
+        new Put(denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
         new Patch(),
         new Delete()
     ],
-   
 )]
-
-#[ORM\Entity(repositoryClass: CreneauRepository::class)]
-#[ORM\Table(name: '`crenau`')]
 class Creneau
 {
     #[ORM\Id]
@@ -36,52 +34,72 @@ class Creneau
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_start = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_end = null;
+    #[ORM\Column(length: 9)]
+    private ?string $day = null;
+
+    #[Groups(['creneau:create', 'creneau:update'])]
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $startTime = null;
+
+    #[Groups(['creneau:create', 'creneau:update'])]
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $endTime = null;
 
     #[ORM\ManyToOne(inversedBy: 'creneaux')]
-    private ?Prestataire $prestataire = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Salarie $salarie = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateStart(): ?\DateTimeInterface
+
+    public function getDay(): ?string
     {
-        return $this->date_start;
+        return $this->day;
     }
 
-    public function setDateStart(\DateTimeInterface $date_start): static
+    public function setDay(string $day): static
     {
-        $this->date_start = $date_start;
+        $this->day = $day;
 
         return $this;
     }
 
-    public function getDateEnd(): ?\DateTimeInterface
+    public function getStartTime(): ?\DateTimeInterface
     {
-        return $this->date_end;
+        return $this->startTime;
     }
 
-    public function setDateEnd(\DateTimeInterface $date_end): static
+    public function setStartTime(\DateTimeInterface $startTime): static
     {
-        $this->date_end = $date_end;
+        $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getPrestataire(): ?Prestataire
+    public function getEndTime(): ?\DateTimeInterface
     {
-        return $this->prestataire;
+        return $this->endTime;
     }
 
-    public function setPrestataire(?Prestataire $prestataire): static
+    public function setEndTime(\DateTimeInterface $endTime): static
     {
-        $this->prestataire = $prestataire;
+        $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    public function getSalarie(): ?Salarie
+    {
+        return $this->salarie;
+    }
+
+    public function setSalarie(?Salarie $salarie): static
+    {
+        $this->salarie = $salarie;
 
         return $this;
     }

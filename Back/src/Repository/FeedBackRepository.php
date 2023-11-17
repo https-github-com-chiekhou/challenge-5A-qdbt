@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\FeedBack;
+use App\Entity\Feedback;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<FeedBack>
+ * @extends ServiceEntityRepository<Feedback>
  *
- * @method FeedBack|null find($id, $lockMode = null, $lockVersion = null)
- * @method FeedBack|null findOneBy(array $criteria, array $orderBy = null)
- * @method FeedBack[]    findAll()
- * @method FeedBack[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Feedback|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Feedback|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Feedback[]    findAll()
+ * @method Feedback[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FeedBackRepository extends ServiceEntityRepository
+class FeedbackRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, FeedBack::class);
+        parent::__construct($registry, Feedback::class);
     }
 
 //    /**
-//     * @return FeedBack[] Returns an array of FeedBack objects
+//     * @return Feedback[] Returns an array of Feedback objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class FeedBackRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?FeedBack
+//    public function findOneBySomeField($value): ?Feedback
 //    {
 //        return $this->createQueryBuilder('f')
 //            ->andWhere('f.exampleField = :val')
