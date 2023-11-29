@@ -1,4 +1,4 @@
-name: Docker Build and Test
+name: Docker Build and Test (github-ci)
 
 on:
   push:
