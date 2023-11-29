@@ -1,0 +1,20 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  IMAGE_NAME: node:20.8-alpine3.17
+  TAG: dev
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker-compose -f docker-compose.yml build
+
+deploy:
+  stage: deploy
+  script:
+    - docker-compose -f docker-compose.yml push
