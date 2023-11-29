@@ -12,12 +12,12 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
+      
+    - name: Localisation
+      run: ls
 
     - name: Set up Docker Compose
       run: docker-compose -f docker-compose.yml up -d
-
-    - name: Localisation
-      run: ls
 
     - name: Run Tests
       run: docker-compose -f docker-compose.yml exec front npm test
