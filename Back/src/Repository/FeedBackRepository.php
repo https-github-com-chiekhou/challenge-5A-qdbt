@@ -2,19 +2,19 @@
 
 namespace App\Repository;
 
-use App\Entity\Feedback;
+use App\Entity\FeedBack;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Feedback>
+ * @extends ServiceEntityRepository<FeedBack>
  *
- * @method Feedback|null find($id, $lockMode = null, $lockVersion = null)
- * @method Feedback|null findOneBy(array $criteria, array $orderBy = null)
- * @method Feedback[]    findAll()
- * @method Feedback[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method FeedBack|null find($id, $lockMode = null, $lockVersion = null)
+ * @method FeedBack|null findOneBy(array $criteria, array $orderBy = null)
+ * @method FeedBack[]    findAll()
+ * @method FeedBack[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FeedbackRepository extends ServiceEntityRepository
+class FeedBackRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
