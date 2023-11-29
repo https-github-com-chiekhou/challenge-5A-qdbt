@@ -1,20 +1,24 @@
-stages:
-  - build
-  - deploy
+name: Docker Build and Test
 
-variables:
-  IMAGE_NAME: node:20.8-alpine3.17
-  TAG: dev
+on:
+  push:
+    branches:
+      - dev
 
-before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
 
-build:
-  stage: build
-  script:
-    - docker-compose -f docker-compose.yml build
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-deploy:
-  stage: deploy
-  script:
-    - docker-compose -f docker-compose.yml push
+    - name: Build and Test Front-end Docker Image
+      run: |
+        docker-compose -f docker-compose.yml build front
+        docker-compose -f docker-compose.yml run front npm test
+
+    - name: Build and Test Back-end Docker Image
+      run: |
+        docker-compose -f docker-compose.yml build back
+        docker-compose -f docker-compose.yml run back npm test
