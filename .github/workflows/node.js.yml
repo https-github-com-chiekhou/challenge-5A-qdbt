@@ -13,6 +13,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    
+    - name: Localisation
+      run: ls
+
+
     - name: Build and Test Front-end Docker Image
       working-directory: ./front
       run: |
