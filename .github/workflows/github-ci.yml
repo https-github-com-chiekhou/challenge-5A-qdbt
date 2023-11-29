@@ -1,24 +1,23 @@
-name: Docker Build and Test (github-ci)
+name: Docker Build and Deploy
 
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Build and Test Front-end Docker Image
-      run: |
-        docker-compose -f docker-compose.yml build front
-        docker-compose -f docker-compose.yml run front npm test
+    - name: Set up Docker Compose
+      run: docker-compose -f docker-compose.yml up -d
 
-    - name: Build and Test Back-end Docker Image
-      run: |
-        docker-compose -f docker-compose.yml build back
-        docker-compose -f docker-compose.yml run back npm test
+    - name: Run Tests
+      run: docker-compose -f docker-compose.yml exec front npm test
+
+    - name: Stop Docker Compose
+      run: docker-compose -f docker-compose.yml down
