@@ -29,32 +29,33 @@ const Header1 = (props) => {
               orientation="horizontal"
             >
               <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
+                <Img
+                    className="h-6 w-4"
+                    src="./src/assets/images/img_arrowdown.svg"
+                    alt="arrowdown"
+                />
                 <Text
                   className="text-base text-gray-900 w-auto"
                   size="txtManropeSemiBold16Gray900"
                 >
                   Accueil
                 </Text>
-                <Img
-                  className="h-4 w-4"
-                  src="images/img_arrowdown.svg"
-                  alt="arrowdown"
-                />
               </div>
               <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
+                <Img
+                    className="h-6 w-4"
+                    src="./src/assets/images/img_massage.svg"
+                    alt="arrowdown"
+                />
                 <Text
                   className="text-base text-gray-900 w-auto"
                   size="txtManropeSemiBold16Gray900"
                 >
-                  Listing
+                  Massage
                 </Text>
-                <Img
-                  className="h-4 w-4"
-                  src="images/img_arrowdown.svg"
-                  alt="arrowdown"
-                />
+                
               </div>
-              <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
+              {/* <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
                 <Text
                   className="text-base text-gray-900 w-auto"
                   size="txtManropeSemiBold16Gray900"
@@ -66,20 +67,20 @@ const Header1 = (props) => {
                   src="images/img_arrowdown.svg"
                   alt="arrowdown"
                 />
-              </div>
+              </div> */}
             </List>
             <Text
               className="text-base text-center text-gray-900 w-auto"
               size="txtManropeSemiBold16Gray900"
             >
-              Property{" "}
+              À propos de nous{" "}
             </Text>
-            <Text
+            {/* <Text
               className="text-base text-gray-900 w-auto"
               size="txtManropeSemiBold16Gray900"
             >
               Blog
-            </Text>
+            </Text> */}
           </div>
           <div className="flex flex-row h-[42px] md:h-auto sm:hidden items-center justify-start w-[228px]">
             {/* <Button

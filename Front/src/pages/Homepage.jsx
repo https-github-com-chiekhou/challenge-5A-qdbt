@@ -25,12 +25,9 @@ const Homepage = () => {
                     size="txtManropeRegular18Gray700"
                   >
                     <>
-                      On the other hand, we denounce with righteous indignation and
-                      dislike men who <br />
-                      are so beguiled and demoralized by the charms of pleasure of
-                      the moment, <br />
-                      so blinded by desire, that they cannot foresee the pain and
-                      trouble.
+                      Vous pouvez venir vous faire chouchouter dans le salon de massage que vous voulez <br />
+                      dans la ville de votre choix <br />
+                      et à l'heure que vous souhaitez en un clic.
                     </>
                   </Text>
                 </div>
@@ -68,7 +65,7 @@ const Homepage = () => {
             </div>
             <div className="bg-gray-50_01 flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] py-[50px] w-full">
               <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between max-w-[1200px] mx-auto w-full">
-                <List
+                {/* <List
                   className="md:flex-1 sm:flex-col flex-row md:gap-10 gap-[100px] grid sm:grid-cols-1 grid-cols-2 w-[46%] md:w-full"
                   orientation="horizontal"
                 >
@@ -130,9 +127,9 @@ const Homepage = () => {
                       </Text>
                     </div>
                   </div>
-                </List>
+                </List> */}
                 <div className="flex flex-col gap-[18px] items-start justify-start w-[225px]">
-                  <Img
+                  {/* <Img
                     className="h-[60px] w-[60px]"
                     src="images/img_file.svg"
                     alt="file"
@@ -153,10 +150,10 @@ const Homepage = () => {
                         transactions
                       </>
                     </Text>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex flex-col gap-[18px] items-start justify-start w-[225px]">
-                  <Img
+                  {/* <Img
                     className="h-[60px] w-[60px]"
                     src="images/img_file_white_a700.svg"
                     alt="file_One"
@@ -174,167 +171,12 @@ const Homepage = () => {
                     >
                       Reagular Clients
                     </Text>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
-            <div className="flex flex-col font-manrope items-center justify-center max-w-[1440px] pl-[120px] pr-[173px] md:px-10 sm:px-5 w-full">
-              <div className="flex md:flex-col flex-row md:gap-10 gap-[84px] items-center justify-start max-w-[1147px] mx-auto w-full">
-                <div className="flex flex-1 flex-col gap-14 items-start justify-start w-full">
-                  <div className="flex flex-col gap-5 items-start justify-start w-full">
-                    <Text
-                      className="text-4xl sm:text-[32px] md:text-[34px] text-gray-900 tracking-[-0.72px] w-full"
-                      size="txtManropeExtraBold36"
-                    >
-                      A note from our founders.
-                    </Text>
-                    <Text
-                      className="leading-[32.00px] max-w-[531px] md:max-w-full text-gray-700 text-lg"
-                      size="txtManropeRegular18Gray700"
-                    >
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. In a free hour,
-                    </Text>
-                  </div>
-                  <List
-                    className="flex flex-col gap-8 items-start w-full"
-                    orientation="vertical"
-                  >
-                    <div className="flex flex-1 sm:flex-col flex-row gap-[26px] items-start justify-start my-0 w-full">
-                      <Text
-                        className="border-2 border-gray-900 border-solid flex h-[35px] items-center justify-center rounded-[17px] text-center text-gray-900 text-xl tracking-[-0.40px] w-[35px]"
-                        size="txtManropeExtraBold20"
-                      >
-                        1
-                      </Text>
-                      <div className="flex flex-1 flex-col gap-[17px] items-start justify-start w-full">
-                        <Text
-                          className="text-[22px] text-gray-900 sm:text-lg md:text-xl tracking-[-0.44px] w-full"
-                          size="txtManropeBold22"
-                        >
-                          It all started in 1995
-                        </Text>
-                        <Text
-                          className="leading-[32.00px] max-w-[470px] md:max-w-full text-gray-700 text-lg"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. In a free hour, On the other hand,
-                          we denounce with righteous indignation and dislike men who
-                          are so beguiled and demoralized by the charms of pleasure
-                          of the moment.
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 sm:flex-col flex-row gap-[26px] items-start justify-start my-0 w-full">
-                      <Text
-                        className="border-2 border-gray-900 border-solid flex h-[35px] items-center justify-center rounded-[17px] text-center text-gray-900 text-xl tracking-[-0.40px] w-[35px]"
-                        size="txtManropeExtraBold20"
-                      >
-                        2
-                      </Text>
-                      <div className="flex flex-1 flex-col gap-[17px] items-start justify-start w-full">
-                        <Text
-                          className="text-[22px] text-gray-900 sm:text-lg md:text-xl tracking-[-0.44px] w-full"
-                          size="txtManropeBold22"
-                        >
-                          Donate launches in 2007
-                        </Text>
-                        <Text
-                          className="leading-[32.00px] max-w-[470px] md:max-w-full text-gray-700 text-lg"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. In a free hour, On the other hand,
-                          we denounce with righteous indignation and dislike men who
-                          are so beguiled and demoralized by the charms of pleasure
-                          of the moment.
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 sm:flex-col flex-row gap-[26px] items-start justify-start my-0 w-full">
-                      <Text
-                        className="border-2 border-gray-900 border-solid flex h-[35px] items-center justify-center rounded-[17px] text-center text-gray-900 text-xl tracking-[-0.40px] w-[35px]"
-                        size="txtManropeExtraBold20"
-                      >
-                        3
-                      </Text>
-                      <div className="flex flex-1 flex-col gap-[17px] items-start justify-start w-full">
-                        <Text
-                          className="text-[22px] text-gray-900 sm:text-lg md:text-xl tracking-[-0.44px] w-full"
-                          size="txtManropeBold22"
-                        >
-                          Relasto holds its initial public offering in 2008
-                        </Text>
-                        <Text
-                          className="leading-[32.00px] max-w-[470px] md:max-w-full text-gray-700 text-lg"
-                          size="txtManropeRegular18Gray700"
-                        >
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. In a free hour, On the other hand,
-                          we denounce with righteous indignation and dislike men who
-                          are so beguiled and demoralized by the charms of pleasure
-                          of the moment.
-                        </Text>
-                      </div>
-                    </div>
-                  </List>
-                </div>
-                <Img
-                  className="flex-1 md:flex-none h-[589px] sm:h-auto max-h-[589px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                  src="images/img_rectangle20_589x531.png"
-                  alt="rectangleTwenty"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col font-manrope items-center justify-center max-w-[1440px] pl-[170px] pr-[120px] md:px-10 sm:px-5 w-full">
-              <div className="flex md:flex-col flex-row md:gap-10 gap-[158px] items-center justify-between max-w-[1150px] mx-auto w-full">
-                <Img
-                  className="flex-1 md:flex-none h-[589px] sm:h-auto max-h-[589px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                  src="images/img_rectangle20_589x496.png"
-                  alt="rectangleTwenty_One"
-                />
-                <div className="flex flex-1 flex-col gap-14 items-start justify-start w-full">
-                  <div className="flex flex-col gap-5 items-start justify-start w-full">
-                    <Text
-                      className="text-4xl sm:text-[32px] md:text-[34px] text-gray-900 tracking-[-0.72px] w-full"
-                      size="txtManropeExtraBold36"
-                    >
-                      Our vision is simple.
-                    </Text>
-                    <Text
-                      className="leading-[32.00px] text-gray-700 text-lg"
-                      size="txtManropeRegular18Gray700"
-                    >
-                      <>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. In a free hour, On the other hand, we
-                        denounce with righteous indignation and dislike men who are
-                        so beguiled and demoralized by the charms of pleasure of the
-                        moment.
-                        <br />
-                        In a free hour, On the other hand, we denounce with
-                        righteous indignation and dislike men .
-                      </>
-                    </Text>
-                  </div>
-                  <div className="flex flex-col gap-1.5 items-start justify-start w-full">
-                    <Text
-                      className="text-gray-900 text-xl tracking-[-0.40px] w-full"
-                      size="txtManropeSemiBold20"
-                    >
-                      Kausar Pial
-                    </Text>
-                    <Text
-                      className="text-gray-700 text-lg w-full"
-                      size="txtManropeSemiBold18Gray700"
-                    >
-                      CEO at Static Mania
-                    </Text>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
+            
             
             <div className="bg-gray-900 flex flex-col font-manrope items-center justify-center p-[120px] md:px-10 sm:px-5 w-full">
               <div className="flex flex-col md:gap-10 gap-[120px] items-center justify-start max-w-[1200px] mx-auto w-full">
@@ -344,20 +186,20 @@ const Homepage = () => {
                       className="flex-1 text-4xl sm:text-[32px] md:text-[34px] text-white-A700 tracking-[-0.72px] w-auto"
                       size="txtManropeExtraBold36WhiteA700"
                     >
-                      News & Consult
+                      Vous possédez un salon de massage ?
                     </Text>
                     <Button
                       className="bg-transparent cursor-pointer flex h-[27px] items-center justify-center min-w-[124px]"
                       rightIcon={
                         <Img
-                          className="h-6 mb-[3px] ml-2"
-                          src="images/img_arrowright_orange_a700.svg"
+                          className="h-5 mb-[1px] ml-2"
+                          src="./src/assets/images/img_arrowright_cyan_600.svg"
                           alt="arrow_right"
                         />
                       }
                     >
-                      <div className="font-bold text-left text-lg text-orange-A700">
-                        Explore All
+                      <div className="font-bold text-left text-lg text-cyan-600">
+                        Explorer
                       </div>
                     </Button>
                   </div>
@@ -459,18 +301,18 @@ const Homepage = () => {
                         className="sm:text-2xl md:text-[26px] text-[28px] text-gray-900 tracking-[-0.56px] w-auto"
                         size="txtManropeExtraBold28"
                       >
-                        For Recent Update, News.
+                        Pour vous inscrire
                       </Text>
                       <Text
                         className="leading-[32.00px] max-w-[600px] md:max-w-full text-center text-gray-900 text-lg"
                         size="txtManropeRegular18Gray900"
                       >
-                        We helps businesses customize, automate and scale up their
-                        ad production and delivery.
+                        Cliquez sur le bouton ci-dessous pour vous inscrire
                       </Text>
                     </div>
-                    <div className="flex sm:flex-col flex-row gap-2 items-start justify-start w-full">
-                      <Input
+                    {/* items-start justify-start */}
+                    <div className="flex sm:flex-col flex-row gap-2 itemps-center justify-center w-full">
+                      {/* <Input
                         name="input"
                         placeholder="Enter your Email"
                         className="font-semibold md:h-auto p-0 placeholder:text-gray-700 sm:h-auto text-left text-sm w-full"
@@ -480,15 +322,15 @@ const Homepage = () => {
                         color="gray_50_02"
                         size="sm"
                         variant="fill"
-                      ></Input>
+                      ></Input> */}
                       <Button
-                        className="cursor-pointer font-semibold min-w-[126px] text-base text-center"
+                        className="cursor-pointer font-semibold min-w-[150px] text-base text-center"
                         shape="round"
                         color="gray_900"
                         size="sm"
                         variant="fill"
                       >
-                        Subscribe
+                        Inscrivez-vous
                       </Button>
                     </div>
                   </div>

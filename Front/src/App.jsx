@@ -1,4 +1,18 @@
-import { useState } from 'react'
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import React from "react";
+import Routes from "./Routes";
+
+function App() {
+  return (
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <Routes />
+    </GoogleOAuthProvider>
+  );
+}
+
+export default App;
+
+/* import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -32,4 +46,4 @@ function App() {
   )
 }
 
-export default App
+export default App */
