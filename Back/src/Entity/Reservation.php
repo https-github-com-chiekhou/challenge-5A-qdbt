@@ -5,8 +5,28 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['reservation:read']],
+    denormalizationContext: ['groups' => ['reservation:create', 'reservation:update']],
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(denormalizationContext: ['groups' => ['reservation:create', 'reservation:update']]),
+        new Put(denormalizationContext: ['groups' => ['reservation:create', 'reservation:update']]),
+        new Patch(),
+        new Delete()
+    ],
+)]
 class Reservation
 {
     #[ORM\Id]
@@ -14,18 +34,23 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['reservation:create', 'reservation:update'])]
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    #[Groups(['reservation:create', 'reservation:update'])]
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $date = null;
+    #[Groups(['reservation:create', 'reservation:update'])]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
+    #[Groups(['reservation:create', 'reservation:update'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
+    #[Groups(['reservation:create', 'reservation:update'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
@@ -40,6 +65,8 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
+
+
 
     public function getId(): ?int
     {
@@ -70,18 +97,7 @@ class Reservation
         return $this;
     }
 
-    public function getDate(): ?\DateTimeImmutable
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeImmutable $date): static
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
+  
     public function getStartTime(): ?\DateTimeInterface
     {
         return $this->startTime;
@@ -138,6 +154,18 @@ class Reservation
     public function setPrestataire(?Prestataire $prestataire): static
     {
         $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

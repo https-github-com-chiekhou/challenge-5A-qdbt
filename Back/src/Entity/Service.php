@@ -25,6 +25,9 @@ class Service
     #[ORM\ManyToOne(inversedBy: 'services')]
     private ?Prestataire $prestataire = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Service
     public function setPrestataire(?Prestataire $prestataire): static
     {
         $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

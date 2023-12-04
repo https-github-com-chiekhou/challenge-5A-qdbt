@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
@@ -35,20 +37,30 @@ class Creneau
     private ?int $id = null;
 
 
+    #[Groups(['creneau:create', 'creneau:update','creneau:read'])]
     #[ORM\Column(length: 9)]
     private ?string $day = null;
 
-    #[Groups(['creneau:create', 'creneau:update'])]
+    #[Groups(['creneau:create', 'creneau:update','creneau:read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
-    #[Groups(['creneau:create', 'creneau:update'])]
+    #[Groups(['creneau:create', 'creneau:update','creneau:read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
+    #[Groups(['creneau:create','creneau:read'])]
     #[ORM\ManyToOne(inversedBy: 'creneaux')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
+
+    #[ORM\OneToMany(mappedBy: 'creneau', targetEntity: Planning::class)]
+    private Collection $plannings;
+
+    public function __construct()
+    {
+        $this->plannings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,6 +112,36 @@ class Creneau
     public function setSalarie(?Salarie $salarie): static
     {
         $this->salarie = $salarie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Planning>
+     */
+    public function getPlannings(): Collection
+    {
+        return $this->plannings;
+    }
+
+    public function addPlanning(Planning $planning): static
+    {
+        if (!$this->plannings->contains($planning)) {
+            $this->plannings->add($planning);
+            $planning->setCreneau($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlanning(Planning $planning): static
+    {
+        if ($this->plannings->removeElement($planning)) {
+            // set the owning side to null (unless already changed)
+            if ($planning->getCreneau() === $this) {
+                $planning->setCreneau(null);
+            }
+        }
 
         return $this;
     }

@@ -6,7 +6,28 @@ use App\Repository\SalarieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['salarie:read']],
+    denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']],
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
+        new Put(denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
+        new Patch(),
+        new Delete()
+    ],
+)]
 #[ORM\Entity(repositoryClass: SalarieRepository::class)]
 class Salarie
 {
@@ -15,24 +36,31 @@ class Salarie
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['salarie:create', 'salarie:update','salarie:read'])]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[Groups(['salarie:create', 'salarie:update','salarie:read'])]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[Groups(['salarie:read'])]
     #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: DayOff::class)]
     private Collection $dayOffs;
 
+    #[Groups(['salarie:read'])]
     #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Creneau::class)]
     private Collection $creneaux;
 
-    #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Reservation::class)]
+    #[Groups(['salarie:read'])]
     private Collection $reservations;
 
     #[ORM\ManyToOne(inversedBy: 'salaries')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
+
+    #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Planning::class)]
+    private Collection $plannings;
 
     public function __construct()
     {
@@ -40,6 +68,7 @@ class Salarie
         $this->creneaux = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->prestataires = new ArrayCollection();
+        $this->plannings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,6 +228,36 @@ class Salarie
     public function setPrestataire(?Prestataire $prestataire): static
     {
         $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Planning>
+     */
+    public function getPlannings(): Collection
+    {
+        return $this->plannings;
+    }
+
+    public function addPlanning(Planning $planning): static
+    {
+        if (!$this->plannings->contains($planning)) {
+            $this->plannings->add($planning);
+            $planning->setSalarie($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlanning(Planning $planning): static
+    {
+        if ($this->plannings->removeElement($planning)) {
+            // set the owning side to null (unless already changed)
+            if ($planning->getSalarie() === $this) {
+                $planning->setSalarie(null);
+            }
+        }
 
         return $this;
     }
