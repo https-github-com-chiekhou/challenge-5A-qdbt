@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\GetCollection;
@@ -37,6 +38,7 @@ use ApiPlatform\Metadata\Delete;
 )]
 class Reservation
 {
+    #[ApiProperty(identifier: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -62,17 +64,17 @@ class Reservation
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[Groups(['reservation: read'])]
+    #[Groups(['reservation: create','reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
