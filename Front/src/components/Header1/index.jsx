@@ -204,4 +204,6 @@ const Header1 = () => {
   );
 };
 
+Header1.defaultProps = {};
+
 export default Header1;
