@@ -2,12 +2,39 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\PrestataireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' =>['prestataire: read']],
+    denormalizationContext: ['groups' =>['prestataire: create']],
+    operations: [
+        new GetCollection(
+            uriTemplate: '/'
+        ),
+        new Get(
+            normalizationContext: ['groups' => ['prestataire:read']]
+        ),
+        new Post(),
+        new Put(),
+        new Patch(
+            denormalizationContext: ['groups' => ['prestataire:write:update']],
+        ),
+        new Delete()
+    ],
+)]
 class Prestataire
 {
     #[ORM\Id]
@@ -16,15 +43,23 @@ class Prestataire
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['prestataire:create'])]
+    #[Groups(['prestataire:create', 'prestataire:read'])]
     private ?string $nomEntreprise = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['prestataire:create'])]
+    #[Groups(['prestataire:create', 'prestataire:read'])]
     private ?string $descriptionEntreprise = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['prestataire:create'])]
+    #[Groups(['prestataire:create','prestataire:read','prestataire:write:update'])]
     private ?string $contact = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['prestataire:create'])]
+    #[Groups(['prestataire:create'])]
     private ?string $kbis = null;
 
     #[ORM\Column(length: 255)]

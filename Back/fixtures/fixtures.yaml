@@ -1,22 +1,23 @@
-# App\Entity\User:
-#   user_{1..10}:
-#     email: '<email()>'
-#     nom: '<nom()>'
-#     prenom: '<prenom()>'
-#     telephone: '<telephone()>'
-#     roles: ['ROLE_USER'])
-#     password: 'test'
+App\Entity\User:
+   user_{1..10}:
+     email: '<email()>'
+     nom: '<name()>'
+     prenom: '<firstname()>'
+     telephone: '<phonenumber()>'
+     roles: ['ROLE_USER']
+     password: 'test'
 
 App\Entity\Creneau:
   creneau_{1..10}:
-    date_start: '<date_start()>'
-    date_end: '<date_end()>'
+    date: 'date()'
+    start_time: '<time()>'
+    end_time: '<time()>'
 
 
 App\Entity\Etablissement:
   etablissement_{1..10}:
-    nom: '<nom()>'
-    adresse: '<prenom()>'
+    nom: '<name()>'
+    adresse: '<adress()>'
 
 
 App\Entity\FeedBack:
