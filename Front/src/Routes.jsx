@@ -9,6 +9,7 @@ import Planning from "./pages/Prestataire/Planning";
 import PlanningSalarie from "./pages/Prestataire/PlanningSalarie";
 import DashboardSalaries from "./pages/Prestataire/DashboardSalaries";
 import Reservation from "./pages/Reservation.jsx";
+import User from "./pages/User"
 //const Error = React.lazy(() => import("pages/Error"));
 const ProjectRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const ProjectRoutes = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/salons" element={<ListMassageViewPage />} />
+          <Route path="/user" element={<User />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/register" element={<Register />} />
