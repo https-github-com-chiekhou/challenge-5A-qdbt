@@ -10,6 +10,8 @@ import PlanningSalarie from "./pages/Prestataire/PlanningSalarie";
 import DashboardSalaries from "./pages/Prestataire/DashboardSalaries";
 import Reservation from "./pages/Reservation.jsx";
 import User from "./pages/User"
+import Admin from "./pages/Admin"
+import GestionAdherents from "./pages/gestionAdherents.jsx"
 //const Error = React.lazy(() => import("pages/Error"));
 const ProjectRoutes = () => {
   return (
@@ -32,6 +34,8 @@ const ProjectRoutes = () => {
             path="/prestataire/dashboard-salaries"
             element={<DashboardSalaries />}
           />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/:id" element={<GestionAdherents />} />
         </Routes>
       </Router>
     </React.Suspense>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import UserProfileTabs from './UserProfileTabs';
+import Footer from "../components/Footer";
+import Header1 from "../components/Header1";
 
 const exampleProfileImage = 'https://via.placeholder.com/150';
 
@@ -65,12 +67,17 @@ const User = () => {
   };
 
   return (
+    
     <div className="bg-white min-h-screen p-4 text-black">
+      <Header1 className="bg-white-A700 flex gap-2 h-20 md:h-auto items-center justify-between md:px-5 px-[120px] py-[19px] w-full" />
       <h1 className="text-gray-700 text-3xl font-semibold mb-4">Profil Utilisateur</h1>
+      <a href="http://localhost:3000/admin" className="text-sm font-semibold leading-6 text-gray-900">
+            -Admin
+          </a>
 
       {/* Profil Section (Centrée) */}
       <div className="bg-white p-4 rounded-md shadow-md mb-4">
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-4 inline-flex">
           {/* Photo de profil */}
           <div className="rounded-full overflow-hidden mr-4">
             {/* Ajoute ici l'image du profil */}
@@ -80,12 +87,12 @@ const User = () => {
           {/* Nom et prénom de l'utilisateur */}
           <div>
             <h2 className="text-gray-700 text-xl font-semibold">John Doe</h2>
-            <p className="text-gray-700">Nom d'utilisateur : johndoe123</p>
           </div>
         </div>
 
         {/* Informations de l'utilisateur */}
         <div>
+          <p className="text-gray-700">Nom d'utilisateur : johndoe123</p>
           <p className="text-gray-700 mb-2">Adresse : 123 Rue de la Liberté</p>
           <p className="text-gray-700 mb-2">Ville : VilleVille</p>
           <p className="text-gray-700 mb-2">Description du Profil : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula urna eget convallis rhoncus.</p>
@@ -101,6 +108,7 @@ const User = () => {
         {/* Contenu spécifique à chaque onglet */}
         {renderTabContent(activeTab)}
       </div>
+      <Footer className="bg-white-A700 flex gap-2 items-center justify-center md:px-5 px-[120px] py-20 w-full" />
     </div>
   );
 };
