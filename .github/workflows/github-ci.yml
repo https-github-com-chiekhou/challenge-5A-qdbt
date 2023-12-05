@@ -24,6 +24,7 @@ jobs:
     - name: Build and run Docker Compose
       run: |
         docker compose version
+        docker compose build
         docker compose up -d
 
     - name: Run tests or other tasks
