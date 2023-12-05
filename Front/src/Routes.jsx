@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register"
+import Reservation from "./pages/Reservation.jsx";
 //const Error = React.lazy(() => import("pages/Error"));
 const ProjectRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const ProjectRoutes = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/reservation" element={<Reservation />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </Router>

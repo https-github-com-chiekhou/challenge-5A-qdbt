@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\GetCollection;
@@ -23,50 +24,55 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/'
         ),
         new Get(),
-        new Post(denormalizationContext: ['groups'=> 'reservation; create', 'user:update']),
+        new Post(),
         new Put(),
-        new Patch(denormalizationContext: ['groups'=> 'reservation; create', 'user:update']),
+        new Patch(),
         new Delete()
     ],
 )]
 class Reservation
 {
+    #[ApiProperty(identifier: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['reservation: write', 'reservation: read', 'user: update'])]
+    #[ApiProperty(identifier: true)]
+    #[Groups(['reservation: create', 'reservation: read', 'user: update'])]
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[ApiProperty(identifier: true)]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[ApiProperty(identifier: true)]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[ApiProperty(identifier: true)]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[Groups(['reservation: read'])]
+    #[Groups(['reservation: create','reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
-    #[Groups(['reservation: write', 'reservation: read'])]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
