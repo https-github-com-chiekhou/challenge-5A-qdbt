@@ -35,7 +35,7 @@ const Homepage = () => {
                   </Text>
                 </div>
                 <div className="flex flex-col gap-6 items-start justify-start w-full">
-                  <div className="flex md:flex-col flex-row gap-6 items-start justify-start w-full">
+                  <div className="flex flex-row gap-6 items-start justify-start w-full">
                     <Img
                       className="flex-1 md:flex-none h-[400px] sm:h-auto max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
                       src="./src/assets/images/salons/salon3.jpg"
@@ -49,7 +49,7 @@ const Homepage = () => {
                       alt="image accueil"
                     />
                   </div>
-                  <div className="flex md:flex-col flex-row gap-6 items-start justify-start w-full">
+                  <div className="flex flex-row gap-6 items-start justify-start w-full">
                     <Img
                       className="md:h-[400px] sm:h-auto h-full max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
                       id="imageaccueil"
@@ -67,7 +67,7 @@ const Homepage = () => {
               </div>
             </div>
             <div className="bg-gray-50_01 flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] py-[50px] w-full">
-              <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between max-w-[1200px] mx-auto w-full">
+              <div className="flex flex-row md:gap-10 items-start justify-between max-w-[1200px] mx-auto w-full">
                 <List
                   className="md:flex-1 sm:flex-col flex-row md:gap-10 gap-[100px] grid sm:grid-cols-1 grid-cols-2 w-[46%] md:w-full"
                   orientation="horizontal"
@@ -179,7 +179,7 @@ const Homepage = () => {
               </div>
             </div>
             <div className="flex flex-col font-manrope items-center justify-center max-w-[1440px] pl-[120px] pr-[173px] md:px-10 sm:px-5 w-full">
-              <div className="flex md:flex-col flex-row md:gap-10 gap-[84px] items-center justify-start max-w-[1147px] mx-auto w-full">
+              <div className="flex flex-row md:gap-10 gap-[84px] items-center justify-start max-w-[1147px] mx-auto w-full">
                 <div className="flex flex-1 flex-col gap-14 items-start justify-start w-full">
                   <div className="flex flex-col gap-5 items-start justify-start w-full">
                     <Text
@@ -288,7 +288,7 @@ const Homepage = () => {
               </div>
             </div>
             <div className="flex flex-col font-manrope items-center justify-center max-w-[1440px] pl-[170px] pr-[120px] md:px-10 sm:px-5 w-full">
-              <div className="flex md:flex-col flex-row md:gap-10 gap-[158px] items-center justify-between max-w-[1150px] mx-auto w-full">
+              <div className="flex flex-row md:gap-10 gap-[158px] items-center justify-between max-w-[1150px] mx-auto w-full">
                 <Img
                   className="flex-1 md:flex-none h-[589px] sm:h-auto max-h-[589px] object-cover rounded-[10px] sm:w-[] md:w-[]"
                   src="images/img_rectangle20_589x496.png"

@@ -33,6 +33,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Reservation
 {
     #[ApiProperty(identifier: false)]
+    #[Groups(['reservation: read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
