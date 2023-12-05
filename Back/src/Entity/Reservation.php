@@ -39,6 +39,7 @@ use ApiPlatform\Metadata\Delete;
 class Reservation
 {
     #[ApiProperty(identifier: false)]
+    #[Groups(['reservation: read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
