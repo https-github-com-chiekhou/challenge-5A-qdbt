@@ -19,12 +19,26 @@ use Doctrine\ORM\Mapping as ORM;
     normalizationContext: ['groups' => ['creneau:read']],
     denormalizationContext: ['groups' => ['creneau:create', 'user:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
-        new Put(denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(
+            uriTemplate: '/creneaux/list',
+        ),
+        new Get(
+            uriTemplate: '/creneaux',
+        ),
+        new Post(
+            uriTemplate: '/creneaux',
+            denormalizationContext: ['groups' => ['creneau:create', 'user:update']]
+        ),
+        new Put(
+            uriTemplate: '/creneaux/{id}',
+            denormalizationContext: ['groups' => ['creneau:create', 'user:update']]
+        ),
+        new Patch(
+            uriTemplate: '/creneaux/{id}',
+        ),
+        new Delete(
+            uriTemplate: '/creneaux/{id}',
+        )
     ],
 )]
 class Creneau
@@ -35,6 +49,7 @@ class Creneau
     private ?int $id = null;
 
 
+    #[Groups(['creneau:create', 'creneau:update'])]
     #[ORM\Column(length: 9)]
     private ?string $day = null;
 

@@ -2,10 +2,32 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\FeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' =>['feedback: read']],
+    denormalizationContext: ['groups' =>['feedback: create']],
+    operations: [
+        new GetCollection(
+            uriTemplate: '/'
+        ),
+        new Get(),
+        new Post(),
+        new Put(),
+        new Patch(),
+        new Delete()
+    ],
+)]
 class Feedback
 {
     #[ORM\Id]

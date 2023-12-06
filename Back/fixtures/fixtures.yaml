@@ -7,56 +7,51 @@ App\Entity\User:
      roles: ['ROLE_USER']
      password: 'test'
 
-App\Entity\Creneau:
-  creneau_{1..10}:
-    date: 'date()'
-    start_time: '<time()>'
-    end_time: '<time()>'
+#App\Entity\Creneau:
+#  creneau_{1..10}:
+#    day: 'date()'
+#    start_time: '<time()>'
+#    end_time: '<time()>'
 
 
 App\Entity\Etablissement:
   etablissement_{1..10}:
-    nom: '<name()>'
-    adresse: '<adress()>'
+    nom: '<word()>'
+    adresse: '<streetAddress()>'
 
 
-App\Entity\FeedBack:
-  feed_back_{1..10}:
-    note: '<note()>'
-    commentaire: '<commentaire()>'
-
-
-App\Entity\Prestataire:
-  prestataire_{1..10}:
-    nom_entreprise: '<nom_entreprise()>'
-    description_entreprise: '<description_entreprise()>'
-    contact: '<contact()>'
-    kbis: '<kbis()>'
-    statistiques: '<statistiques()>'
-
-App\Entity\Reservation:
-  reservation_{1..10}:
-    status: '<status()>'
-    commentaire: '<commentaire()>'
-  
-App\Entity\Salarie:
-  salarie_{1..10}:
-    nom: '<nom()>'
-    prenom: '<prenom()>'
-    telephone: '<telephone()>'
-    horaire: '<horaire()>'
-    conge: '<conge()>'
-
-App\Entity\Service:
-  service_{1..10}:
-    description: '<description()>'
-    nom_service: '<nom()>'
-    prenom: '<prenom()>'
-    tarif: '<tarif()>'
-    duree : '<duree()>'
-    categorie: '<categorie()>'
-
-
-
-
-
+#App\Entity\FeedBack:
+#  feed_back_{1..10}:
+#    note: '<numberBetween(1, 5)>'
+#    commentaire: '<sentences(5, true)>'
+#
+#
+#App\Entity\Prestataire:
+#  prestataire_{1..10}:
+#    nom_entreprise: '<nom_entreprise()>'
+#    description_entreprise: '<sentences(5, true)>'
+#    contact: '<phonenumber()>'
+#    kbis: '<kbis()>'
+#    statistiques: '<statistiques()>'
+#
+#App\Entity\Reservation:
+#  reservation_{1..10}:
+#    status: '<status()>'
+#    commentaire: '<commentaire()>'
+#
+#App\Entity\Salarie:
+#  salarie_{1..10}:
+#    nom: '<name()>'
+#    prenom: '<firstname()>'
+#    telephone: '<phonenumber()>'
+#    horaire: '<horaire()>'
+#    conge: '<conge()>'
+#
+#App\Entity\Service:
+#  service_{1..10}:
+#    description: '<description()>'
+#    nom_service: '<nom()>'
+#    prenom: '<prenom()>'
+#    tarif: '<tarif()>'
+#    duree : '<duree()>'
+#    categorie: '<categorie()>'

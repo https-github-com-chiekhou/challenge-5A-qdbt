@@ -63,6 +63,7 @@ class Prestataire
     private ?string $kbis = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['prestataire:read'])]
     private ?string $statistique = null;
 
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Etablissement::class)]

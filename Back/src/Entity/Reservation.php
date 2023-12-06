@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Link;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
@@ -24,6 +25,12 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/'
         ),
         new Get(),
+        new Get(
+            uriTemplate: '/user/{id}/reservations',
+            uriVariables: [
+                'id' => new Link(fromClass: User::class, fromProperty: 'id', toProperty: 'user')
+            ]
+        ),
         new Post(),
         new Put(),
         new Patch(),
