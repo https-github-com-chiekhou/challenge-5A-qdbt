@@ -1,0 +1,33 @@
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Back
+      uses: cd ./Back
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+
+    - name: Install Composer Dependencies
+      run: composer install
+
+    - name: Set up Symfony Environment
+      run: cp .env.dist .env
+
+    - name: Build and Test
+      run: |
+        php bin/console doctrine:schema:update --force
+        php bin/phpunit
