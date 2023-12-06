@@ -11,6 +11,12 @@ import {
 } from "../../components";
 import Footer from "../../components/Footer";
 import Header1 from "../../components/Header1";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup
+} from 'react-leaflet';
 
 const dropdownlargeOptionsList = [
   { label: "Option1", value: "option1" },
@@ -27,6 +33,8 @@ const dropdownlargeOneOptionsList = [
   { label: "Option2", value: "option2" },
   { label: "Option3", value: "option3" },
 ];
+
+const position = [51.505, -0.09];
 
 const ListMassageViewPage = () => {
   return (
@@ -181,96 +189,23 @@ const ListMassageViewPage = () => {
                   showMarker={false}
                 ></GoogleMap> 
                 <Line className="h-[3px] md:ml-[0] ml-[842px] w-[11%]" />*/}
-                <Img
+                {/*<Img
                   src="./src/assets/images/google_map/carte.webp"
                   alt="map salon"
-                ></Img>
+              ></Img>*/}
                 <div className="flex mb-[236px] md:ml-[0] ml-[26px] px-4 py-6 relative w-[159px]">
-                  <div className="bg-white-A700 border border-gray-600 border-solid h-[190px] my-auto rounded-lg w-1/4"></div>
-                  <div className="flex flex-col gap-[21.66px] items-start justify-start ml-[-23.23px] my-auto overflow-auto w-[143px] z-[1]">
-                    <div className="flex flex-row gap-[9.63px] items-center justify-start w-full">
-                      <Img
-                        className="h-[19px] w-[19px]"
-                        src=""
-                        alt="eye"
-                      />
-                      <Text
-                        className="flex-1 text-[12.83px] text-gray-900 w-auto"
-                        size="txtManropeSemiBold1283"
-                      >
-                        Nom du salon
-                      </Text>
-                    </div>
-                    <List
-                      className="flex flex-col gap-[16.84px] items-start w-full"
-                      orientation="vertical"
-                    >
-                      <div className="flex flex-1 flex-row gap-[32.08px] items-center justify-between my-0 w-full">
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="./src/assets/images/img_massage.svg"
-                            alt="volume"
-                          />
-                          <Text
-                            className="flex-1 text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                            type de massage
-                          </Text>
-                        </div>
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="images/img_ticket.svg"
-                            alt="ticket"
-                          />
-                          <Text
-                            className="text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                            prix
-                          </Text>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 flex-row gap-[32.08px] items-center justify-between my-0 w-full">
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="./src/assets/images/img_massage.svg"
-                            alt="icon"
-                          />
-                          <Text
-                            className="flex-1 text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                            type de massage
-                          </Text>
-                        </div>
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="images/img_iocnmenu_16x16.svg"
-                            alt="iocnmenu"
-                          />
-                          <Text
-                            className="text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                           prix
-                          </Text>
-                        </div>
-                      </div>
-                    </List>
-                    <div className="flex flex-col items-center justify-start w-full">
-                      <Text
-                        className="text-[19.25px] text-gray-900 tracking-[-0.38px] w-auto"
-                        size="txtManropeBold1925"
-                      >
-                        en savoir plus
-                      </Text>
-                    </div>
-                  </div>
+                <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker position={position}>
+                    <Popup>
+                      A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+                  
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-full">
@@ -1176,7 +1111,7 @@ const ListMassageViewPage = () => {
                   rightIcon={
                     <Img
                       className="h-4 mt-px mb-[5px] ml-1"
-                      src="images/img_arrowright.svg"
+                      src="./src/assets/images/img_arrowright.svg"
                       alt="arrow_right"
                     />
                   }
