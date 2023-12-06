@@ -1,5 +1,5 @@
-
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+export default {
   mode: "jit",
   content: [
     "./index.html",
@@ -8,7 +8,6 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    screens: { md: { max: "1050px" }, sm: { max: "550px" } },
     extend: {
       colors: {
         deep_orange: { 50: "#fbeee6", 400: "#ff8b46", 900: "#883301" },

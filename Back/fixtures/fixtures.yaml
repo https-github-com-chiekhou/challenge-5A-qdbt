@@ -1,0 +1,97 @@
+App\Entity\User:
+  user_{1..10}:
+    email: '<email()>'
+    nom: '<name()>'
+    prenom: '<firstName()>'
+    telephone: '<phoneNumber()>'
+    roles: ['ROLE_USER']
+    password: 'test'
+
+App\Entity\Creneau:
+  creneau_{1..10}:
+    day: '<dayOfWeek()>'
+    startTime: "<DateTime('H:i:s')>"
+    endTime: "<DateTime('H:i:s')>" 
+    salarie: '@salarie_*'
+ 
+
+App\Entity\Etablissement:
+  etablissement_{1..10}:
+    name: '<name()>'
+    adresse: '<address()>'
+    prestataire: '@prestataire_<rand(1, 10)>'
+
+
+App\Entity\FeedBack:
+  feedback_{1..10}:
+    note: '<rand(1, 5)>'
+    commentaire: '<text()>'
+    client: '@user_<rand(1, 10)>'
+    prestataire: '@prestataire_<rand(1, 10)>'
+
+
+
+App\Entity\Prestataire:
+  prestataire_{1..10}:
+    nomEntreprise: '<company()>'
+    descriptionEntreprise: '<text()>'
+    contact: '<text()>'
+    kbis: '<text()>'
+    statistique: '<text()>'
+ 
+
+
+App\Entity\Reservation:
+  reservation_{1..10}:
+    status: "<randomElement(['Disponible', 'Non-Disponible'])>"
+    commentaire: '<text()>'
+    date : "<dateTime()>" 
+    startTime: '<dateTime()>'
+    endTime: '<dateTime()>'
+    client : '@user_<rand(1, 10)>'
+    salarie: '@salarie_<rand(1, 10)>'
+    prestataire: '@prestataire_<rand(1, 10)>'
+  
+App\Entity\Salarie:
+  salarie_{1..10}:
+    nom: '<firstName()>'
+    prenom: '<lastName()>'
+    prestataire: '@prestataire_<rand(1, 10)>'
+
+App\Entity\Service:
+  service_{1..10}:
+    description: '<randomElement(["Massage Relaxant Complet: Offrez-vous une expérience de détente totale avec un massage complet du corps. Idéal pour relâcher les tensions musculaires et favoriser la relaxation générale.","Massage Thérapeutique du Dos et des Épaules : 
+    Ciblez les zones spécifiques sujettes aux tensions avec ce massage thérapeutique axé sur le dos et les épaules. Parfait pour soulager les douleurs liées au stress et à la posture.","Massage des Pieds Réflexologie : 
+    Stimulez les points réflexes des pieds pour favoriser léquilibre énergétique dans tout le corps. Un traitement apaisant qui peut également aider à améliorer la circulation.","Massage aux Pierres Chaudes : 
+    Profitez de la chaleur apaisante des pierres volcaniques pour détendre les muscles tendus. Une expérience luxueuse qui favorise la circulation sanguine et la relaxation profonde.","Massage du Cuir Chevelu et du Visage : 
+    Détendez-vous avec un massage du cuir chevelu apaisant et un soin visage revitalisant. Idéal pour libérer les tensions et raviver léclat de la peau.", "Massage Aromathérapie : 
+    Combinez les bienfaits du massage avec les pouvoirs relaxants des huiles essentielles. Choisissez parmi une sélection darômes pour personnaliser votre expérience.","Massage Prénatal Doux : 
+    Conçu spécialement pour les futures mamans, ce massage doux vise à soulager les inconforts liés à la grossesse, favorisant la détente et le bien-être.","Massage Shiatsu Équilibrant : 
+    Inspiré de la médecine traditionnelle chinoise, le Shiatsu utilise des pressions ciblées pour rétablir léquilibre énergétique. Idéal pour soulager le stress et les tensions.","Massage Thai Stretching : 
+    Expérimentez une séance de stretching actif avec ce massage thaïlandais qui combine des étirements doux pour améliorer la flexibilité et soulager le raideur musculaire."])>'
+    nom: '<name()>'
+    tarif: '<randomFloat()>'
+    categorie: '<text()>'
+    prestataire: '@prestataire_<rand(1, 10)>'
+
+App\Entity\DayOff:
+  dayOffs_{1..31}:
+    name : '<name()>'
+    dateStart: '<dateTimeBetween("-30 days", "now")>'
+    dateEnd: '<dateTimeBetween("now", "+30 days")>'
+    salarie: '@salarie_<rand(1, 10)>'
+
+
+App\Entity\Planning:
+  planning_{1..10}:
+    datePlanning : '<dateTime()>'
+    salarie: '@salarie_<rand(1, 10)>'
+    creneau: '@creneau_<rand(1, 10)>'
+    dayOff: '@dayOffs_<rand(1, 10)>'
+
+
+
+
+
+
+

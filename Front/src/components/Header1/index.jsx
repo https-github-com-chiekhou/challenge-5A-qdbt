@@ -1,118 +1,269 @@
-import React from "react";
+/* eslint-disable react/no-unescaped-entities */
+import { Fragment, useState } from "react";
+import logo from "../../assets/logo/logo.png";
+import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
+import {
+  ArrowPathIcon,
+  Bars3Icon,
+  ChartPieIcon,
+  CursorArrowRaysIcon,
+  FingerPrintIcon,
+  SquaresPlusIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import {
+  ChevronDownIcon,
+  PhoneIcon,
+  PlayCircleIcon,
+} from "@heroicons/react/20/solid";
 
-import { Button, Img, List, Text } from "../../components";
+const products = [
+  {
+    name: "Analytics",
+    description: "Get a better understanding of your traffic",
+    href: "#",
+    icon: ChartPieIcon,
+  },
+  {
+    name: "Engagement",
+    description: "Speak directly to your customers",
+    href: "#",
+    icon: CursorArrowRaysIcon,
+  },
+  {
+    name: "Security",
+    description: "Your customers’ data will be safe and secure",
+    href: "#",
+    icon: FingerPrintIcon,
+  },
+  {
+    name: "Integrations",
+    description: "Connect with third-party tools",
+    href: "#",
+    icon: SquaresPlusIcon,
+  },
+  {
+    name: "Automations",
+    description: "Build strategic funnels that will convert",
+    href: "#",
+    icon: ArrowPathIcon,
+  },
+];
+const callsToAction = [
+  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
+  { name: "Contact sales", href: "#", icon: PhoneIcon },
+];
 
-const Header1 = (props) => {
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const Header1 = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <>
-      <header className={props.className}>
-        <div className="flex md:flex-col flex-row md:gap-10 items-center justify-between w-full">
-          <div className="header-row my-px">
-            <div className="flex flex-row gap-[11px] items-center justify-start">
-              <Img className="h-10 w-10" src="./src/assets/logo/logo.png" alt="qdbt logo" />
-              <Text
-                className="text-cyan-800 text-xl w-auto"
-                size="txtMarkoOneRegular20"
-              >
-                QDBT
-              </Text>
-            </div>
-            <div className="mobile-menu">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-          <div className="flex sm:flex-1 sm:flex-col flex-row sm:hidden items-center justify-between w-[492px] sm:w-full">
-            <List
-              className="sm:flex-col flex-row gap-10 grid grid-cols-3"
-              orientation="horizontal"
+    <header>
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex lg:flex-1">
+          <a href="/" className="-m-1.5 p-1.5">
+            <span className="sr-only">Your Company</span>
+            <img className="h-8 w-auto" src={logo} alt="" />
+          </a>
+        </div>
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+          <Popover className="relative">
+            <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+              Product
+              <ChevronDownIcon
+                className="h-5 w-5 flex-none text-gray-400"
+                aria-hidden="true"
+              />
+            </Popover.Button>
+
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-200"
+              enterFrom="opacity-0 translate-y-1"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in duration-150"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 translate-y-1"
             >
-              <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
-                <Img
-                    className="h-6 w-4"
-                    src="./src/assets/images/img_arrowdown.svg"
-                    alt="arrowdown"
-                />
-                <Text
-                  className="text-base text-gray-900 w-auto"
-                  size="txtManropeSemiBold16Gray900"
+              <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-dark shadow-lg ring-1 ring-gray-900/5">
+                <div className="p-4">
+                  {products.map((item) => (
+                    <div
+                      key={item.name}
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                    >
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                        <item.icon
+                          className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className="flex-auto">
+                        <a
+                          href={item.href}
+                          className="block font-semibold text-gray-900"
+                        >
+                          {item.name}
+                          <span className="absolute inset-0" />
+                        </a>
+                        <p className="mt-1 text-gray-600">{item.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                  {callsToAction.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                    >
+                      <item.icon
+                        className="h-5 w-5 flex-none text-gray-400"
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </Popover.Panel>
+            </Transition>
+          </Popover>
+
+          <a
+            href="/salons"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Salons
+          </a>
+
+          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            Company
+          </a>
+          <a
+            href="/login"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Log in <span aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a
+            href="/register"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Register <span aria-hidden="true">&rarr;</span>
+          </a>
+        </Popover.Group>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end"></div>
+      </nav>
+
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
+        <div className="fixed inset-0 z-10" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="flex items-center justify-between">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Your Company</span>
+            </a>
+            <button
+              type="button"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className="sr-only">Close menu</span>
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 bg-dark divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                <Disclosure as="div" className="-mx-3">
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                        Product
+                        <ChevronDownIcon
+                          className={classNames(
+                            open ? "rotate-180" : "",
+                            "h-5 w-5 flex-none"
+                          )}
+                          aria-hidden="true"
+                        />
+                      </Disclosure.Button>
+                      <Disclosure.Panel className="mt-2 space-y-2">
+                        {[...products, ...callsToAction].map((item) => (
+                          <Disclosure.Button
+                            key={item.name}
+                            as="a"
+                            href={item.href}
+                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          >
+                            {item.name}
+                          </Disclosure.Button>
+                        ))}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+                <a
+                  href="/prestataire/planning"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Accueil
-                </Text>
-              </div>
-              <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
-                <Img
-                    className="h-6 w-4"
-                    src="./src/assets/images/img_massage.svg"
-                    alt="arrowdown"
-                />
-                <Text
-                  className="text-base text-gray-900 w-auto"
-                  size="txtManropeSemiBold16Gray900"
+                  Prestataire
+                </a>
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Massage
-                </Text>
-                
-              </div>
-              {/* <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
-                <Text
-                  className="text-base text-gray-900 w-auto"
-                  size="txtManropeSemiBold16Gray900"
+                </a>
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Agents
-                </Text>
-                <Img
-                  className="h-4 w-4"
-                  src="images/img_arrowdown.svg"
-                  alt="arrowdown"
-                />
-              </div> */}
-            </List>
-            <Text
-              className="text-base text-center text-gray-900 w-auto"
-              size="txtManropeSemiBold16Gray900"
-            >
-              À propos de nous{" "}
-            </Text>
-            {/* <Text
-              className="text-base text-gray-900 w-auto"
-              size="txtManropeSemiBold16Gray900"
-            >
-              Blog
-            </Text> */}
-          </div>
-          <div className="flex flex-row h-[42px] md:h-auto sm:hidden items-center justify-start w-[228px]">
-            {/* <Button
-              className="bg-transparent cursor-pointer flex items-center justify-center min-w-[94px]"
-              leftIcon={
-                <Img
-                  className="h-6 mb-px mr-2"
-                  src="images/img_search.svg"
-                  alt="search"
-                />
-              }
-            >
-              <div className="font-bold font-manrope text-gray-900 text-left text-lg">
-                Search
+                  Company
+                </a>
               </div>
-            </Button> */}
-            <a href="https://seinfeldquotes.com" class="text-cyan-800 visited:text-cyan-800 hover:text-cyan-800">
-              Pour votre entreprise
-            </a>
-            <p>
-              ||
-            </p>
-            <a href="https://seinfeldquotes.com" class="text-purple-400 visited:text-purple-400 hover:text-purple-400">
-              S'identifier
-            </a>
+
+              <a
+                href="/login"
+                className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              >
+                S'identifier
+              </a>
+              <a
+                href="/register"
+                className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              >
+                Register
+              </a>
+            </div>
           </div>
-        </div>
-      </header>
-    </>
+        </Dialog.Panel>
+      </Dialog>
+    </header>
   );
 };
-
-Header1.defaultProps = {};
 
 export default Header1;

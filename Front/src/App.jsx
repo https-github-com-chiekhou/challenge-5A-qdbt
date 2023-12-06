@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import React from "react";
 import Routes from "./Routes";

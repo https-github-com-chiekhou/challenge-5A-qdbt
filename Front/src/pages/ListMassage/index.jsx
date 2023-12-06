@@ -31,9 +31,10 @@ const dropdownlargeOneOptionsList = [
 const ListMassageViewPage = () => {
   return (
     <>
+      <Header1 />
+
       <div className="bg-gray-50 flex flex-col font-markoone sm:gap-10 md:gap-10 gap-[100px] items-start justify-start mx-auto w-auto sm:w-full md:w-full">
         <div className="flex flex-col md:gap-10 gap-[60px] items-center justify-center w-full">
-          <Header1 className="bg-white-A700 flex gap-2 h-20 md:h-auto items-center justify-between md:px-5 px-[120px] py-[19px] w-full" />
           <div className="flex flex-col font-manrope items-center justify-start md:px-10 sm:px-5 px-[120px] w-full">
             <div className="flex flex-col gap-6 items-center justify-center max-w-[1200px] mx-auto w-full">
               <Text
@@ -59,8 +60,7 @@ const ListMassageViewPage = () => {
                       }
                     ></Input>
                   </div>
-                  
-                  
+
                   <Button
                     className="cursor-pointer flex items-center justify-center min-w-[124px]"
                     rightIcon={
@@ -189,11 +189,7 @@ const ListMassageViewPage = () => {
                   <div className="bg-white-A700 border border-gray-600 border-solid h-[190px] my-auto rounded-lg w-1/4"></div>
                   <div className="flex flex-col gap-[21.66px] items-start justify-start ml-[-23.23px] my-auto overflow-auto w-[143px] z-[1]">
                     <div className="flex flex-row gap-[9.63px] items-center justify-start w-full">
-                      <Img
-                        className="h-[19px] w-[19px]"
-                        src=""
-                        alt="eye"
-                      />
+                      <Img className="h-[19px] w-[19px]" src="" alt="eye" />
                       <Text
                         className="flex-1 text-[12.83px] text-gray-900 w-auto"
                         size="txtManropeSemiBold1283"
@@ -257,7 +253,7 @@ const ListMassageViewPage = () => {
                             className="text-[12.83px] text-gray-700 w-auto"
                             size="txtManropeSemiBold1283Gray700"
                           >
-                           prix
+                            prix
                           </Text>
                         </div>
                       </div>
@@ -274,7 +270,7 @@ const ListMassageViewPage = () => {
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-full">
-                <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
+                <div className="gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
                     <Img
                       className="h-[260px] md:h-auto object-cover w-full"
@@ -284,11 +280,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -349,7 +341,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -364,7 +356,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -378,11 +369,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -443,7 +430,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -458,7 +445,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -472,11 +458,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -537,7 +519,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -552,7 +534,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -566,11 +547,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -631,7 +608,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -646,7 +623,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -660,11 +636,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -725,7 +697,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -740,7 +712,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -754,11 +725,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -819,7 +786,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -834,7 +801,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -848,11 +814,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -913,7 +875,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -928,7 +890,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -942,11 +903,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -1007,7 +964,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -1022,7 +979,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -1036,11 +992,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img
-                            className="h-6 w-6"
-                            src=""
-                            alt="eye"
-                          />
+                          <Img className="h-6 w-6" src="" alt="eye" />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -1101,7 +1053,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                               prix
+                                prix
                               </Text>
                             </div>
                           </div>
@@ -1116,7 +1068,6 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                          
                         </div>
                       </div>
                     </div>
@@ -1193,8 +1144,8 @@ const ListMassageViewPage = () => {
             </div>
           </div>
         </div>
-        <Footer className="bg-white-A700 flex gap-2 items-center justify-center md:px-5 px-[120px] py-20 w-full" />
       </div>
+      <Footer />
     </>
   );
 };
