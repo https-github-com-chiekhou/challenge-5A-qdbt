@@ -9,6 +9,14 @@ import {
   List,
   Text,
 } from "../../components";
+import Footer from "../../components/Footer";
+import Header1 from "../../components/Header1";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup
+} from 'react-leaflet';
 
 const dropdownlargeOptionsList = [
   { label: "Option1", value: "option1" },
@@ -25,6 +33,8 @@ const dropdownlargeOneOptionsList = [
   { label: "Option2", value: "option2" },
   { label: "Option3", value: "option3" },
 ];
+
+const position = [51.505, -0.09];
 
 const ListMassageViewPage = () => {
   return (
@@ -177,10 +187,25 @@ const ListMassageViewPage = () => {
                   showMarker={false}
                 ></GoogleMap> 
                 <Line className="h-[3px] md:ml-[0] ml-[842px] w-[11%]" />*/}
-                <Img
+                {/*<Img
                   src="./src/assets/images/google_map/carte.webp"
                   alt="map salon"
                 ></Img>
+              ></Img>*/}
+                <div className="flex mb-[236px] md:ml-[0] ml-[26px] px-4 py-6 relative w-[159px]">
+                <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker position={position}>
+                    <Popup>
+                      A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+                  
+                </div>
               </div>
               <div className="flex flex-col items-start justify-start w-full">
                 <div className="gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
@@ -1044,6 +1069,24 @@ const ListMassageViewPage = () => {
                     </div>
                   </Button>
                 </div>
+                <Button
+                  className="cursor-pointer flex items-center justify-center min-w-[134px]"
+                  rightIcon={
+                    <Img
+                      className="h-4 mt-px mb-[5px] ml-1"
+                      src="./src/assets/images/img_arrowright.svg"
+                      alt="arrow_right"
+                    />
+                  }
+                  shape="round"
+                  color="transparent"
+                  size="sm"
+                  variant="outline"
+                >
+                  <div className="font-semibold text-base text-left">
+                    Next Page
+                  </div>
+                </Button>
               </div>
             </div>
           </div>
