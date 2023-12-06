@@ -44,7 +44,7 @@ const ListMassageViewPage = () => {
                 Trouver votre salon
               </Text>
               <div className="flex flex-col gap-3 items-start justify-start w-full">
-                <div className="flex md:flex-col flex-row gap-5 items-start justify-start w-full">
+                <div className="flex md:flex flex-row gap-5 items-start justify-start w-full">
                   <div className="bg-white-A700 border border-blue_gray-100 border-solid flex flex-1 flex-col h-[60px] md:h-auto justify-start px-4 py-3.5 rounded-[10px] w-full">
                     <Input
                       name="frame1000001565"
@@ -78,7 +78,7 @@ const ListMassageViewPage = () => {
                     <div className="font-bold text-left text-lg">Search</div>
                   </Button>
                 </div>
-                <div className="flex flex-row flex-wrap gap-2.5 items-start justify-start max-w-[1200px] w-full">
+                {/* <div className="flex flex-row flex-wrap gap-2.5 items-start justify-start max-w-[1200px] w-full">
                   <Button
                     className="cursor-pointer flex items-center justify-center w-[145px]"
                     rightIcon={
@@ -169,13 +169,13 @@ const ListMassageViewPage = () => {
                       New Construction
                     </div>
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
           <div className="flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] w-full">
             <div className="flex flex-col md:gap-10 gap-[60px] items-center justify-start w-full">
-              <div className="flex md:flex-col flex-row md:gap-5 items-start justify-start w-full">
+              <div className="flex md:flex-col flex-row md:gap-5 items-center justify-start w-full">
                 {/* <GoogleMap
                   className="h-1 md:mt-0 mt-[423px] rounded-sm w-[12%]"
                   showMarker={false}
@@ -185,89 +185,6 @@ const ListMassageViewPage = () => {
                   src="./src/assets/images/google_map/carte.webp"
                   alt="map salon"
                 ></Img>
-                <div className="flex mb-[236px] md:ml-[0] ml-[26px] px-4 py-6 relative w-[159px]">
-                  <div className="bg-white-A700 border border-gray-600 border-solid h-[190px] my-auto rounded-lg w-1/4"></div>
-                  <div className="flex flex-col gap-[21.66px] items-start justify-start ml-[-23.23px] my-auto overflow-auto w-[143px] z-[1]">
-                    <div className="flex flex-row gap-[9.63px] items-center justify-start w-full">
-                      <Img className="h-[19px] w-[19px]" src="" alt="eye" />
-                      <Text
-                        className="flex-1 text-[12.83px] text-gray-900 w-auto"
-                        size="txtManropeSemiBold1283"
-                      >
-                        Nom du salon
-                      </Text>
-                    </div>
-                    <List
-                      className="flex flex-col gap-[16.84px] items-start w-full"
-                      orientation="vertical"
-                    >
-                      <div className="flex flex-1 flex-row gap-[32.08px] items-center justify-between my-0 w-full">
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="./src/assets/images/img_massage.svg"
-                            alt="volume"
-                          />
-                          <Text
-                            className="flex-1 text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                            type de massage
-                          </Text>
-                        </div>
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="images/img_ticket.svg"
-                            alt="ticket"
-                          />
-                          <Text
-                            className="text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                            prix
-                          </Text>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 flex-row gap-[32.08px] items-center justify-between my-0 w-full">
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="./src/assets/images/img_massage.svg"
-                            alt="icon"
-                          />
-                          <Text
-                            className="flex-1 text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                            type de massage
-                          </Text>
-                        </div>
-                        <div className="flex flex-1 flex-row gap-[9.63px] items-center justify-start w-full">
-                          <Img
-                            className="h-4 w-4"
-                            src="images/img_iocnmenu_16x16.svg"
-                            alt="iocnmenu"
-                          />
-                          <Text
-                            className="text-[12.83px] text-gray-700 w-auto"
-                            size="txtManropeSemiBold1283Gray700"
-                          >
-                            prix
-                          </Text>
-                        </div>
-                      </div>
-                    </List>
-                    <div className="flex flex-col items-center justify-start w-full">
-                      <Text
-                        className="text-[19.25px] text-gray-900 tracking-[-0.38px] w-auto"
-                        size="txtManropeBold1925"
-                      >
-                        en savoir plus
-                      </Text>
-                    </div>
-                  </div>
-                </div>
               </div>
               <div className="flex flex-col items-start justify-start w-full">
                 <div className="gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
@@ -280,7 +197,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -303,7 +220,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -331,7 +248,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_20.svg"
@@ -369,7 +286,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -392,7 +309,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -420,7 +337,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_21.svg"
@@ -458,7 +375,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -481,7 +398,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -509,7 +426,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_22.svg"
@@ -547,7 +464,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -570,7 +487,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -598,7 +515,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_23.svg"
@@ -628,15 +545,15 @@ const ListMassageViewPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
+                  <Img
                       className="h-[260px] md:h-auto object-cover w-full"
-                      src="images/img_image_2.png"
+                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
                       alt="image"
                     />
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -659,7 +576,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -687,7 +604,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_24.svg"
@@ -717,15 +634,15 @@ const ListMassageViewPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
+                  <Img
                       className="h-[260px] md:h-auto object-cover w-full"
-                      src="images/img_image_2.png"
+                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
                       alt="image"
                     />
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -748,7 +665,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -776,7 +693,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_25.svg"
@@ -806,15 +723,15 @@ const ListMassageViewPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
+                  <Img
                       className="h-[260px] md:h-auto object-cover w-full"
-                      src="images/img_image_3.png"
+                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
                       alt="image"
                     />
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -824,7 +741,7 @@ const ListMassageViewPage = () => {
                         </div>
                         <div className="flex flex-col gap-[21px] items-start justify-start w-full">
                           <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="./src/assets/images/img_massage.svg"
@@ -837,7 +754,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -865,7 +782,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_26.svg"
@@ -903,7 +820,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -926,7 +843,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -954,7 +871,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_27.svg"
@@ -992,7 +909,7 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Img className="h-6 w-6" src="" alt="eye" />
+                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -1015,7 +932,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -1043,7 +960,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_28.svg"
@@ -1121,13 +1038,12 @@ const ListMassageViewPage = () => {
                   >
                     5
                   </Button>
-                </div>
-                <Button
+                  <Button
                   className="cursor-pointer flex items-center justify-center min-w-[134px]"
                   rightIcon={
                     <Img
                       className="h-4 mt-px mb-[5px] ml-1"
-                      src="images/img_arrowright.svg"
+                      src="./src/assets/images/img_arrowright.svg"
                       alt="arrow_right"
                     />
                   }
@@ -1140,6 +1056,7 @@ const ListMassageViewPage = () => {
                     Next Page
                   </div>
                 </Button>
+                </div>
               </div>
             </div>
           </div>
