@@ -20,9 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
     normalizationContext: ['groups' =>['reservation: read']],
     denormalizationContext: ['groups' =>['reservation: create', 'user: update']],
     operations: [
-        new GetCollection(
-            uriTemplate: '/'
-        ),
+        new GetCollection(),
         new Get(),
         new Post(),
         new Put(),
