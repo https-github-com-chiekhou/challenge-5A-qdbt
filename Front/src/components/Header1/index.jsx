@@ -70,7 +70,10 @@ const Header1 = () => {
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src={logo} alt="" />
+            <div className="rounded-full overflow-hidden mr-4">
+            <img src={logo} alt="Profile" className="w-14 h-14 object-cover" />
+          </div>
+            {/* <img className="h-8 w-auto" src={logo} alt="" /> */}
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -103,11 +106,11 @@ const Header1 = () => {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-dark shadow-lg ring-1 ring-gray-900/5">
-                <div className="p-4">
+                <div className="p-4 bg-[#e7f3fa]">
                   {products.map((item) => (
                     <div
                       key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 leading-6 hover:bg-[#c8e2f2]"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <item.icon
@@ -128,7 +131,7 @@ const Header1 = () => {
                     </div>
                   ))}
                 </div>
-                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-[#d0e6f4]">
                   {callsToAction.map((item) => (
                     <a
                       key={item.name}
@@ -149,24 +152,24 @@ const Header1 = () => {
 
           <a
             href="/salons"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="flex items-center font-semibold leading-6 text-gray-900"
           >
             Salons
           </a>
 
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="#" className="flex items-center font-semibold leading-6 text-gray-900">
             Company
           </a>
           <a
             href="/login"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="flex items-center font-semibold leading-6 text-gray-900"
           >
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
 
           <a
             href="/register"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="flex items-center font-semibold leading-6 text-gray-900"
           >
             Register <span aria-hidden="true">&rarr;</span>
           </a>
