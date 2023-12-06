@@ -23,8 +23,8 @@ jobs:
 
     - name: Install Composer Dependencies
       run: |
-      cd ./Back
-      composer install
+        cd ./Back
+        composer install
 
     - name: Set up Symfony Environment
       run: cp .env.dist .env
