@@ -25,6 +25,54 @@ import UpdatePlanningSalarie from "./pages/Prestataire/Salarie/UpdatePlanningSal
 import Prestataire from "./pages/Prestataire";
 import MakeReservation from "./pages/MakeReservation.jsx";
 
+const Homepage = lazy(() => import("./pages/Homepage"));
+const Login = lazy(() => import("./pages/Login"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ListMassageViewPage = lazy(() => import("./pages/ListMassage"));
+const CompagnyViewPage = lazy(() => import("./pages/Compagny"));
+const Register = lazy(() => import("./pages/Register"));
+const Planning = lazy(() => import("./pages/Prestataire/Salarie/Planning"));
+const PlanningSalarie = lazy(() =>
+  import("./pages/Prestataire/Salarie/PlanningSalarie")
+);
+const DashboardSalaries = lazy(() =>
+  import("./pages/Prestataire/Salarie/DashboardSalaries")
+);
+const AddEtablissementPrestations = lazy(() =>
+  import("./pages/Prestataire/Etablissement/AddEtablissementPrestations")
+);
+const Admin = lazy(() => import("./pages/Admin"));
+const DashboardUsers = lazy(() => import("./pages/Admin/DashboardUsers"));
+const ProtectRoutes = lazy(() =>
+  import("./components/ProtectRoutes/ProtectRoutes")
+);
+const UpdateUser = lazy(() => import("./pages/Admin/UpdateUser"));
+const AddUser = lazy(() => import("./pages/Admin/AddUser"));
+const ListEtablissement = lazy(() =>
+  import("./pages/Prestataire/Etablissement/ListEtablissement")
+);
+const Etablissement = lazy(() =>
+  import("./pages/Prestataire/Etablissement/Etablissement")
+);
+const Profil = lazy(() => import("./pages/Profil"));
+const DayOff = lazy(() => import("./pages/Prestataire/Salarie/DayOff"));
+const UpdateService = lazy(() =>
+  import("./pages/Prestataire/Etablissement/UpdateService")
+);
+const DayOffSalarie = lazy(() =>
+  import("./pages/Prestataire/Salarie/DayOffSalarie")
+);
+const UpdateDayOff = lazy(() =>
+  import("./pages/Prestataire/Salarie/UpdateDayOff")
+);
+const UpdatePlanningSalarie = lazy(() =>
+  import("./pages/Prestataire/Salarie/UpdatePlanningSalarie")
+);
+const Prestataire = lazy(() => import("./pages/Prestataire"));
+
+const Loading = lazy(() => import("./components/Loading"));
+import Map from "./pages/Map/Map";
+//const Error = React.lazy(() => import("pages/Error"));
 const ProjectRoutes = () => {
     return (<React.Suspense fallback={<>Loading...</>}>
             <Router>
@@ -149,9 +197,10 @@ const ProjectRoutes = () => {
                         path='/make-reservation'
                         element={<MakeReservation/>}
                     />
-                </Routes>
-
-            </Router>
-        </React.Suspense>);
+          <Route path="/map" element={<Map />} />
+        </Routes>
+      </Router>
+    </React.Suspense>
+  );
 };
 export default ProjectRoutes;
