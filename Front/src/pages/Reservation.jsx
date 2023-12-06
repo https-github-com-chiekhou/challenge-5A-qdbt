@@ -1,25 +1,47 @@
-import Header1 from "../components/Header1";
-import Footer from '../components/Footer'
-import {Button, Img, Input, List, Text} from "../components";
-import Calendar from 'react-calendar';
 import React, { useState } from 'react';
-
+import Calendar from 'react-calendar';
+import Select from 'react-select';
+import Header1 from "../components/Header1/index.jsx";
+import Footer from "../components/Footer/index.jsx";
 
 const Reservation = () => {
+    const currentDate = new Date();
+    const minHour = 9;
+    const maxHour = 20;
 
-    //TODO: récupérer le prestataire choisi avec son calendrier et donc ses disponibilités
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
 
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        // Réinitialiser le créneau horaire lors du changement de date
         setSelectedTimeSlot(null);
     };
 
-    const handleTimeSlotSelect = (value) => {
-        setSelectedTimeSlot(value);
+
+    // Simuler les créneaux horaires du prestataire
+    //TODO recuperer le prestataire et ses creneaux pour le timeslot
+    const generateTimeSlots = (minHour, maxHour, intervalMinutes) => {
+        const timeSlots = [];
+        let currentTime = new Date();
+        currentTime.setHours(minHour, 0, 0);
+
+        while (currentTime.getHours() < maxHour) {
+            timeSlots.push({
+                label: `${currentTime.getHours()}:${(currentTime.getMinutes() < 10 ? '0' : '') + currentTime.getMinutes()}`,
+                value: currentTime.toISOString(),
+            });
+
+            currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
+        }
+        return timeSlots;
     };
+    const timeSlots = generateTimeSlots(minHour, maxHour, 60);
+
+    const handleTimeSlotChange = (selectedOption) => {
+        setSelectedTimeSlot(selectedOption);
+    };
+
 
     return (
         <>
@@ -27,26 +49,34 @@ const Reservation = () => {
             <h2 className="text-black-900 text-center font-bold">Calendrier de disponibilité</h2>
             <Calendar
                 onChange={handleDateChange}
+                minDate={currentDate}
                 value={selectedDate}
                 selectRange={false}
                 select={selectedDate}
-                tileContent={({ date, view }) =>
-                    view === 'month' && date.getDate() === selectedDate.getDate() ? (
-                        <div className="availability-indicator">Disponible</div>
-                    ) : null
-                }
-                onClickDay={(value) => handleDateChange(value)}
+                className="text-black-900"
+            />
+            <h2>Sélectionnez un créneau horaire :</h2>
+            <Select
+                options={timeSlots}
+                value={selectedTimeSlot}
+                onChange={handleTimeSlotChange}
+                placeholder="Choisissez un créneau horaire"
                 className="text-black-900"
             />
             {selectedTimeSlot && (
                 <div>
                     <h3>Créneau horaire sélectionné :</h3>
-                    <p>{selectedTimeSlot}</p>
+                    <p>{selectedTimeSlot.label}</p>
                 </div>
             )}
+            <div className="block">
+                {/*<textarea placeholder="Placer un commentaire si vous voulez"></textarea>*/}
+                <button className="padi">Prendre un rendez-vous</button>
+            </div>
+
             <Footer/>
         </>
-    )
-}
+    );
+};
 
 export default Reservation;
