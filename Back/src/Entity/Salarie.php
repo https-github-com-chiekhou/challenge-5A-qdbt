@@ -2,34 +2,66 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\SalarieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SalarieRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups'=>['salarie: read']],
+    denormalizationContext: ['groups'=>['salarie: create', 'user:update']],
+    operations:[
+        new GetCollection(),
+        new Get(),
+        new Post(),
+        new Put(),
+        new Patch(),
+        new Delete()
+    ],
+)]
 class Salarie
 {
+    #[ApiProperty(identifier: true)]
+    #[Groups(['salarie: read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ApiProperty(identifier: true)]
+    #[Groups(['salarie: read', 'salarie: create', 'user: update'])]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[ApiProperty(identifier: true)]
+    #[Groups(['salarie: read', 'salarie: create', 'user: update'])]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[ApiProperty(identifier: true)]
+    #[Groups(['salarie: read', 'salarie: create'])]
     #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: DayOff::class)]
     private Collection $dayOffs;
 
+    #[Groups(['salarie: read'])]
     #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Creneau::class)]
     private Collection $creneaux;
 
+    #[Groups(['salarie: read'])]
     #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Reservation::class)]
     private Collection $reservations;
 
+    #[Groups(['salarie: read'])]
     #[ORM\ManyToOne(inversedBy: 'salaries')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;

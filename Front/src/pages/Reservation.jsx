@@ -5,6 +5,9 @@ import Header1 from "../components/Header1/index.jsx";
 import Footer from "../components/Footer/index.jsx";
 
 const Reservation = () => {
+    const [users, setUsers] = useState();
+    const [prestataire, setPrestataire] = useState();
+
     const currentDate = new Date();
     const minHour = 9;
     const maxHour = 20;
@@ -12,6 +15,9 @@ const Reservation = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
 
+    const fetchPrestataireData = () =>{
+        fetch('https://localhost:8888/api/')
+    }
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
