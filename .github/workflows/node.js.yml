@@ -19,8 +19,8 @@ jobs:
 
 
     - name: Build and Test Front-end Docker Image
-      working-directory: ./front
       run: |
+        cd front
         docker build -t front-app .
         docker run front-app npm test
 
