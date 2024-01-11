@@ -20,7 +20,7 @@ jobs:
 
     - name: Build and Test Front-end Docker Image
       run: |
-        cd front
+        cd Front
         docker build -t front-app .
         docker run front-app npm test
 
