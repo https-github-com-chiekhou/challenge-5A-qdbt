@@ -24,6 +24,6 @@ jobs:
         docker build -t front-app .
 
     - name: Build and Test Back-end Docker Image
-      working-directory: ./back
       run: |
+        cd Back
         docker build -t back-app .
