@@ -18,10 +18,13 @@ jobs:
       run: ls
 
 
-    - name: Build and Test Front-end Docker Image
+    - name: Build Front-end Docker Image
       run: |
         cd Front
         docker build -t front-app .
+
+    - name: start Front-end Docker Image
+      run: |
         docker compose up -d
 
     # - name: Build and Test Back-end Docker Image
