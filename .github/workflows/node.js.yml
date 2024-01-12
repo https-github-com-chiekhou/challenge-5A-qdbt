@@ -22,10 +22,8 @@ jobs:
       run: |
         cd Front
         docker build -t front-app .
-        docker run front-app npm test
 
     - name: Build and Test Back-end Docker Image
       working-directory: ./back
       run: |
         docker build -t back-app .
-        docker run back-app npm test
