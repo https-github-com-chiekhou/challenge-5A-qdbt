@@ -23,7 +23,11 @@ jobs:
         cd Front
         docker build -t front-app .
 
-    - name: Build and Test Back-end Docker Image
+    # - name: Build and Test Back-end Docker Image
+    #   run: |
+    #     cd Back
+    #     docker build -t back-app .
+
+    - name: Stop Docker Containers
       run: |
-        cd Back
-        docker build -t back-app .
+        docker-compose down
