@@ -22,6 +22,7 @@ jobs:
       run: |
         cd Front
         docker build -t front-app .
+        docker compose up -d
 
     # - name: Build and Test Back-end Docker Image
     #   run: |
