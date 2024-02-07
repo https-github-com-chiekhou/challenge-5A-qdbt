@@ -5,6 +5,7 @@ export default {
     "./index.html",
     "./src/**/**/*.{js,ts,jsx,tsx,html,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,html,mdx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   darkMode: "class",
   theme: {
@@ -42,6 +43,8 @@ export default {
     },
   },
   plugins: [
-    //require('@tailwindcss/forms')
+    require("@tailwindcss/forms"),
+    require('flowbite/plugin')
+
   ],
 };

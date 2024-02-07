@@ -1,12 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Button, Img, Input, List, Text } from "../components";
-import Footer from "../components/Footer";
-import Header1 from "../components/Header1";
 
 const Homepage = () => {
   return (
     <>
-      <Header1 />
       <div className="bg-white-A700 flex flex-col font-markoone sm:gap-10 md:gap-10 gap-[100px] items-center justify-start mx-auto w-auto sm:w-full md:w-full">
         <div className="flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] w-full">
           <div className="flex flex-col gap-10 items-center justify-start max-w-[1200px] mx-auto w-full">
@@ -172,10 +169,7 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-
-
       </div>
-      <Footer />
     </>
   );
 };

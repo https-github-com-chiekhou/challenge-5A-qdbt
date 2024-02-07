@@ -7,3 +7,11 @@
 auth:
   path: /auth
   methods: ['POST']
+
+logout:
+  path: /logout
+
+default_confirm_token:
+  path: /confirm-user/{token}
+  controller: App\Controller\ConfirmationUserController::confirmUser
+  methods: ['GET']

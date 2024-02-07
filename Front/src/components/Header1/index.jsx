@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
+import { AuthContext } from "../../context";
+import { logout } from "../../api/auth";
 import logo from "../../assets/logo/logo.png";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import {
@@ -60,6 +62,11 @@ function classNames(...classes) {
 
 const Header1 = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <header>
@@ -71,8 +78,12 @@ const Header1 = () => {
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <div className="rounded-full overflow-hidden mr-4">
-            <img src={logo} alt="Profile" className="w-14 h-14 object-cover" />
-          </div>
+              <img
+                src={logo}
+                alt="Profile"
+                className="w-14 h-14 object-cover"
+              />
+            </div>
             {/* <img className="h-8 w-auto" src={logo} alt="" /> */}
           </a>
         </div>
@@ -157,22 +168,47 @@ const Header1 = () => {
             Salons
           </a>
 
-          <a href="#" className="flex items-center font-semibold leading-6 text-gray-900">
+          <a
+            href="#"
+            className="flex items-center font-semibold leading-6 text-gray-900"
+          >
             Company
           </a>
-          <a
-            href="/login"
-            className="flex items-center font-semibold leading-6 text-gray-900"
-          >
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          {(!isAuthenticated && (
+            <>
+              <a
+                href="/login"
+                className="flex items-center font-semibold leading-6 text-gray-900"
+              >
+                Log in <span aria-hidden="true">&rarr;</span>
+              </a>
 
-          <a
-            href="/register"
-            className="flex items-center font-semibold leading-6 text-gray-900"
-          >
-            Register <span aria-hidden="true">&rarr;</span>
-          </a>
+              <a
+                href="/register"
+                className="flex items-center font-semibold leading-6 text-gray-900"
+              >
+                Register <span aria-hidden="true">&rarr;</span>
+              </a>
+            </>
+          )) || (
+            <>
+              <a
+                href="/profil"
+                className="flex items-center font-semibold leading-6 text-gray-900"
+              >
+                Profil <span aria-hidden="true">&rarr;</span>
+              </a>
+
+              <a href="">
+                <button
+                  className="btn btn-danger bg-indigo-600 text-white"
+                  onClick={handleLogout}
+                >
+                  Déconnexion
+                </button>
+              </a>
+            </>
+          )}
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end"></div>
       </nav>

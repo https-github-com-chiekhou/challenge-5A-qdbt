@@ -9,8 +9,6 @@ import {
   List,
   Text,
 } from "../../components";
-import Footer from "../../components/Footer";
-import Header1 from "../../components/Header1";
 
 const dropdownlargeOptionsList = [
   { label: "Option1", value: "option1" },
@@ -31,8 +29,6 @@ const dropdownlargeOneOptionsList = [
 const ListMassageViewPage = () => {
   return (
     <>
-      <Header1 />
-
       <div className="bg-gray-50 flex flex-col font-markoone sm:gap-10 md:gap-10 gap-[100px] items-start justify-start mx-auto w-auto sm:w-full md:w-full">
         <div className="flex flex-col md:gap-10 gap-[60px] items-center justify-center w-full">
           <div className="flex flex-col font-manrope items-center justify-start md:px-10 sm:px-5 px-[120px] w-full">
@@ -197,7 +193,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -286,7 +281,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -375,7 +369,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -464,7 +457,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -545,7 +537,7 @@ const ListMassageViewPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                  <Img
+                    <Img
                       className="h-[260px] md:h-auto object-cover w-full"
                       src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
                       alt="image"
@@ -553,7 +545,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -634,7 +625,7 @@ const ListMassageViewPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                  <Img
+                    <Img
                       className="h-[260px] md:h-auto object-cover w-full"
                       src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
                       alt="image"
@@ -642,7 +633,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -723,7 +713,7 @@ const ListMassageViewPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                  <Img
+                    <Img
                       className="h-[260px] md:h-auto object-cover w-full"
                       src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
                       alt="image"
@@ -731,7 +721,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -820,7 +809,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -909,7 +897,6 @@ const ListMassageViewPage = () => {
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -1039,30 +1026,29 @@ const ListMassageViewPage = () => {
                     5
                   </Button>
                   <Button
-                  className="cursor-pointer flex items-center justify-center min-w-[134px]"
-                  rightIcon={
-                    <Img
-                      className="h-4 mt-px mb-[5px] ml-1"
-                      src="./src/assets/images/img_arrowright.svg"
-                      alt="arrow_right"
-                    />
-                  }
-                  shape="round"
-                  color="transparent"
-                  size="sm"
-                  variant="outline"
-                >
-                  <div className="font-semibold text-base text-left">
-                    Next Page
-                  </div>
-                </Button>
+                    className="cursor-pointer flex items-center justify-center min-w-[134px]"
+                    rightIcon={
+                      <Img
+                        className="h-4 mt-px mb-[5px] ml-1"
+                        src="./src/assets/images/img_arrowright.svg"
+                        alt="arrow_right"
+                      />
+                    }
+                    shape="round"
+                    color="transparent"
+                    size="sm"
+                    variant="outline"
+                  >
+                    <div className="font-semibold text-base text-left">
+                      Next Page
+                    </div>
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

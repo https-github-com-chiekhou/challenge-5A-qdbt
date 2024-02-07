@@ -37,31 +37,25 @@ class DayOff
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['dayoff:create', 'dayoff:update'])]
-    #[ORM\Column(length: 255)]
+    #[Groups(['dayoff:read','dayoff:create', 'dayoff:update'])]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $name = null;
 
-    #[Groups(['dayoff:create', 'dayoff:update'])]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['dayoff:read','dayoff:create', 'dayoff:update'])]
+    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $dateStart = null;
 
-    #[Groups(['dayoff:create', 'dayoff:update'])]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['dayoff:read','dayoff:create', 'dayoff:update'])]
+    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $dateEnd = null;
   
 
+    #[Groups(['dayoff:read','dayoff:create'])]
     #[ORM\ManyToOne(inversedBy: 'dayOffs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
-    #[ORM\OneToMany(mappedBy: 'dayOff', targetEntity: Planning::class)]
-    private Collection $plannings;
-
-    public function __construct()
-    {
-        $this->plannings = new ArrayCollection();
-    }
-
+    
 
     public function getId(): ?int
     {
@@ -112,36 +106,6 @@ class DayOff
     public function setDateEnd(\DateTimeInterface $dateEnd): static
     {
         $this->dateEnd = $dateEnd;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Planning>
-     */
-    public function getPlannings(): Collection
-    {
-        return $this->plannings;
-    }
-
-    public function addPlanning(Planning $planning): static
-    {
-        if (!$this->plannings->contains($planning)) {
-            $this->plannings->add($planning);
-            $planning->setDayOff($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlanning(Planning $planning): static
-    {
-        if ($this->plannings->removeElement($planning)) {
-            // set the owning side to null (unless already changed)
-            if ($planning->getDayOff() === $this) {
-                $planning->setDayOff(null);
-            }
-        }
 
         return $this;
     }
