@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 import {
   Button,
-  // GoogleMap,
   Img,
   Input,
   //Line,
@@ -17,7 +17,10 @@ import {
   Marker,
   Popup
 } from 'react-leaflet';
-
+//import OpenLayerMap from "../Map/Map3";
+import SearchSalon from "../../components/Search/searchsalon";
+import StarRating from "../../components/StarRating/starratting";
+import "../Map/Map3";
 const dropdownlargeOptionsList = [
   { label: "Option1", value: "option1" },
   { label: "Option2", value: "option2" },
@@ -34,9 +37,36 @@ const dropdownlargeOneOptionsList = [
   { label: "Option3", value: "option3" },
 ];
 
-const position = [51.505, -0.09];
+const position = [48.866667, 2.333333];
+const position2 = [48.846137, 2.347412];
 
 const ListMassageViewPage = () => {
+  const [etablissements, setEtablissements] = useState(null);
+  useEffect(() => {
+    // Fonction asynchrone pour effectuer la requête
+    const fetchObject = async () => {
+      try {
+        let response = []
+        // Effectuer la requête GET vers l'API Platform Symfony
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          response = await axios.get('http://localhost:8888/api/etablissements'); // Remplacez l'URL par celle de votre API
+        } else {
+          const url = process.env.URL_API_APP
+          response = await axios.get(url + ""); 
+        }
+        
+
+        // Mettre à jour l'état avec l'objet récupéré depuis la réponse
+        setEtablissements(response.data);
+      } catch (error) {
+        // Gérer les erreurs de requête
+        //console.error('Error fetching object:', error);
+      }
+    };
+
+    // Appeler la fonction de requête
+    fetchObject();
+  }, []); 
   return (
     <>
       <div className="bg-gray-50 flex flex-col font-markoone sm:gap-10 md:gap-10 gap-[100px] items-start justify-start mx-auto w-auto sm:w-full md:w-full">
@@ -176,9 +206,14 @@ const ListMassageViewPage = () => {
                     </div>
                   </Button>
                 </div> */}
+                <div className="flex md:flex-col flex-row gap-5 items-start justify-start w-full">
+                  <SearchSalon></SearchSalon>
+                </div>
+                
               </div>
             </div>
           </div>
+          {/* <OpenLayerMap/> */}
           <div className="flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] w-full">
             <div className="flex flex-col md:gap-10 gap-[60px] items-center justify-start w-full">
               <div className="flex md:flex-col flex-row md:gap-5 items-center justify-start w-full">
@@ -204,12 +239,128 @@ const ListMassageViewPage = () => {
                     </Popup>
                   </Marker>
                 </MapContainer>
-                  
-                </div>
               </div>
               <div className="flex flex-col items-start justify-start w-full">
                 <div className="gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
+
+              { etablissements && etablissements.length > 0 ? (
+              
+              etablissements.map((etablissement, index) => (
+                <div key={index} className="flex flex-col items-start justify-start w-full">
+                  <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
+                    <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
+                      <Img
+                        className="h-[260px] md:h-auto object-cover w-full"
+                        src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
+                        alt="image"
+                      />
+                      <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
+                        <div className="flex flex-col gap-[27px] items-start justify-start w-full">
+                          <div className="flex flex-row gap-3 items-center justify-start w-full">
+                            <Img
+                              className="h-6 w-6"
+                              src=""
+                              alt="eye"
+                            />
+                            <Text
+                              className="flex-1 text-base text-gray-900 w-auto"
+                              size="txtManropeSemiBold16Gray900"
+                            >
+                              Nom du salon {etablissement.name}
+                            </Text>
+                          </div>
+                          <div className="flex flex-col gap-[21px] items-start justify-start w-full">
+                          <div className="flex flex-row gap-10 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                              <Img
+                                className="h-5 w-5"
+                                src="./src/assets/images/img_massage.svg"
+                                alt="volume"
+                              />
+                              <Text
+                                className="flex-1 text-base text-gray-700 w-auto"
+                                size="txtManropeSemiBold16Gray700"
+                              >
+                                type de massage
+                              </Text>
+                            </div>
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                              <Img
+                                className="h-5 w-5"
+                                src="images/img_ticket.svg"
+                                alt="ticket"
+                              />
+                              <Text
+                                className="text-base text-gray-700 w-auto"
+                                size="txtManropeSemiBold16Gray700"
+                              >
+                                prix
+                              </Text>
+                            </div>
+                          </div>
+                          <div className="flex flex-row gap-10 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                              <Img
+                                className="h-5 w-5"
+                                src="./src/assets/images/img_massage.svg"
+                                alt="icon"
+                              />
+                              <Text
+                                className="flex-1 text-base text-gray-700 w-auto"
+                                size="txtManropeSemiBold16Gray700"
+                              >
+                                type de massage
+                              </Text>
+                            </div>
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                              <Img
+                                className="h-5 w-5"
+                                src="images/img_settings_20.svg"
+                                alt="settings"
+                              />
+                              <Text
+                                className="text-base text-gray-700 w-auto"
+                                size="txtManropeSemiBold16Gray700"
+                              >
+                               prix
+                              </Text>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
+                          <Button
+                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
+                            shape="round"
+                            color="gray_900"
+                            size="sm"
+                            variant="fill"
+                          >
+                            Voir plus de détails
+                          </Button>
+                          
+                        </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+
+              ) : (
+                <Text
+                  className="flex-1 text-base text-gray-900 w-auto"
+                  size="txtManropeSemiBold16Gray900"
+                >
+                  Aucun résultat
+                </Text>
+              )}
+
+
+              {/* <div className="flex flex-col items-start justify-start w-full">
+                <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
+                  <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
                     <Img
                       className="h-[260px] md:h-auto object-cover w-full"
                       src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
@@ -217,6 +368,7 @@ const ListMassageViewPage = () => {
                     />
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
+                      <StarRating rating={3.5} />
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
@@ -297,7 +449,7 @@ const ListMassageViewPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
+                  <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
                     <Img
                       className="h-[260px] md:h-auto object-cover w-full"
                       src="./src/assets/images/exemple_list_salon/img2_salon.jpg"
@@ -305,6 +457,7 @@ const ListMassageViewPage = () => {
                     />
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
+                      <StarRating rating={4.5} />
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
@@ -312,6 +465,8 @@ const ListMassageViewPage = () => {
                           >
                             Nom du salon
                           </Text>
+                          <div>
+                          </div>
                         </div>
                         <div className="flex flex-col gap-[21px] items-start justify-start w-full">
                           <div className="flex flex-row gap-10 items-center justify-between w-full">
@@ -385,7 +540,7 @@ const ListMassageViewPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
+                  <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
                     <Img
                       className="h-[260px] md:h-auto object-cover w-full"
                       src="./src/assets/images/exemple_list_salon/img2_salon.jpg"
@@ -393,6 +548,7 @@ const ListMassageViewPage = () => {
                     />
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
+                      <StarRating rating={3.5} />
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
@@ -826,6 +982,8 @@ const ListMassageViewPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
+                  
+                  <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
                     <Img
                       className="h-[260px] md:h-auto object-cover w-full"
                       src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
@@ -833,6 +991,7 @@ const ListMassageViewPage = () => {
                     />
                     <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
+                      <StarRating rating={3.5} />
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
@@ -1001,8 +1160,9 @@ const ListMassageViewPage = () => {
                       </div>
                     </div>
                   </div>
+                   
                 </div>
-              </div>
+              </div>*/}
               <div className="flex sm:flex-col flex-row gap-5 items-center justify-between w-full">
                 <div className="flex flex-row gap-[5px] items-start justify-start w-auto">
                   <Button
@@ -1091,6 +1251,10 @@ const ListMassageViewPage = () => {
             </div>
           </div>
         </div>
+        </div>
+      </div>
+      </div>
+      </div>
       </div>
     </>
   );
