@@ -45,6 +45,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_PRESTATAIRE = 'ROLE_PRESTATAIRE';
+   
+
+    
     #[Groups(['user:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]

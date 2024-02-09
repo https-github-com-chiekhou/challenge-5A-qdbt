@@ -28,9 +28,14 @@ services:
         bind:
             $processor: '@api_platform.doctrine.orm.state.persist_processor'
 
-    # App\EventListener\AuthenticationSuccessListener:
+    App\ContextBuilder\UserContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: ['@App\ContextBuilder\UserContextBuilder.inner']
+
+    # App\Normalizer\UserNormalizer:
+    #     arguments: ['@security.token_storage']
     #     tags:
-    #         - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+    #         - { name: 'serializer.normalizer', priority: 64 }
     
     App\EventListener\AddCreatedIdListener:
         tags:

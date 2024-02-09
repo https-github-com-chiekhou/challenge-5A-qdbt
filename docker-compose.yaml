@@ -49,6 +49,17 @@ services:
     ports:
       - "5432:5432"
 
+  dbtest:
+    image: postgres:15.4-alpine
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+
   adminer:
     image: adminer
     restart: always

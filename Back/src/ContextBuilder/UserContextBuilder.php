@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Serializer;
+namespace App\ContextBuilder;
 
 use ApiPlatform\Core\Exception\RuntimeException;
-use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
+use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 
-#[AsDecorator(decorates: 'api_platform.serializer.context_builder')]
 class UserContextBuilder implements SerializerContextBuilderInterface
 {
     /**
