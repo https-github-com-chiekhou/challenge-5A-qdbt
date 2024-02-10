@@ -21,8 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
-#[ApiResource(security: 'is_granted("ROLE_USER")')]
 #[ApiResource(
+    security: 'is_granted("ROLE_USER")',
     normalizationContext: ['groups' => ['reservation: read']],
     denormalizationContext: ['groups' => ['reservation: create', 'user: update']],
     operations: [
