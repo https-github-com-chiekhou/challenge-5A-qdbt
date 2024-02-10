@@ -16,7 +16,7 @@ const Reservation = () => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
 
     const fetchPrestataireData = () =>{
-        fetch('https://localhost:8888/api/')
+        fetch(`https://localhost:8888/api/salaries/${id}`)
     }
 
     const handleDateChange = (date) => {
