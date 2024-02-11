@@ -41,16 +41,16 @@ App\Entity\Prestataire:
  
 
 
-App\Entity\Reservation:
-  reservation_{1..10}:
-    status: "<randomElement(['Disponible', 'Non-Disponible'])>"
-    commentaire: '<text()>'
-    date : "<dateTime()>" 
-    startTime: '<dateTime()>'
-    endTime: '<dateTime()>'
-    client : '@user_<rand(1, 10)>'
-    salarie: '@salarie_<rand(1, 10)>'
-    prestataire: '@prestataire_<rand(1, 10)>'
+#App\Entity\Reservation:
+#  reservation_{1..10}:
+#    status: "<randomElement(['Disponible', 'Non-Disponible'])>"
+#    commentaire: '<text()>'
+#    date : "<dateTimeImmutable()>"
+#    startTime: '<dateTime()>'
+#    endTime: '<dateTime()>'
+#    client : '@user_<rand(1, 10)>'
+#    salarie: '@salarie_<rand(1, 10)>'
+#    prestataire: '@prestataire_<rand(1, 10)>'
   
 App\Entity\Salarie:
   salarie_{1..10}:
