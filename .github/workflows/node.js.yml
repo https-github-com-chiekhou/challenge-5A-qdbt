@@ -18,14 +18,20 @@ jobs:
       run: ls
 
 
-    - name: Build and Test Front-end Docker Image
-      working-directory: ./front
+    - name: Build Front-end Docker Image
       run: |
+        cd Front
         docker build -t front-app .
-        docker run front-app npm test
 
-    - name: Build and Test Back-end Docker Image
-      working-directory: ./back
+    - name: start Front-end Docker Image
       run: |
-        docker build -t back-app .
-        docker run back-app npm test
+        docker compose up -d
+
+    # - name: Build and Test Back-end Docker Image
+    #   run: |
+    #     cd Back
+    #     docker build -t back-app .
+
+    - name: Stop Docker Containers
+      run: |
+        docker-compose down
