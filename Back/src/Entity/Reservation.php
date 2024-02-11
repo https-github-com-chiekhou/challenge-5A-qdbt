@@ -30,7 +30,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
             security: 'is_granted("ROLE_ADMIN")',
             securityMessage: 'Sorry but you are not amdin.'
         ),
-//        new Get(),
 //        new Post(
 //            processor: ReservationProcessor::class
 //        ),
