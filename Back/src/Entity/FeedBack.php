@@ -32,7 +32,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             security: 'is_granted("ROLE_USER")',
         ),
         new Delete(
-            uriTemplate: '/prestataire/{id}/deletetComments',
+            uriTemplate: '/prestataire/{id}/deleteteComments',
             uriVariables: [
                 'id' => new Link(fromClass: Prestataire::class, fromProperty: 'id', toProperty: 'prestataire')
             ],
