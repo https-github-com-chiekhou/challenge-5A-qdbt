@@ -2,66 +2,59 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiProperty;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Put;
 use App\Repository\SalarieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
-#[ORM\Entity(repositoryClass: SalarieRepository::class)]
+
 #[ApiResource(
-    normalizationContext: ['groups'=>['salarie: read']],
-    denormalizationContext: ['groups'=>['salarie: create', 'user:update']],
-    operations:[
+    normalizationContext: ['groups' => ['salarie:read']],
+    denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']],
+    operations: [
         new GetCollection(),
         new Get(),
-        new Post(),
-        new Put(),
+        new Post(denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
+        new Put(denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
         new Patch(),
         new Delete()
     ],
 )]
+#[ORM\Entity(repositoryClass: SalarieRepository::class)]
 class Salarie
 {
-    #[ApiProperty(identifier: true)]
-    #[Groups(['salarie: read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ApiProperty(identifier: true)]
-    #[Groups(['salarie: read', 'salarie: create', 'user: update'])]
+    #[Groups(['salarie:create', 'salarie:update','salarie:read'])]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ApiProperty(identifier: true)]
-    #[Groups(['salarie: read', 'salarie: create', 'user: update'])]
+    #[Groups(['salarie:create', 'salarie:update','salarie:read'])]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    #[ApiProperty(identifier: true)]
-    #[Groups(['salarie: read', 'salarie: create'])]
+    #[Groups(['salarie:read'])]
     #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: DayOff::class)]
     private Collection $dayOffs;
 
-    #[Groups(['salarie: read'])]
+    #[Groups(['salarie:read'])]
     #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Creneau::class)]
     private Collection $creneaux;
 
-    #[Groups(['salarie: read'])]
-    #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Reservation::class)]
+    #[Groups(['salarie:read'])]
     private Collection $reservations;
 
-    #[Groups(['salarie: read'])]
     #[ORM\ManyToOne(inversedBy: 'salaries')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
@@ -234,4 +227,6 @@ class Salarie
 
         return $this;
     }
+
+  
 }

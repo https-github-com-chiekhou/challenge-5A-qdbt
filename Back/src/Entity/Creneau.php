@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
@@ -35,20 +37,23 @@ class Creneau
     private ?int $id = null;
 
 
+    #[Groups(['creneau:create', 'creneau:update','creneau:read'])]
     #[ORM\Column(length: 9)]
     private ?string $day = null;
 
-    #[Groups(['creneau:create', 'creneau:update'])]
+    #[Groups(['creneau:create', 'creneau:update','creneau:read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
-    #[Groups(['creneau:create', 'creneau:update'])]
+    #[Groups(['creneau:create', 'creneau:update','creneau:read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
+    #[Groups(['creneau:create','creneau:read'])]
     #[ORM\ManyToOne(inversedBy: 'creneaux')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
+
 
     public function getId(): ?int
     {
@@ -103,4 +108,7 @@ class Creneau
 
         return $this;
     }
+
+
+
 }

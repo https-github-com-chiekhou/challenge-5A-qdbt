@@ -6,7 +6,28 @@ use App\Repository\PrestataireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['prestataire:read']],
+    denormalizationContext: ['groups' => ['prestataire:create', 'prestataire:update']],
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(denormalizationContext: ['groups' => ['prestataire:create']]),
+        new Put(denormalizationContext: ['groups' => ['prestataire:update']]),
+        new Patch(),
+        new Delete()
+    ],
+)]
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
 class Prestataire
 {
@@ -15,20 +36,29 @@ class Prestataire
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['prestataire:create', 'prestataire:update'])]
     #[ORM\Column(length: 255)]
     private ?string $nomEntreprise = null;
 
+    #[Groups(['prestataire:create', 'prestataire:update'])]
     #[ORM\Column(length: 255)]
     private ?string $descriptionEntreprise = null;
 
+    #[Groups(['prestataire:create', 'prestataire:update'])]
     #[ORM\Column(length: 255)]
     private ?string $contact = null;
 
+    #[Groups(['prestataire:create', 'prestataire:update'])]
     #[ORM\Column(length: 255)]
     private ?string $kbis = null;
 
-    #[ORM\Column(length: 255)]
+    #[Groups(['prestataire:create', 'prestataire:update'])]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $statistique = null;
+
+    #[Groups(['prestataire:read','prestataire:create', 'prestataire:update'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Etablissement::class)]
     private Collection $etablissements;
@@ -45,13 +75,9 @@ class Prestataire
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Service::class)]
     private Collection $services;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $client = null;
+
 
    
-
-  
-
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -59,6 +85,7 @@ class Prestataire
         $this->feedback = new ArrayCollection();
         $this->salaries = new ArrayCollection();
         $this->services = new ArrayCollection();
+        $this->statistique =  null;
     }
 
     public function getId(): ?int
@@ -216,29 +243,18 @@ class Prestataire
         return $this;
     }
 
-    public function getClient(): ?User
+    public function getUser(): ?User
     {
-        return $this->client;
+        return $this->user;
     }
 
-    public function setClient(?User $client): static
+    public function setUser(?User $user): static
     {
-        $this->client = $client;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getSalarie(): ?Salarie
-    {
-        return $this->salarie;
-    }
-
-    public function setSalarie(?Salarie $salarie): static
-    {
-        $this->salarie = $salarie;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Salarie>

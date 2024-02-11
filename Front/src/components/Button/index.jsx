@@ -16,6 +16,7 @@ const variants = {
     blue_gray_100_01:
       "border border-blue_gray-100_01 border-solid text-gray-900",
     blue_gray_100: "border border-blue_gray-100 border-solid text-gray-900",
+    transparent: "bg-transparent border border-gray-700 border-solid text-gray-900"
   },
 };
 const sizes = { xs: "p-2.5", sm: "p-[13px]", md: "p-[17px]" };
