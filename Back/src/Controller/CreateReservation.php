@@ -59,7 +59,7 @@ class CreateReservation extends AbstractController
         $entityManager->flush();
 
         $clientEmail = $this->email->create(
-            'eddygomet@gmail.com',
+            'api-platform@api.com',
             $this->user->getEmail(),
             'Confirmation de réservation n°' . $reservation->getId(),
             'Reservation effectué'
