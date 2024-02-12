@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use App\Entity\User;
 use App\Factory\Email;
 use App\Repository\PrestataireRepository;
 use App\Repository\SalarieRepository;
@@ -36,35 +37,56 @@ class CreateReservation extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(Request $request): Reservation
+    public function __invoke(Request $request, PrestataireRepository $prestataireRepository, SalarieRepository $salarieRepository, Security $security): Reservation
     {
+        $user = $security->getUser();
+        if (!$user) {
+            throw new \Exception("Utilisateur non authentifié.");
+        }
+
+        if (!($user instanceof User)) {
+            throw new \Exception("L'utilisateur n'est pas valide.");
+        }
+
         $data = json_decode($request->getContent(), true);
         $reservation = new Reservation();
+        $reservation->setClient($user);
 
-        $prestataireId = $data['prestataire'] ?? null;
-        if ($prestataireId) {
-            $prestataire = $this->prestataireRepository->find($prestataireId);
-            $reservation->setPrestataire($prestataire);
+        $prestataireId = $data['prestataire']['id'] ?? null;
+        $salarieId = $data['salarie']['id'] ?? null;
+
+        if ($prestataireId === null) {
+            throw new \Exception("L'ID du prestataire est manquant.");
+        }
+        if ($salarieId === null) {
+            throw new \Exception("L'ID du salarié est manquant.");
         }
 
-        $salarieId = $data['salarie'] ?? null;
-        if($salarieId){
-            $salarie = $this->salarieRepository->find($salarieId);
-            $reservation->setSalarie($salarie);
+        $prestataire = $prestataireRepository->find($prestataireId);
+        if ($prestataire === null) {
+            throw new \Exception("Aucun prestataire trouvé pour l'ID spécifié.");
         }
+        $reservation->setPrestataire($prestataire);
 
-        // Enregistrer la réservation dans la base de données
+        $salarie = $salarieRepository->find($salarieId);
+        if ($salarie === null) {
+            throw new \Exception("Aucun salarié trouvé pour l'ID spécifié.");
+        }
+        $reservation->setSalarie($salarie);
+
         $entityManager = $this->entityManager;
         $entityManager->persist($reservation);
         $entityManager->flush();
 
         $clientEmail = $this->email->create(
             'api-platform@api.com',
-            $this->user->getEmail(),
+            $user->getEmail(),
             'Confirmation de réservation n°' . $reservation->getId(),
             'Reservation effectué'
         );
 
         return $reservation;
     }
+
+
 }

@@ -30,9 +30,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
             security: 'is_granted("ROLE_ADMIN")',
             securityMessage: 'Sorry but you are not amdin.'
         ),
-//        new Post(
-//            processor: ReservationProcessor::class
-//        ),
         new HttpOperation(
             method: Request::METHOD_POST,
             security:'is_granted("ROLE_USER")',
@@ -94,18 +91,18 @@ class Reservation
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
-    #[Groups(['reservation: create', 'reservation: read'])]
+    #[Groups(['reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
     #[Groups(['reservation: create','reservation: read'])]
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: 'Salarie')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
     #[Groups(['reservation: create', 'reservation: read'])]
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: "Prestataire")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
 

@@ -55,7 +55,7 @@ class Feedback
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[Groups(['feedback: create','feedback: read'])]
+    #[Groups(['feedback: read'])]
     #[ORM\ManyToOne(inversedBy: 'feedback')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
