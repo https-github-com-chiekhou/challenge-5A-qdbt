@@ -1,4 +1,4 @@
-name: Frontend CI
+name: Frontend CD
 
 on:
   push:
@@ -23,7 +23,12 @@ jobs:
         cd ./Front
         npm install
 
-    # - name: Build and Test
-    #   run: |
-    #     npm run build
-    #     npm test
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v20
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-scope: ${{ secrets.VERCEL_SCOPE }}
+        vercel-dir: ./Front
+        vercel-env: production

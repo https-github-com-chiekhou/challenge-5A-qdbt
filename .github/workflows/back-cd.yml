@@ -1,4 +1,4 @@
-name: Backend CI
+name: Backend CD
 
 on:
   push:
@@ -21,15 +21,25 @@ jobs:
       with:
         php-version: '8.2'
 
-    # - name: Install Composer Dependencies
-    #   run: |
-    #     cd ./Back
-    #     composer install
+    - name: Install Composer Dependencies
+      run: |
+        cd ./Back
+        composer install
 
-    # - name: Set up Symfony Environment
-    #   run: cp .env.dist .env
+    - name: Set up Symfony Environment
+      run: cp .env.dist .env
 
-    # - name: Build and Test
-    #   run: |
-    #     php bin/console doctrine:schema:update --force
-    #     php bin/phpunit
+    - name: Build and Test
+      run: |
+        php bin/console doctrine:schema:update --force
+        php bin/phpunit
+
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v20
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-scope: ${{ secrets.VERCEL_SCOPE }}
+        vercel-dir: ./Back
+        vercel-env: production
