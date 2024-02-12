@@ -146,13 +146,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Reservation::class)]
     private Collection $reservations;
 
-    #[Groups(['user:read'])]
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Feedback::class)]
-    private Collection $feedback;
+    
+    // #[ORM\OneToMany(mappedBy: 'client', targetEntity: Feedback::class)]
+    // private Collection $feedback;
 
     #[Groups(['user:read'])]
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Comment::class)]
     private Collection $comments;
+
+    #[Groups(['user:read'])]
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Feedback::class)]
+    private Collection $feedback;
 
     public function __construct()
     {
@@ -381,32 +385,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Feedback>
      */
-    public function getFeedback(): Collection
-    {
-        return $this->feedback;
-    }
+    // public function getFeedback(): Collection
+    // {
+    //     return $this->feedback;
+    // }
 
-    public function addFeedback(Feedback $feedback): static
-    {
-        if (!$this->feedback->contains($feedback)) {
-            $this->feedback->add($feedback);
-            $feedback->setClient($this);
-        }
+    // public function addFeedback(Feedback $feedback): static
+    // {
+    //     if (!$this->feedback->contains($feedback)) {
+    //         $this->feedback->add($feedback);
+    //         $feedback->setClient($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeFeedback(Feedback $feedback): static
-    {
-        if ($this->feedback->removeElement($feedback)) {
-            // set the owning side to null (unless already changed)
-            if ($feedback->getClient() === $this) {
-                $feedback->setClient(null);
-            }
-        }
+    // public function removeFeedback(Feedback $feedback): static
+    // {
+    //     if ($this->feedback->removeElement($feedback)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($feedback->getClient() === $this) {
+    //             $feedback->setClient(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getIsValid(): ?bool
     {
@@ -456,6 +460,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getClient() === $this) {
                 $comment->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(FeedBack $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(FeedBack $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getClient() === $this) {
+                $feedback->setClient(null);
             }
         }
 

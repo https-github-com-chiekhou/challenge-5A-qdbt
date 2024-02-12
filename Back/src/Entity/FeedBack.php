@@ -6,7 +6,7 @@ use App\Repository\FeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
-class Feedback
+class FeedBack
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,13 +19,16 @@ class Feedback
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[ORM\ManyToOne(inversedBy: 'feedback')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $client = null;
+    // #[ORM\ManyToOne(inversedBy: 'feedback')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private ?User $client = null;
 
     #[ORM\ManyToOne(inversedBy: 'feedback')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
+
+    #[ORM\ManyToOne(inversedBy: 'feedback')]
+    private ?User $client = null;
 
     public function getId(): ?int
     {
@@ -56,17 +59,17 @@ class Feedback
         return $this;
     }
 
-    public function getClient(): ?User
-    {
-        return $this->client;
-    }
+    // public function getClient(): ?User
+    // {
+    //     return $this->client;
+    // }
 
-    public function setClient(?User $client): static
-    {
-        $this->client = $client;
+    // public function setClient(?User $client): static
+    // {
+    //     $this->client = $client;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getPrestataire(): ?Prestataire
     {
@@ -76,6 +79,18 @@ class Feedback
     public function setPrestataire(?Prestataire $prestataire): static
     {
         $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    public function getClient(): ?User
+    {
+        return $this->client;
+    }
+
+    public function setClient(?User $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }
