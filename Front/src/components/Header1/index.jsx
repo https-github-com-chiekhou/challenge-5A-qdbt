@@ -68,9 +68,9 @@ const Header1 = () => {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5">
+          <a href="/" className="header-icon -m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src={logo} alt="" />
+            <img className=" w-auto" src={logo} alt="" />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -83,7 +83,7 @@ const Header1 = () => {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+        <Popover.Group className="menu-item hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               Product
@@ -103,7 +103,7 @@ const Header1 = () => {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-dark shadow-lg ring-1 ring-gray-900/5">
-                <div className="p-4">
+                <div className="p-4 product-list">
                   {products.map((item) => (
                     <div
                       key={item.name}
@@ -159,14 +159,14 @@ const Header1 = () => {
           </a>
           <a
             href="/login"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="text-sm font-semibold leading-6 text-gray-900 login-link"
           >
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
 
           <a
             href="/register"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="text-sm font-semibold leading-6 text-gray-900 register-link"
           >
             Register <span aria-hidden="true">&rarr;</span>
           </a>
