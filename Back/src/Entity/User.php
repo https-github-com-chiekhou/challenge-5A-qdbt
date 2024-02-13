@@ -155,7 +155,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     #[Groups(['user:read'])]
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: FeedBack::class)]
     private Collection $feedback;
 
     public function __construct()

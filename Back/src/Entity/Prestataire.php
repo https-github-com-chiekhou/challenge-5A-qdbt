@@ -66,7 +66,7 @@ class Prestataire
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Reservation::class)]
     private Collection $reservations;
 
-    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: FeedBack::class)]
     private Collection $feedback;
 
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Salarie::class)]
@@ -221,7 +221,7 @@ class Prestataire
         return $this->feedback;
     }
 
-    public function addFeedback(Feedback $feedback): static
+    public function addFeedback(FeedBack $feedback): static
     {
         if (!$this->feedback->contains($feedback)) {
             $this->feedback->add($feedback);
@@ -231,7 +231,7 @@ class Prestataire
         return $this;
     }
 
-    public function removeFeedback(Feedback $feedback): static
+    public function removeFeedback(FeedBack $feedback): static
     {
         if ($this->feedback->removeElement($feedback)) {
             // set the owning side to null (unless already changed)
