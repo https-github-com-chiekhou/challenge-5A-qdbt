@@ -40,7 +40,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         )
     ]
 )]
-class Feedback
+class FeedBack
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

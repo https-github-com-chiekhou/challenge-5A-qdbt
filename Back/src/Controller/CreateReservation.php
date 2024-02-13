@@ -37,24 +37,26 @@ class CreateReservation extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(Request $request, PrestataireRepository $prestataireRepository, SalarieRepository $salarieRepository, Security $security): Reservation
+    public function __invoke(Request $request, PrestataireRepository $prestataireRepository, SalarieRepository $salarieRepository, Security $security, EntityManagerInterface $entityManager): Reservation
     {
+        // Récupérer l'utilisateur actuel
         $user = $security->getUser();
-        if (!$user) {
-            throw new \Exception("Utilisateur non authentifié.");
+        if (!$user instanceof User) {
+            throw new \Exception("Utilisateur non valide.");
         }
 
-        if (!($user instanceof User)) {
-            throw new \Exception("L'utilisateur n'est pas valide.");
-        }
-
+        // Récupérer les données de la requête
         $data = json_decode($request->getContent(), true);
+
+        // Créer une nouvelle réservation
         $reservation = new Reservation();
         $reservation->setClient($user);
 
-        $prestataireId = $data['prestataire']['id'] ?? null;
-        $salarieId = $data['salarie']['id'] ?? null;
+        // Extraire les identifiants du prestataire et du salarié de la requête
+        $prestataireId = $data['prestataire'] ?? null;
+        $salarieId = $data['salarie'] ?? null;
 
+        // Vérifier si les identifiants du prestataire et du salarié sont présents dans la requête
         if ($prestataireId === null) {
             throw new \Exception("L'ID du prestataire est manquant.");
         }
@@ -62,27 +64,32 @@ class CreateReservation extends AbstractController
             throw new \Exception("L'ID du salarié est manquant.");
         }
 
+        // Récupérer l'entité du prestataire à partir de l'ID
         $prestataire = $prestataireRepository->find($prestataireId);
-        if ($prestataire === null) {
-            throw new \Exception("Aucun prestataire trouvé pour l'ID spécifié.");
+        if (!$prestataire) {
+            throw new \Exception("Prestataire non trouvé pour l'ID spécifié.");
         }
-        $reservation->setPrestataire($prestataire);
 
+        // Récupérer l'entité du salarié à partir de l'ID
         $salarie = $salarieRepository->find($salarieId);
-        if ($salarie === null) {
-            throw new \Exception("Aucun salarié trouvé pour l'ID spécifié.");
+        if (!$salarie) {
+            throw new \Exception("Salarié non trouvé pour l'ID spécifié.");
         }
+
+        // Définir le prestataire et le salarié pour la réservation
+        $reservation->setPrestataire($prestataire);
         $reservation->setSalarie($salarie);
 
-        $entityManager = $this->entityManager;
+        // Persist the reservation entity
         $entityManager->persist($reservation);
         $entityManager->flush();
 
+        // Envoyer un email de confirmation
         $clientEmail = $this->email->create(
             'api-platform@api.com',
             $user->getEmail(),
             'Confirmation de réservation n°' . $reservation->getId(),
-            'Reservation effectué'
+            'Réservation effectuée'
         );
 
         return $reservation;
