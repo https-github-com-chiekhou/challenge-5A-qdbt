@@ -31,7 +31,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: SalarieRepository::class)]
 class Salarie
 {
-    #[Groups(['salarie:read', 'reservation: read', 'reservation: create'])]
+    #[Groups(['salarie:read', 'reservation: read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -41,7 +41,7 @@ class Salarie
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[Groups(['salarie:create', 'salarie:update','salarie:read', 'reservation: read'])]
+    #[Groups(['salarie:create', 'salarie:update','salarie:read', 'reservation: read'    ])]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 

@@ -7,11 +7,11 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
-use App\Repository\FeedbackRepository;
+use App\Repository\FeedBackRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ORM\Entity(repositoryClass: FeedbackRepository::class)]
+#[ORM\Entity(repositoryClass: FeedBackRepository::class)]
 #[ApiResource(
     security: 'is_granted("ROLE_USER")',
     normalizationContext: ['groups' => ['feedback: read']],
@@ -40,7 +40,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         )
     ]
 )]
-class Feedback
+class FeedBack
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

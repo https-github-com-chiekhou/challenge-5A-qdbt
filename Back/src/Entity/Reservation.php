@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\HttpOperation;
+use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\RequestBody;
 use App\Controller\CancelReservation;
@@ -37,6 +38,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
             controller: CreateReservation::class,
             description: 'Créer une réservation',
         ),
+//        new HttpOperation(
+//            method: Request::METHOD_POST,
+//            security:'is_granted("ROLE_USER")',
+//            uriTemplate: '/salarie/{id}/create-reservation',
+//            uriVariables: [
+//                'id' => new Link(fromClass: Salarie::class, fromProperty: 'id', toProperty: 'salarie')
+//            ],
+//            controller: CreateReservation::class,
+//            description: 'Créer une réservation depuis l\'id du salarié',
+//        ),
         new HttpOperation(
             method: Request::METHOD_PATCH,
             security: 'is_granted("ROLE_USER")',
@@ -96,7 +107,7 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[Groups(['reservation: create','reservation: read'])]
+    #[Groups(['reservation: create', 'reservation: read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: 'Salarie')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
@@ -105,6 +116,7 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: "Prestataire")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
+
 
     public function getId(): ?int
     {
