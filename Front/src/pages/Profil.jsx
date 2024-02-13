@@ -13,6 +13,8 @@ const Profil = () => {
       try {
         const userInfo = await getUserInfoFromToken();
 
+        console.log(userInfo);
+
         if (userInfo && userInfo.id) {
           const response = await fetch(
             `http://localhost:8888/api/users/${userInfo.id}`
