@@ -66,7 +66,7 @@ class Prestataire
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Reservation::class)]
     private Collection $reservations;
 
-    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: FeedBack::class)]
     private Collection $feedback;
 
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Salarie::class)]
