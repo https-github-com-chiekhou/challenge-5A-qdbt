@@ -19,10 +19,6 @@ class FeedBack
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'feedback')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?User $client = null;
-
     #[ORM\ManyToOne(inversedBy: 'feedback')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
@@ -59,17 +55,6 @@ class FeedBack
         return $this;
     }
 
-    // public function getClient(): ?User
-    // {
-    //     return $this->client;
-    // }
-
-    // public function setClient(?User $client): static
-    // {
-    //     $this->client = $client;
-
-    //     return $this;
-    // }
 
     public function getPrestataire(): ?Prestataire
     {

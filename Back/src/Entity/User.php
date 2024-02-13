@@ -147,9 +147,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $reservations;
 
     
-    // #[ORM\OneToMany(mappedBy: 'client', targetEntity: Feedback::class)]
-    // private Collection $feedback;
-
     #[Groups(['user:read'])]
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Comment::class)]
     private Collection $comments;
@@ -382,35 +379,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Feedback>
-     */
-    // public function getFeedback(): Collection
-    // {
-    //     return $this->feedback;
-    // }
-
-    // public function addFeedback(Feedback $feedback): static
-    // {
-    //     if (!$this->feedback->contains($feedback)) {
-    //         $this->feedback->add($feedback);
-    //         $feedback->setClient($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeFeedback(Feedback $feedback): static
-    // {
-    //     if ($this->feedback->removeElement($feedback)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($feedback->getClient() === $this) {
-    //             $feedback->setClient(null);
-    //         }
-    //     }
-
-    //     return $this;
-    // }
 
     public function getIsValid(): ?bool
     {
@@ -467,24 +435,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Feedback>
+     * @return Collection<int, FeedBack>
      */
-    public function getFeedback(): Collection
+    public function getFeedBack(): Collection
     {
         return $this->feedback;
     }
 
-    public function addFeedback(FeedBack $feedback): static
+    public function addFeedBack(FeedBack $feedback): static
     {
         if (!$this->feedback->contains($feedback)) {
-            $this->feedback->add($feedback);
+            $this->feedback->add($feedack);
             $feedback->setClient($this);
         }
 
         return $this;
     }
 
-    public function removeFeedback(FeedBack $feedback): static
+    public function removeFeedBack(FeedBack $feedback): static
     {
         if ($this->feedback->removeElement($feedback)) {
             // set the owning side to null (unless already changed)
