@@ -59,16 +59,12 @@ class Salarie
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
 
-    #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Planning::class)]
-    private Collection $plannings;
-
     public function __construct()
     {
         $this->dayOffs = new ArrayCollection();
         $this->creneaux = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->prestataires = new ArrayCollection();
-        $this->plannings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -232,33 +228,5 @@ class Salarie
         return $this;
     }
 
-    /**
-     * @return Collection<int, Planning>
-     */
-    public function getPlannings(): Collection
-    {
-        return $this->plannings;
-    }
-
-    public function addPlanning(Planning $planning): static
-    {
-        if (!$this->plannings->contains($planning)) {
-            $this->plannings->add($planning);
-            $planning->setSalarie($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlanning(Planning $planning): static
-    {
-        if ($this->plannings->removeElement($planning)) {
-            // set the owning side to null (unless already changed)
-            if ($planning->getSalarie() === $this) {
-                $planning->setSalarie(null);
-            }
-        }
-
-        return $this;
-    }
+  
 }

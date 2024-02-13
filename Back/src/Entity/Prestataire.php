@@ -22,8 +22,8 @@ use ApiPlatform\Metadata\Delete;
     operations: [
         new GetCollection(),
         new Get(),
-        new Post(denormalizationContext: ['groups' => ['prestataire:create', 'prestataire:update']]),
-        new Put(denormalizationContext: ['groups' => ['prestataire:create', 'prestataire:update']]),
+        new Post(denormalizationContext: ['groups' => ['prestataire:create']]),
+        new Put(denormalizationContext: ['groups' => ['prestataire:update']]),
         new Patch(),
         new Delete()
     ],
@@ -53,8 +53,12 @@ class Prestataire
     private ?string $kbis = null;
 
     #[Groups(['prestataire:create', 'prestataire:update'])]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $statistique = null;
+
+    #[Groups(['prestataire:read','prestataire:create', 'prestataire:update'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Etablissement::class)]
     private Collection $etablissements;
@@ -71,8 +75,7 @@ class Prestataire
     #[ORM\OneToMany(mappedBy: 'prestataire', targetEntity: Service::class)]
     private Collection $services;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $client = null;
+
 
    
     public function __construct()
@@ -82,6 +85,7 @@ class Prestataire
         $this->feedback = new ArrayCollection();
         $this->salaries = new ArrayCollection();
         $this->services = new ArrayCollection();
+        $this->statistique =  null;
     }
 
     public function getId(): ?int
@@ -239,14 +243,14 @@ class Prestataire
         return $this;
     }
 
-    public function getClient(): ?User
+    public function getUser(): ?User
     {
-        return $this->client;
+        return $this->user;
     }
 
-    public function setClient(?User $client): static
+    public function setUser(?User $user): static
     {
-        $this->client = $client;
+        $this->user = $user;
 
         return $this;
     }

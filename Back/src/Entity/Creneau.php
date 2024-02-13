@@ -54,13 +54,6 @@ class Creneau
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
-    #[ORM\OneToMany(mappedBy: 'creneau', targetEntity: Planning::class)]
-    private Collection $plannings;
-
-    public function __construct()
-    {
-        $this->plannings = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -116,33 +109,6 @@ class Creneau
         return $this;
     }
 
-    /**
-     * @return Collection<int, Planning>
-     */
-    public function getPlannings(): Collection
-    {
-        return $this->plannings;
-    }
 
-    public function addPlanning(Planning $planning): static
-    {
-        if (!$this->plannings->contains($planning)) {
-            $this->plannings->add($planning);
-            $planning->setCreneau($this);
-        }
 
-        return $this;
-    }
-
-    public function removePlanning(Planning $planning): static
-    {
-        if ($this->plannings->removeElement($planning)) {
-            // set the owning side to null (unless already changed)
-            if ($planning->getCreneau() === $this) {
-                $planning->setCreneau(null);
-            }
-        }
-
-        return $this;
-    }
 }

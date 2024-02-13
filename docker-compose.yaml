@@ -37,12 +37,24 @@ services:
       - ./.docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ~/.config/composer:/home/prod/.composer
       - ./Back:/srv/app
+
   database:
     image: postgres:15.4-alpine
     environment:
       POSTGRES_DB: symfony
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+
+  dbtest:
+    image: postgres:15.4-alpine
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
     volumes:
       - database_data:/var/lib/postgresql/data:rw
     ports:
