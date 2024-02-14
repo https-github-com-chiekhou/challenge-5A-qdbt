@@ -31,13 +31,13 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
 class Prestataire
 {
-    #[Groups(['prestataire:read','reservation: read'])]
+    #[Groups(['prestataire:read','reservation:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['prestataire:create', 'prestataire:update', 'reservation: read'])]
+    #[Groups(['prestataire:create', 'prestataire:update', 'reservation:read'])]
     #[ORM\Column(length: 255)]
     private ?string $nomEntreprise = null;
 

@@ -69,7 +69,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 )]
 class Reservation
 {
-    #[ApiProperty(identifier: false)]
+    #[ApiProperty(identifier: true)]
     #[Groups(['reservation:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -77,22 +77,18 @@ class Reservation
     private ?int $id = null;
 
     #[Assert\NotBlank()]
-    #[ApiProperty(identifier: true)]
     #[Groups(['reservation:create', 'reservation:read', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[ApiProperty(identifier: true)]
     #[Groups(['reservation:create', 'reservation:read'])]
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[ApiProperty(identifier: true)]
     #[Groups(['reservation:create', 'reservation:read'])]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date = null;
 
-    #[ApiProperty(identifier: true)]
     #[Groups(['reservation:create', 'reservation:read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
@@ -108,13 +104,13 @@ class Reservation
 
     #[Assert\NotBlank()]
     #[Groups(['reservation:create', 'reservation:read'])]
-    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Salarie::class)]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Salarie::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
     #[Assert\NotBlank()]
     #[Groups(['reservation:create', 'reservation:read'])]
-    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Prestataire::class)]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Prestataire::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
 

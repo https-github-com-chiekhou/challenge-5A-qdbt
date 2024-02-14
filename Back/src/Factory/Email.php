@@ -13,6 +13,6 @@ class Email implements EmailInterface
             ->from($from)
             ->to($to)
             ->subject(htmlentities($subject))
-            ->html(sprintf("<p>%S</p>", htmlentities($content)));
+            ->html(sprintf("<p>%s</p>", htmlentities($content)));
     }
 }
