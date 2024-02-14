@@ -5,31 +5,28 @@ on:
     branches:
       - dev
 
+# Définition des jobs
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  test:
+    # Utilisation de l'image PHP pour exécuter les tests
+    docker:
+      - image: php:8.2-cli
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Back
+        run: cd ./Back
 
-    - name: Back
-      run: cd ./Back
-
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.2'
-
-    # - name: Install Composer Dependencies
-    #   run: |
-    #     cd ./Back
-    #     composer install
-
-    # - name: Set up Symfony Environment
-    #   run: cp .env.dist .env
-
-    # - name: Build and Test
-    #   run: |
-    #     php bin/console doctrine:schema:update --force
-    #     php bin/phpunit
+      # Installation de Composer
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+            php -r "unlink('composer-setup.php');"
+      # Installation des dépendances du projet
+      - run:
+          name: Install dependencies
+          command: composer install
+      # Exécution des tests PHPUnit
+      - run:
+          name: Run PHPUnit tests
+          command: vendor/bin/phpunit
