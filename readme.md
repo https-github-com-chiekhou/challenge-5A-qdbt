@@ -9,7 +9,7 @@ Ce projet consiste à créer un site web de réservation de massages, offrant au
 ## Technologies Utilisées
 
 ### Frontend (React)
-- [ ] Recherche Entreprise
+- [x] Recherche Entreprise
 - [ ] Connexion / enregistrement
 - [ ] Utilisateur
 - [ ] Planning Utilisateur
