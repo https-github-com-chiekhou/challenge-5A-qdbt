@@ -27,7 +27,7 @@ const SearchSalon = () => {
             className="font-semibold p-0 placeholder:text-gray-700 text-gray-700 text-left text-lg w-full"
             wrapClassName="flex w-auto sm:w-full"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e ? e : '')}
             suffix={
             <Img
                 className="mt-auto mb-0.5 h-6 ml-3"
