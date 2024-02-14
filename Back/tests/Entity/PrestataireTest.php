@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Entity\Tests;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\Prestataire;
