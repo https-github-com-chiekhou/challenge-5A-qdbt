@@ -4,28 +4,25 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Link;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\OpenApi\Model\RequestBody;
 use App\Controller\CancelReservation;
 use App\Controller\CreateReservation;
 use App\Controller\GetReservation;
 use App\Controller\ModifyReservation;
 use App\Repository\ReservationRepository;
-use App\State\ReservationProcessor;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ApiResource(
     security: 'is_granted("ROLE_USER")',
-    normalizationContext: ['groups' => ['reservation: read']],
-    denormalizationContext: ['groups' => ['reservation: create', 'user: update']],
+    normalizationContext: ['groups' => ['reservation:read']],
+    denormalizationContext: ['groups' => ['reservation:create', 'user:update']],
     operations: [
         new GetCollection(
             security: 'is_granted("ROLE_ADMIN")',
@@ -34,16 +31,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new HttpOperation(
             method: Request::METHOD_POST,
             security:'is_granted("ROLE_USER")',
-            uriTemplate: '/reservation/create-reservation',
-            controller: CreateReservation::class,
+            uriTemplate: '/reservations',
+//            controller: CreateReservation::class,
             description: 'Créer une réservation',
+            denormalizationContext: ['groups'=>['reservation:create']]
         ),
 //        new HttpOperation(
 //            method: Request::METHOD_POST,
 //            security:'is_granted("ROLE_USER")',
-//            uriTemplate: '/salarie/{id}/create-reservation',
+//            uriTemplate: '/prestataire/{id}/create-reservation',
 //            uriVariables: [
-//                'id' => new Link(fromClass: Salarie::class, fromProperty: 'id', toProperty: 'salarie')
+//                'id' => new Link(fromClass: Prestataire::class, fromProperty: 'id', toProperty: 'prestataire')
 //            ],
 //            controller: CreateReservation::class,
 //            description: 'Créer une réservation depuis l\'id du salarié',
@@ -64,7 +62,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             method: Request::METHOD_GET,
             uriTemplate: '/reservations',
             controller: GetReservation::class,
-            normalizationContext: ['groups' => ['reservation: read']],
+            normalizationContext: ['groups' => ['reservation:read']],
             security: 'is_granted("ROLE_USER")'
         )
     ],
@@ -72,48 +70,51 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Reservation
 {
     #[ApiProperty(identifier: false)]
-    #[Groups(['reservation: read'])]
+    #[Groups(['reservation:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank()]
     #[ApiProperty(identifier: true)]
-    #[Groups(['reservation: create', 'reservation: read', 'user: update'])]
+    #[Groups(['reservation:create', 'reservation:read', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
     #[ApiProperty(identifier: true)]
-    #[Groups(['reservation: create', 'reservation: read'])]
+    #[Groups(['reservation:create', 'reservation:read'])]
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
     #[ApiProperty(identifier: true)]
-    #[Groups(['reservation: create', 'reservation: read'])]
+    #[Groups(['reservation:create', 'reservation:read'])]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date = null;
 
     #[ApiProperty(identifier: true)]
-    #[Groups(['reservation: create', 'reservation: read'])]
+    #[Groups(['reservation:create', 'reservation:read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
-    #[Groups(['reservation: create', 'reservation: read'])]
+    #[Groups(['reservation:create', 'reservation:read'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
-    #[Groups(['reservation: read'])]
+    #[Groups(['reservation:read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[Groups(['reservation: create', 'reservation: read'])]
-    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: 'Salarie')]
+    #[Assert\NotBlank()]
+    #[Groups(['reservation:create', 'reservation:read'])]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Salarie::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
-    #[Groups(['reservation: create', 'reservation: read'])]
-    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: "Prestataire")]
+    #[Assert\NotBlank()]
+    #[Groups(['reservation:create', 'reservation:read'])]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Prestataire::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
 

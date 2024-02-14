@@ -37,11 +37,11 @@ class Salarie
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['salarie:create', 'salarie:update','salarie:read'])]
+    #[Groups(['salarie:create', 'salarie:update','salarie:read', 'reservation: read'])]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[Groups(['salarie:create', 'salarie:update','salarie:read'])]
+    #[Groups(['salarie:create', 'salarie:update','salarie:read', 'reservation: read'])]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 

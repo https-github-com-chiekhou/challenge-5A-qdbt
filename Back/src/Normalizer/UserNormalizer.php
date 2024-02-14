@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Serializer;
+namespace App\Normalizer;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-// use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
-// use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-// use Symfony\Component\Serializer\SerializerAwareInterface;
-// use Symfony\Component\Serializer\SerializerAwareTrait;
 
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -23,7 +19,7 @@ class UserNormalizer
     /**
      * @var TokenStorageInterface
      */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(TokenStorageInterface $tokenStorage)
     {

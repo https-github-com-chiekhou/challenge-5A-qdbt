@@ -54,15 +54,15 @@ class CreateReservation extends AbstractController
 
         // Extraire les identifiants du prestataire et du salarié de la requête
         $prestataireId = $data['prestataire'] ?? null;
-        $salarieId = $data['salarie'] ?? null;
+//        $salarieId = $data['salarie'] ?? null;
 
         // Vérifier si les identifiants du prestataire et du salarié sont présents dans la requête
         if ($prestataireId === null) {
             throw new \Exception("L'ID du prestataire est manquant.");
         }
-        if ($salarieId === null) {
-            throw new \Exception("L'ID du salarié est manquant.");
-        }
+//        if ($salarieId === null) {
+//            throw new \Exception("L'ID du salarié est manquant.");
+//        }
 
         // Récupérer l'entité du prestataire à partir de l'ID
         $prestataire = $prestataireRepository->find($prestataireId);
@@ -71,14 +71,14 @@ class CreateReservation extends AbstractController
         }
 
         // Récupérer l'entité du salarié à partir de l'ID
-        $salarie = $salarieRepository->find($salarieId);
-        if (!$salarie) {
-            throw new \Exception("Salarié non trouvé pour l'ID spécifié.");
-        }
+//        $salarie = $salarieRepository->find($salarieId);
+//        if (!$salarie) {
+//            throw new \Exception("Salarié non trouvé pour l'ID spécifié.");
+//        }
 
         // Définir le prestataire et le salarié pour la réservation
         $reservation->setPrestataire($prestataire);
-        $reservation->setSalarie($salarie);
+//        $reservation->setSalarie($salarie);
 
         // Persist the reservation entity
         $entityManager->persist($reservation);

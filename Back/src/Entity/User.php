@@ -141,7 +141,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $reservations;
 
     #[Groups(['user:read'])]
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: FeedBack::class)]
     private Collection $feedback;
 
     #[Groups(['user:read'])]
@@ -380,7 +380,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->feedback;
     }
 
-    public function addFeedback(Feedback $feedback): static
+    public function addFeedback(FeedBack $feedback): static
     {
         if (!$this->feedback->contains($feedback)) {
             $this->feedback->add($feedback);
@@ -390,7 +390,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeFeedback(Feedback $feedback): static
+    public function removeFeedback(FeedBack $feedback): static
     {
         if ($this->feedback->removeElement($feedback)) {
             // set the owning side to null (unless already changed)

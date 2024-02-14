@@ -1,6 +1,6 @@
 <?php
 
-namespace App\State;
+namespace App\Action\Reservation;
 
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Prestataire;
