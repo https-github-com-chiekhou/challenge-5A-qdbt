@@ -68,7 +68,7 @@ const Admin = () => {
         <SideBar />
 
         <div className="flex flex-1 mb-5 ">
-          <section id="features" className="pb-32 bg-gray-100">
+          <section id="features" className=" w-full pb-32 bg-gray-100">
             <div className="relative container flex flex-col items-start px-6 mx-auto md:flex-row md:space-x-7">
               <div className="hidden absolute top-24 w-10/12 left-16 h-3 bg-cyan md:block"></div>
 
@@ -105,10 +105,10 @@ const Admin = () => {
                 <h5 className="pt-6 text-xl font-bold text-center capitalize md:text-left">
                   Fully customizable
                 </h5>
-                <p className="text-center text-gray-400 md:text-left">
+                {/* <p className="text-center text-gray-400 md:text-left">
                   Improve brand awareness and content discoverability through
                   customizable links, supercharging audience engagement.
-                </p>
+                </p> */}
               </div>
             </div>
           </section>

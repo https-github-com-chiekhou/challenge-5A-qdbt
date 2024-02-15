@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new Post( uriTemplate: '/users/confirm')
+        new Post(security: "is_granted('ROLE_PRESTATAIRE') and is_granted('ROLE_USER' and is_granted('ROLE_ADMIN') " , uriTemplate: '/users/confirm')
     ],
 )]
 

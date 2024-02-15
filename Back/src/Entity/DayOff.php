@@ -21,12 +21,12 @@ use ApiPlatform\Metadata\Delete;
     normalizationContext: ['groups' => ['dayoff:read']],
     denormalizationContext: ['groups' => ['dayoff:create', 'dayoff:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['dayoff:create', 'dayoff:update']]),
-        new Put(denormalizationContext: ['groups' => ['dayoff:create', 'dayoff:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Get(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Post(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['dayoff:create', 'dayoff:update']]),
+        new Put(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['dayoff:create', 'dayoff:update']]),
+        new Patch(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Delete(security: "is_granted('ROLE_PRESTATAIRE')")
     ],
 )]
 #[ORM\Entity(repositoryClass: DayOffRepository::class)]

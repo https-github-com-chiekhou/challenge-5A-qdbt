@@ -32,4 +32,4 @@ jobs:
     # - name: Build and Test
     #   run: |
     #     php bin/console doctrine:schema:update --force
-    #     php bin/phpunit
+    #     php vendor/bin/phpunit

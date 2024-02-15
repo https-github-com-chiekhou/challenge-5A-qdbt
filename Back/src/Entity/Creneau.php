@@ -21,12 +21,12 @@ use Doctrine\ORM\Mapping as ORM;
     normalizationContext: ['groups' => ['creneau:read']],
     denormalizationContext: ['groups' => ['creneau:create', 'user:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
-        new Put(denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Get(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Post(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
+        new Put(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['creneau:create', 'user:update']]),
+        new Patch(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Delete(security: "is_granted('ROLE_PRESTATAIRE')")
     ],
 )]
 class Creneau

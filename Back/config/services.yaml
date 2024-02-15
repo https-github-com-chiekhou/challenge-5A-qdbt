@@ -32,10 +32,10 @@ services:
         decorates: 'api_platform.serializer.context_builder'
         arguments: ['@App\ContextBuilder\UserContextBuilder.inner']
 
-    # App\Normalizer\UserNormalizer:
-    #     arguments: ['@security.token_storage']
-    #     tags:
-    #         - { name: 'serializer.normalizer', priority: 64 }
+    App\Normalizer\UserNormalizer:
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: 'serializer.normalizer', priority: 64 }
     
     App\EventListener\AddCreatedIdListener:
         tags:

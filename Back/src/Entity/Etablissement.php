@@ -20,12 +20,12 @@ use ApiPlatform\Metadata\Delete;
     normalizationContext: ['groups' => ['etablissement:read']],
     denormalizationContext: ['groups' => ['etablissement:create', 'etablissement:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['etablissement:create']]),
-        new Put(denormalizationContext: ['groups' => ['etablissement:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Get(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Post(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['etablissement:create']]),
+        new Put(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['etablissement:update']]),
+        new Patch(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Delete(security: "is_granted('ROLE_PRESTATAIRE')")
     ],
 )]
 class Etablissement

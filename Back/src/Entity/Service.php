@@ -18,12 +18,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['services:read']],
     denormalizationContext: ['groups' => ['services:create', 'services:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['services:create', 'services:update']]),
-        new Put(denormalizationContext: ['groups' => ['services:create', 'services:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Get(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Post(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['services:create', 'services:update']]),
+        new Put(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['services:create', 'services:update']]),
+        new Patch(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Delete(security: "is_granted('ROLE_PRESTATAIRE')")
     ],
 )]
 class Service
