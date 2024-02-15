@@ -34,7 +34,7 @@ const SideBar = () => {
               <>
                 <a
                   href="/prestataire"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_dashboard' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -62,7 +62,7 @@ const SideBar = () => {
                 </a>
                 <a
                   href="/prestataire/salarie/list-salaries"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_admin_users' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -84,7 +84,7 @@ const SideBar = () => {
                 </a>
                 <a
                   href="/prestataire/salarie/planning"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_admin_support' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -107,7 +107,7 @@ const SideBar = () => {
 
                 <a
                   href="/prestataire/salarie/dayoff"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_doctor_service' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -129,7 +129,7 @@ const SideBar = () => {
                 </a>
                 <a
                   href="/prestataire/etablissement"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-indigo-600 text-white "
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4] "
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -155,7 +155,7 @@ const SideBar = () => {
                 <>
                   <a
                     href="/admin/dashboard"
-                    className="flex items-center gap-1 rounded-md border border-gray-300 bg-indigo-600 text-white"
+                    className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                   >
                     <span className="flex h-10 w-10 items-center justify-center">
                       <svg
@@ -177,7 +177,7 @@ const SideBar = () => {
                   </a>
                   <a
                     href="/admin"
-                    className="flex items-center gap-1 rounded-md border border-gray-300  bg-indigo-600 text-white "
+                    className="flex items-center gap-1 rounded-md border border-gray-300  bg-[#d0e6f4] "
                   >
                     <span className="flex h-10 w-10 items-center justify-center">
                       <svg

@@ -12,6 +12,10 @@ jobs:
     docker:
       - image: php:8.2-cli
     steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
       - name: Back
         run: cd ./Back
 
@@ -30,3 +34,4 @@ jobs:
       - run:
           name: Run PHPUnit tests
           command: vendor/bin/phpunit
+

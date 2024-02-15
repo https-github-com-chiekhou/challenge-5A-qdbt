@@ -25,20 +25,23 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']]),
+        new GetCollection(security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') "),
+        new Get(security: "is_granted('ROLE_ADMIN') "),
+        new Post(security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') and is_granted('ROLE_PRESTATAIRE') ",
+        processor: UserPasswordHasher::class,
+         validationContext: ['groups' => ['Default', 'user:create']]),
         new Put(
-                // security: "is_granted('ROLE_USER') and object.owner == user",
+            security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') ",
                 uriTemplate: '/users/{id}/reset-password',
                 controller: ResetPassword::class,
                 denormalizationContext: ['groups' => ['put-reset-password']],
                 validationContext:[ 'groups' => [ "put-reset-password"]]
             ),
-        new Put(processor: UserPasswordHasher::class,
+        new Put(security: "is_granted('ROLE_ADMIN') ",processor: UserPasswordHasher::class,
         denormalizationContext: ['groups' => ['user:update']],),
-        new Patch(processor: UserPasswordHasher::class),
-        new Delete()
+        new Patch(processor: UserPasswordHasher::class,
+        security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') "),
+        new Delete(security: "is_granted('ROLE_ADMIN') ")
     ],
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]

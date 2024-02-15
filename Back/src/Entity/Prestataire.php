@@ -20,12 +20,12 @@ use ApiPlatform\Metadata\Delete;
     normalizationContext: ['groups' => ['prestataire:read']],
     denormalizationContext: ['groups' => ['prestataire:create', 'prestataire:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['prestataire:create']]),
-        new Put(denormalizationContext: ['groups' => ['prestataire:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Get(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Post(security: "is_granted('ROLE_PRESTATAIRE') and is_granted('ROLE_ADMIN') ",denormalizationContext: ['groups' => ['prestataire:create']]),
+        new Put(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['prestataire:update']]),
+        new Patch(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Delete(security: "is_granted('ROLE_PRESTATAIRE')")
     ],
 )]
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
