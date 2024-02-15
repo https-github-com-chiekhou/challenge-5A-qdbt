@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import Select from 'react-select';
-import Header1 from "../components/Header1/index.jsx";
 import Footer from "../components/Footer/index.jsx";
+import Header1 from "../components/Header1/index.jsx";
+import Select from "react-select";
+import {useState} from "react";
+import Calendar from "react-calendar";
 
-const Reservation = () => {
+const MakeReservation = () => {
     const [users, setUsers] = useState();
     const [prestataire, setPrestataire] = useState();
 
@@ -15,7 +15,7 @@ const Reservation = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
 
-    const fetchPrestataireData = () =>{
+    const fetchPrestataireData = () => {
         fetch(`https://localhost:8888/api/salaries/${id}`)
     }
 
@@ -47,11 +47,8 @@ const Reservation = () => {
     const handleTimeSlotChange = (selectedOption) => {
         setSelectedTimeSlot(selectedOption);
     };
-
-
     return (
         <>
-            <Header1/>
             <h2 className="text-black-900 text-center font-bold">Calendrier de disponibilité</h2>
             <Calendar
                 onChange={handleDateChange}
@@ -79,10 +76,8 @@ const Reservation = () => {
                 {/*<textarea placeholder="Placer un commentaire si vous voulez"></textarea>*/}
                 <button className="padi">Prendre un rendez-vous</button>
             </div>
-
-            <Footer/>
         </>
-    );
-};
+    )
+}
 
-export default Reservation;
+export default MakeReservation;

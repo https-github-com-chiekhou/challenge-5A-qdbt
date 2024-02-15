@@ -54,6 +54,7 @@ class Salarie
     private Collection $creneaux;
 
     #[Groups(['salarie:read'])]
+    #[ORM\OneToMany(mappedBy: 'salarie', targetEntity: Reservation::class)]
     private Collection $reservations;
 
     #[ORM\ManyToOne(inversedBy: 'salaries')]

@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Patch;
@@ -13,6 +14,7 @@ use App\Controller\CancelReservation;
 use App\Controller\GetReservation;
 use App\Controller\ModifyReservation;
 use App\Repository\ReservationRepository;
+use App\ReservationModifiedProcessor;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +40,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Patch(
             security: 'is_granted("ROLE_USER")',
             controller: ModifyReservation::class,
-            denormalizationContext: ['groups' => ['reservation:update']]
+            denormalizationContext: ['groups' => ['reservation:update']],
+//            processor: ReservationModifiedProcessor::class
         ),
         new Post(
             security: 'is_granted("ROLE_USER")',
@@ -46,8 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             description: 'Créer une réservation',
             denormalizationContext: ['groups' => ['reservation:create']]
         ),
-        new HttpOperation(
-            method: Request::METHOD_GET,
+        new Get(
             uriTemplate: '/reservations',
             controller: GetReservation::class,
             normalizationContext: ['groups' => ['reservation:read']],

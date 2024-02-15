@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\DayOff;
 use App\Entity\Reservation;
 use App\Factory\Email;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,12 +39,15 @@ class ModifyReservation extends AbstractController
     {
         $currentDate = new \DateTimeImmutable();
         $requestData = json_decode($request->getContent(), true);
+        $newDate = new \DateTimeImmutable($requestData['date']);
+        $newStartTime = new \DateTime($requestData['startTime']);
+        $newEndTime = new \DateTime($requestData['endTime']);
 
         if ($reservation->getDate() >= $currentDate && $reservation->getStartTime() >= $currentDate && $reservation->getEndTime() >= $currentDate) {
 
-            $reservation->setDate($requestData['date']);
-            $reservation->setStartTime($requestData['startTime']);
-            $reservation->setEndTime($requestData['endTime']);
+            $reservation->setDate($newDate);
+            $reservation->setStartTime($newStartTime);
+            $reservation->setEndTime($newEndTime);
 
             $this->entityManager->flush();
 
@@ -56,11 +60,15 @@ class ModifyReservation extends AbstractController
 
             $this->mailer->send($clientEmail);
         } else {
-            // Gérer le cas où la date de réservation est antérieure à la date actuelle
-            // Vous pouvez rejeter la modification ou effectuer d'autres actions nécessaires
+            if ($reservation->getDate() < $currentDate) {
+                throw new \Exception("La date de la réservation est dans le passé.");
+            } elseif ($reservation->getEndTime() < $reservation->getStartTime()) {
+                throw new \Exception("L'heure de fin est antérieure à l'heure de début.");
+            } elseif ($reservation->getEndTime() < $currentDate) {
+                throw new \Exception("La réservation est déjà passée et ne peut pas être modifiée.");
+            }
         }
 
-        // Retourner la réservation modifiée
         return $reservation;
     }
 
