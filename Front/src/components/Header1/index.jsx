@@ -274,34 +274,12 @@ const Header1 = () => {
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                 >
-                    Accueil
-                  </a>
-              </div>
-              <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
-                <Img
-                    className="h-6 w-4"
-                    src="./src/assets/images/img_massage.svg"
-                    alt="arrowdown"
-                />
-                <Text
-                  className="text-base text-gray-900 w-auto"
-                  size="txtManropeSemiBold16Gray900"
                 >
-                  <a href="/salons" className=" text-gray-900 w-auto font-manrope font-semibold hover:text-cyan-800">
                   Massage
                 </a>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  </a>
-                </Text>
-                
-              </div>
-              {/* <div className="flex flex-row gap-1.5 items-start justify-start w-[77px]">
-                <Text
-                  className="text-base text-gray-900 w-auto"
-                  size="txtManropeSemiBold16Gray900"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Company
                 </a>
@@ -319,17 +297,6 @@ const Header1 = () => {
               >
                 Register
               </a>
-            </div>
-            </Button> */}
-            <a href="https://seinfeldquotes.com" className="text-cyan-800 visited:text-cyan-800 hover:text-cyan-800">
-              Pour votre entreprise
-            </a>
-            <p>
-              ||
-            </p>
-            <a href="https://seinfeldquotes.com" className="text-purple-400 visited:text-purple-400 hover:text-purple-400">
-              S'identifier
-            </a>
             </div>
           </div>
         </Dialog.Panel>

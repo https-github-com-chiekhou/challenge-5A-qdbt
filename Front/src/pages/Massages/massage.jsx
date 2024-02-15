@@ -1,271 +1,287 @@
-import React, {useEffect, useState} from "react";
-import { Button, Img, Input, List, Text } from "../components";
-import Footer from "../components/Footer";
-import Header1 from "../components/Header1";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+
+import { Button, Img, Input, List, Text } from "../../components";
+import Footer from "../../components/Footer";
+import Header1 from "../../components/Header1";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup
+} from 'react-leaflet';
 import axios from 'axios';
 
-const Massage = (idsalon) => {
-    const [salon, setSalon] = useState(null);
+const position = [48.866667, 2.333333];
 
-    useEffect(() => {
-        const fetchResource = async () => {
-        try {
-            const response = await axios.get(`https://your-api-domain.com/api/resources/${idsalon}`);
-            setSalon(response.data);
-        } catch (error) {
-            //console.error('Error fetching resource:', error);
+const Massage = () => {
+  const [salon, setSalon] = useState(null);
+  const { salonId } = useParams();
+
+  useEffect(() => {
+    const fetchSalon = async () => {
+      try {  
+        let response = [];
+        let jsonData = "";
+        // Effectuer la requête GET vers l'API Platform Symfony
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          response = await fetch(`http://localhost:8888/api/etablissements/${salonId}`);
+          //response = await axios.get(`http://localhost:8888/api/etablissements/${salonId}`);
+          jsonData = await response.json();
+          console.log(response, jsonData)
+          //jsonData = await response.data.json()
+        } else {
+          const url = process.env.URL_API_APP
+          //response = await axios.get(url + ""); 
+          response = await fetch(`http://localhost:8888/api/etablissement/${salonId}`);
+          jsonData = await response.json();
         }
-        };
-
-        fetchResource();
-    }, [idsalon]);
-    return (
-        <>
-          <div className="bg-white-A700 flex flex-col font-markoone sm:gap-10 md:gap-10 gap-[100px] items-center justify-start mx-auto w-auto sm:w-full md:w-full">
+        // Mettre à jour l'état avec l'objet récupéré depuis la réponse
+        setSalon(jsonData);
+      } catch (error) {
+        // Gérer les erreurs de requête
+        //console.error('Error fetching object:', error);
+      }
+    };
+    // Appeler la fonction de requête
+    fetchSalon();
+  }, [salonId]);
+  return (
+    <>
+      <div className="bg-gray-50 flex flex-col font-markoone sm:gap-10 md:gap-10 gap-[100px] items-start justify-start mx-auto w-auto sm:w-full md:w-full">
+        <div className="flex flex-col md:gap-10 gap-[60px] items-start justify-start w-full">
+          <div className="flex flex-col gap-10 items-start justify-start w-full">
             <Header1 className="bg-white-A700 flex gap-2 h-20 md:h-auto items-center justify-between md:px-5 px-[120px] py-[19px] w-full" />
             <div className="flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] w-full">
-              <div className="flex flex-col gap-10 items-center justify-start max-w-[1200px] mx-auto w-full">
-                <div className="flex flex-col gap-4 items-center justify-start w-full">
-                  <Text
-                    className="leading-[75.00px] sm:text-[40px] md:text-[46px] text-[54px] text-center text-gray-900 tracking-[-1.08px]"
-                    size="txtManropeExtraBold54"
-                  >
-                    <>
-                      Réserver facilement votre séance de massage <br />
-                      avec Que du bon temps.
-                    </>
-                  </Text>
-                  <Text
-                    className="leading-[32.00px] max-w-[1200px] md:max-w-full text-center text-gray-700 text-lg"
-                    size="txtManropeRegular18Gray700"
-                  >
-                    <>
-                      Vous pouvez venir vous faire chouchouter dans le salon de massage que vous voulez <br />
-                      dans la ville de votre choix <br />
-                      et à l'heure que vous souhaitez en un clic.
-                    </>
-                  </Text>
+              <div className="flex md:flex-col flex-row gap-6 items-center justify-center max-w-[1200px] mx-auto w-full">
+                <div className="flex flex-1 flex-col items-center justify-start w-full">
+                  <Img
+                    className="h-[550px] md:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
+                    src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
+                    alt=""
+                  />
                 </div>
-                <div className="flex flex-col gap-6 items-start justify-start w-full">
-                  <div className="flex md:flex-col flex-row gap-6 items-start justify-start w-full">
+                <div className="flex sm:flex-1 flex-col gap-6 h-[594px] md:h-auto items-start justify-start w-auto sm:w-full">
+                  <Img
+                    className="h-[263px] sm:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
+                    src="./src/assets/images/exemple_list_salon/img2_salon.jpg"
+                    alt=""
+                  />
+                  <div className="flex flex-col h-[307px] md:h-auto items-end justify-start w-96 sm:w-full">
                     <Img
-                      className="flex-1 md:flex-none h-[400px] sm:h-auto max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      src="./src/assets/images/salons/salon3.jpg"
-                      id="imageaccueil"
-                      alt="image accueil"
+                      className="h-[263px] sm:h-auto object-cover rounded-bl-[10px] rounded-br-[10px] w-full"
+                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
+                      alt=""
                     />
-                    <Img
-                      className="md:h-[400px] sm:h-auto h-full max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      id="imageaccueil"
-                      src="./src/assets/images/salons/salon1.jpg"
-                      alt="image accueil"
-                    />
-                  </div>
-                  <div className="flex md:flex-col flex-row gap-6 items-start justify-start w-full">
-                    <Img
-                      className="md:h-[400px] sm:h-auto h-full max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      id="imageaccueil"
-                      src="./src/assets/images/salons/massage1.jpg"
-                      alt="image accueil"
-                    />
-                    <Img
-                      className="flex-1 md:flex-none h-[400px] sm:h-auto max-h-[400px] object-cover rounded-[10px] sm:w-[] md:w-[]"
-                      id="imageaccueil"
-                      src="./src/assets/images/salons/salon4.jpg"
-                      alt="image accueil"
-                    />
+                    
                   </div>
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50_01 flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] py-[50px] w-full">
-              <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between max-w-[1200px] mx-auto w-full">
-                {/* <List
-                  className="md:flex-1 sm:flex-col flex-row md:gap-10 gap-[100px] grid sm:grid-cols-1 grid-cols-2 w-[46%] md:w-full"
-                  orientation="horizontal"
-                >
-                  <div className="flex flex-col gap-[18px] items-start justify-start w-[225px]">
-                    <Button
-                      className="flex h-[60px] items-center justify-center shadow-bs w-[60px]"
-                      shape="circle"
-                      color="white_A700"
-                      size="sm"
-                      variant="fill"
-                    >
-                      <Img className="h-8" src="images/img_frame.svg" alt="frame" />
-                    </Button>
-                    <div className="flex flex-col gap-3.5 items-start justify-start w-full">
-                      <Text
-                        className="sm:text-4xl md:text-[42px] text-[46px] text-gray-900 tracking-[-0.92px] w-full"
-                        size="txtManropeExtraBold46"
-                      >
-                        $15.4M
-                      </Text>
-                      <Text
-                        className="leading-[28.00px] text-blue_gray-600 text-xl tracking-[-0.40px]"
-                        size="txtManropeSemiBold20Bluegray600"
-                      >
-                        <>
-                          Owned from
-                          <br />
-                          Properties transactions
-                        </>
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-[18px] items-start justify-start w-[225px]">
-                    <Button
-                      className="flex h-[60px] items-center justify-center shadow-bs w-[60px]"
-                      shape="circle"
-                      color="white_A700"
-                      size="sm"
-                      variant="fill"
-                    >
-                      <Img
-                        className="h-8"
-                        src="images/img_frame_orange_a700.svg"
-                        alt="frame"
-                      />
-                    </Button>
-                    <div className="flex flex-col gap-3.5 items-start justify-start w-full">
-                      <Text
-                        className="sm:text-4xl md:text-[42px] text-[46px] text-gray-900 tracking-[-0.92px] w-full"
-                        size="txtManropeExtraBold46"
-                      >
-                        25K+
-                      </Text>
-                      <Text
-                        className="leading-[28.00px] max-w-[225px] md:max-w-full text-blue_gray-600 text-xl tracking-[-0.40px]"
-                        size="txtManropeSemiBold20Bluegray600"
-                      >
-                        Properties for Buy & sell Successfully
-                      </Text>
-                    </div>
-                  </div>
-                </List> */}
-                <div className="flex flex-col gap-[18px] items-start justify-start w-[225px]">
-                  {/* <Img
-                    className="h-[60px] w-[60px]"
-                    src="images/img_file.svg"
-                    alt="file"
-                  />
-                  <div className="flex flex-col gap-3.5 items-start justify-start w-full">
-                    <Text
-                      className="sm:text-4xl md:text-[42px] text-[46px] text-gray-900 tracking-[-0.92px] w-full"
-                      size="txtManropeExtraBold46"
-                    >
-                      500
-                    </Text>
-                    <Text
-                      className="leading-[28.00px] max-w-[225px] md:max-w-full text-blue_gray-600 text-xl tracking-[-0.40px]"
-                      size="txtManropeSemiBold20Bluegray600"
-                    >
-                      <>
-                        Daily completed <br />
-                        transactions
-                      </>
-                    </Text>
-                  </div> */}
-                </div>
-                <div className="flex flex-col gap-[18px] items-start justify-start w-[225px]">
-                  {/* <Img
-                    className="h-[60px] w-[60px]"
-                    src="images/img_file_white_a700.svg"
-                    alt="file_One"
-                  />
-                  <div className="flex flex-col gap-3.5 items-start justify-start w-full">
-                    <Text
-                      className="sm:text-4xl md:text-[42px] text-[46px] text-gray-900 tracking-[-0.92px] w-full"
-                      size="txtManropeExtraBold46"
-                    >
-                      600+
-                    </Text>
-                    <Text
-                      className="text-blue_gray-600 text-xl tracking-[-0.40px] w-full"
-                      size="txtManropeSemiBold20Bluegray600"
-                    >
-                      Reagular Clients
-                    </Text>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-            
-            
-            
-            <div className="bg-gray-900 flex flex-col font-manrope items-center justify-center p-[120px] md:px-10 sm:px-5 w-full">
-              <div className="flex flex-col md:gap-10 gap-[120px] items-center justify-start max-w-[1200px] mx-auto w-full">
-                <div className="flex flex-col md:gap-10 gap-[60px] items-start justify-start w-full">
-                  <div className="flex sm:flex-col flex-row gap-5 items-center justify-start w-full">
-                    <Text
-                      className="flex-1 text-4xl sm:text-[32px] md:text-[34px] text-white-A700 tracking-[-0.72px] w-auto"
-                      size="txtManropeExtraBold36WhiteA700"
-                    >
-                      Vous possédez un salon de massage ?
-                    </Text>
-                    <Button
-                      className="bg-transparent cursor-pointer flex h-[27px] items-center justify-center min-w-[124px]"
-                      rightIcon={
-                        <Img
-                          className="h-5 mb-[1px] ml-2"
-                          src="./src/assets/images/img_arrowright_cyan_600.svg"
-                          alt="arrow_right"
-                        />
-                      }
-                    >
-                      <div className="font-bold text-left text-lg text-cyan-600">
-                        Explorer
+            <div className="flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] w-full">
+              <div className="flex md:flex-col flex-row gap-6 h-[1819px] md:h-auto items-start justify-center max-w-[1200px] mx-auto w-full">
+                <div className="flex flex-1 flex-col gap-6 items-start justify-start w-full">
+                  <div className="bg-white-A700 border border-blue_gray-100 border-solid flex flex-col items-start justify-start p-10 sm:px-5 rounded-[10px] w-full">
+                    <div className="flex flex-col gap-11 items-start justify-start w-full">
+                      <div className="flex flex-col gap-6 items-start justify-start w-full">
+                        <div className="flex flex-col gap-4 items-start justify-start w-full">
+                          <Text
+                            className="leading-[37.00px] max-w-[712px] md:max-w-full sm:text-2xl md:text-[26px] text-[28px] text-gray-900 tracking-[-0.56px]"
+                            size="txtManropeExtraBold28"
+                          >
+                            {salon.name}
+                          </Text>
+                          <Text
+                            className="text-gray-900 text-xl tracking-[-0.40px] w-full"
+                            size="txtManropeSemiBold20"
+                          >
+                            {salon.adresse}
+                          </Text>
+                        </div>
+                        
                       </div>
-                    </Button>
+                      <div className="flex flex-col gap-4 items-start justify-start w-full">
+                        <Text
+                          className="text-gray-900 text-xl tracking-[-0.40px] w-full"
+                          size="txtManropeSemiBold20"
+                        >
+                          Well-constructed 1562 Sq Ft Home Is Now Offering To
+                          You In Uttara For Sale
+                        </Text>
+                        
+                          <>
+                            {salon.prestataire.services && salon.prestataire.services.length > 0 ? (
+                              salon.prestataire.services.map((service, index) => (
+                                <div key={index} className="flex flex-row gap-10 items-center justify-between w-full">
+                                  {service.nom}
+                                </div>
+                              )) 
+                            ):(
+                              <Text
+                                className="leading-[32.00px] max-w-[712px] md:max-w-full text-gray-600 text-lg"
+                                size="txtManropeRegular18"
+                              >
+                                Aucun service
+                              </Text>
+                            )}
+                          </>
+                        
+                      </div>
+                      <div className="flex flex-col gap-6 items-start justify-start w-full">
+                        <div className="flex flex-col gap-6 items-start justify-start w-full">
+                          <Text
+                            className="sm:text-2xl md:text-[26px] text-[28px] text-gray-900 tracking-[-0.56px] w-full"
+                            size="txtManropeExtraBold28"
+                          >
+                            Localisation
+                          </Text>
+                          
+                        </div>
+                        <div className="flex flex-col items-center justify-start w-full">
+                          <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '400px', width: '100%' }}>
+                            <TileLayer
+                              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <Marker position={position}>
+                              <Popup>
+                                A pretty CSS3 popup. <br /> Easily customizable.
+                              </Popup>
+                            </Marker>
+                          </MapContainer>
+                  
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   
-                </div>
-                <div className="bg-gray-400_01 flex flex-col items-center justify-center md:px-10 sm:px-5 px-[100px] py-10 rounded-[10px] w-full">
-                  <div className="flex flex-col gap-[30px] items-center justify-start md:px-10 sm:px-5 px-[200px] w-full">
-                    <div className="flex flex-col gap-2.5 items-center justify-start w-full">
+                  <div className="bg-white-A700 border border-blue_gray-100 border-solid flex flex-col items-start justify-start p-10 sm:px-5 rounded-[10px] w-full">
+                    <div className="flex flex-col gap-[26px] items-start justify-start w-full">
                       <Text
-                        className="sm:text-2xl md:text-[26px] text-[28px] text-gray-900 tracking-[-0.56px] w-auto"
+                        className="sm:text-2xl md:text-[26px] text-[28px] text-gray-900 tracking-[-0.56px] w-full"
                         size="txtManropeExtraBold28"
                       >
-                        Pour vous inscrire
+                        Agent Information
                       </Text>
+                      <div className="flex flex-row gap-6 items-center justify-start w-full">
+                        <Img
+                          className="h-[150px] md:h-auto object-cover rounded-[10px] w-[150px]"
+                          src="images/img_rectangle5599.png"
+                          alt="rectangle5599"
+                        />
+                        <div className="flex flex-col gap-[3px] items-start justify-start w-auto">
+                          <Text
+                            className="text-gray-900 text-xl tracking-[-0.40px] w-auto"
+                            size="txtManropeSemiBold20"
+                          >
+                            Bruno Fernandes
+                          </Text>
+                          <Input
+                            name="reviewCounter"
+                            placeholder="4 review"
+                            className="font-semibold p-0 placeholder:text-gray-900 text-base text-gray-900 text-left w-full"
+                            wrapClassName="flex pr-[9px] w-full"
+                            prefix={
+                              <Img
+                                className="mt-0.5 mb-[3px] mr-3.5"
+                                src="images/img_settings_gray_600.svg"
+                                alt="settings"
+                              />
+                            }
+                          ></Input>
+                          <div className="flex flex-row gap-2.5 items-center justify-start w-full">
+                            <Img
+                              className="h-5 w-5"
+                              src="images/img_mail_gray_600.svg"
+                              alt="mail"
+                            />
+                            <Text
+                              className="text-base text-gray-600 w-auto"
+                              size="txtManropeMedium16"
+                            >
+                              bruno@relasto .com
+                            </Text>
+                          </div>
+                          <div className="flex flex-row gap-2.5 items-center justify-start w-full">
+                            <Img
+                              className="h-5 w-5"
+                              src="images/img_call.svg"
+                              alt="call"
+                            />
+                            <Text
+                              className="text-base text-gray-600 w-auto"
+                              size="txtManropeMedium16"
+                            >
+                              +65 0231 965 965
+                            </Text>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white-A700 border border-blue_gray-100 border-solid flex sm:flex-1 flex-col items-start justify-start p-6 sm:px-5 rounded-[10px] w-auto sm:w-full">
+                  <div className="flex flex-col gap-10 items-start justify-start w-[336px]">
+                    <div className="flex flex-col gap-6 items-start justify-start w-full">
                       <Text
-                        className="leading-[32.00px] max-w-[600px] md:max-w-full text-center text-gray-900 text-lg"
-                        size="txtManropeRegular18Gray900"
+                        className="sm:text-2xl md:text-[26px] text-[28px] text-gray-900 tracking-[-0.56px] w-full"
+                        size="txtManropeExtraBold28"
                       >
-                        Cliquez sur le bouton ci-dessous pour vous inscrire
+                        Les prestations
                       </Text>
+                      <div className="flex flex-col gap-3 h-[440px] md:h-auto items-start justify-start w-full">
+                        
+                      <div className="flex sm:flex-col flex-row gap-4 items-start justify-start md:pr-10 sm:pr-5 pr-[180px] w-full">
+                          <div className="bg-white-A700 border border-gray-600 border-solid flex flex-1 flex-col items-center justify-center sm:px-5 px-6 py-[7px] rounded-[10px] w-full">
+                            <div className="flex flex-col gap-1 items-start justify-start w-full">
+                              <Text
+                                className="text-2xl md:text-[22px] text-gray-900 sm:text-xl tracking-[-0.48px] w-full"
+                                size="txtManropeBold24"
+                              >
+                                $649,900
+                              </Text>
+                              <Text
+                                className="text-gray-600 text-xs w-full"
+                                size="txtManropeSemiBold12Gray600"
+                              >
+                                Online / Cash Payment
+                              </Text>
+                            </div>
+                          </div>
+                          <div className="bg-white-A700 border border-blue_gray-100 border-solid flex flex-1 flex-col items-center justify-center sm:px-5 px-6 py-[7px] rounded-[10px] w-full">
+                            <div className="flex flex-col gap-1 items-start justify-start w-full">
+                              <Text
+                                className="text-2xl md:text-[22px] text-gray-900 sm:text-xl tracking-[-0.48px] w-full"
+                                size="txtManropeBold24"
+                              >
+                                $850 / month
+                              </Text>
+                              <Text
+                                className="text-gray-600 text-xs w-full"
+                                size="txtManropeSemiBold12Gray600"
+                              >
+                                0% EMI for 6 Months
+                              </Text>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        
+                        
+                      </div>
                     </div>
-                    {/* items-start justify-start */}
-                    <div className="flex sm:flex-col flex-row gap-2 itemps-center justify-center w-full">
-                      {/* <Input
-                        name="input"
-                        placeholder="Enter your Email"
-                        className="font-semibold md:h-auto p-0 placeholder:text-gray-700 sm:h-auto text-left text-sm w-full"
-                        wrapClassName="sm:flex-1 w-[78%] sm:w-full"
-                        type="email"
-                        shape="round"
-                        color="gray_50_02"
-                        size="sm"
-                        variant="fill"
-                      ></Input> */}
-                      <Button
-                        className="cursor-pointer font-semibold min-w-[150px] text-base text-center"
-                        shape="round"
-                        color="gray_900"
-                        size="sm"
-                        variant="fill"
-                      >
-                        Inscrivez-vous
-                      </Button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
             </div>
-            <Footer className="bg-white-A700 flex gap-2 items-center justify-center md:px-5 px-[120px] py-20 w-full" />
           </div>
-        </>
-      );
-    };
+          
+        </div>
+        <Footer className="bg-white-A700 flex gap-2 items-center justify-center md:px-5 px-[120px] py-20 w-full" />
+      </div>
+    </>
+  );
+};
+
 export default Massage;

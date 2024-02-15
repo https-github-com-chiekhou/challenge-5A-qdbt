@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import { Link } from "react-router-dom";
 
 import {
   Button,
@@ -44,20 +44,24 @@ const ListMassageViewPage = () => {
   const [etablissements, setEtablissements] = useState(null);
   useEffect(() => {
     // Fonction asynchrone pour effectuer la requête
-    const fetchObject = async () => {
-      try {
-        let response = []
+    const fetchSalons = async () => {
+      try {  
+        let response = [];
+        let jsonData = "";
         // Effectuer la requête GET vers l'API Platform Symfony
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-          response = await axios.get('http://localhost:8888/api/etablissements'); // Remplacez l'URL par celle de votre API
+          response = await fetch("http://localhost:8888/api/etablissements");
+          jsonData = await response.json();
+          //response = await axios.get('http://localhost:8888/api/etablissements');
+          //console.log(response)
         } else {
           const url = process.env.URL_API_APP
-          response = await axios.get(url + ""); 
+          //response = await axios.get(url + ""); 
+          response = await fetch("http://localhost:8888/api/etablissements");
+          jsonData = await response.json();
         }
-        
-
         // Mettre à jour l'état avec l'objet récupéré depuis la réponse
-        setEtablissements(response.data);
+        setEtablissements(jsonData["hydra:member"]);
       } catch (error) {
         // Gérer les erreurs de requête
         //console.error('Error fetching object:', error);
@@ -65,7 +69,7 @@ const ListMassageViewPage = () => {
     };
 
     // Appeler la fonction de requête
-    fetchObject();
+    fetchSalons();
   }, []); 
   return (
     <>
@@ -80,132 +84,6 @@ const ListMassageViewPage = () => {
                 Trouver votre salon
               </Text>
               <div className="flex flex-col gap-3 items-start justify-start w-full">
-                <div className="flex md:flex flex-row gap-5 items-start justify-start w-full">
-                  <div className="bg-white-A700 border border-blue_gray-100 border-solid flex flex-1 flex-col h-[60px] md:h-auto justify-start px-4 py-3.5 rounded-[10px] w-full">
-                    <Input
-                      name="frame1000001565"
-                      placeholder="Entrez la prestation ou le prestataire"
-                      className="font-semibold p-0 placeholder:text-gray-700 text-gray-700 text-left text-lg w-full"
-                      wrapClassName="flex w-auto sm:w-full"
-                      suffix={
-                        <Img
-                          className="mt-auto mb-0.5 h-6 ml-3"
-                          src="./src/assets/images/img_search_gray_700.svg"
-                          alt="search"
-                        />
-                      }
-                    ></Input>
-                  </div>
-
-                  <Button
-                    className="cursor-pointer flex items-center justify-center min-w-[124px]"
-                    rightIcon={
-                      <Img
-                        className="h-5 mt-px mb-[3px] ml-2.5"
-                        src="./src/assets/images/img_search_gray_700.svg"
-                        alt="search"
-                      />
-                    }
-                    shape="round"
-                    color="gray_900"
-                    size="md"
-                    variant="fill"
-                  >
-                    <div className="font-bold text-left text-lg">Search</div>
-                  </Button>
-                </div>
-                {/* <div className="flex flex-row flex-wrap gap-2.5 items-start justify-start max-w-[1200px] w-full">
-                  <Button
-                    className="cursor-pointer flex items-center justify-center w-[145px]"
-                    rightIcon={
-                      <Img
-                        className="h-4 mt-px mb-0.5 ml-2"
-                        src="images/img_close_gray_900.svg"
-                        alt="close"
-                      />
-                    }
-                    shape="round"
-                    color="blue_gray_100_02"
-                    size="xs"
-                    variant="outline"
-                  >
-                    <div className="font-semibold text-left text-sm">
-                      Bathrooms 2+
-                    </div>
-                  </Button>
-                  <Button
-                    className="cursor-pointer flex items-center justify-center min-w-[243px]"
-                    rightIcon={
-                      <Img
-                        className="h-4 mb-1 ml-2"
-                        src="images/img_close_gray_900.svg"
-                        alt="close"
-                      />
-                    }
-                    shape="round"
-                    color="blue_gray_100_02"
-                    size="xs"
-                    variant="outline"
-                  >
-                    <div className="font-semibold text-left text-sm">
-                      Square Feet 750 - 2000 sq. ft
-                    </div>
-                  </Button>
-                  <Button
-                    className="cursor-pointer flex items-center justify-center min-w-[151px]"
-                    rightIcon={
-                      <Img
-                        className="h-4 mt-px mb-0.5 ml-2"
-                        src="images/img_close_gray_900.svg"
-                        alt="close"
-                      />
-                    }
-                    shape="round"
-                    color="blue_gray_100_02"
-                    size="xs"
-                    variant="outline"
-                  >
-                    <div className="font-semibold text-left text-sm">
-                      Year Built 5 - 15
-                    </div>
-                  </Button>
-                  <Button
-                    className="cursor-pointer flex items-center justify-center min-w-[168px]"
-                    rightIcon={
-                      <Img
-                        className="h-4 mb-1 ml-2"
-                        src="images/img_close_gray_900.svg"
-                        alt="close"
-                      />
-                    }
-                    shape="round"
-                    color="blue_gray_100_02"
-                    size="xs"
-                    variant="outline"
-                  >
-                    <div className="!text-gray-900 font-semibold text-left text-sm">
-                      For Sale By Agent
-                    </div>
-                  </Button>
-                  <Button
-                    className="cursor-pointer flex items-center justify-center min-w-[174px]"
-                    rightIcon={
-                      <Img
-                        className="h-4 mt-px mb-0.5 ml-2"
-                        src="images/img_close_gray_900.svg"
-                        alt="close"
-                      />
-                    }
-                    shape="round"
-                    color="blue_gray_100_02"
-                    size="xs"
-                    variant="outline"
-                  >
-                    <div className="!text-gray-900 font-semibold text-left text-sm">
-                      New Construction
-                    </div>
-                  </Button>
-                </div> */}
                 <div className="flex md:flex-col flex-row gap-5 items-start justify-start w-full">
                   <SearchSalon></SearchSalon>
                 </div>
@@ -216,40 +94,34 @@ const ListMassageViewPage = () => {
           {/* <OpenLayerMap/> */}
           <div className="flex flex-col font-manrope items-center justify-center md:px-10 sm:px-5 px-[120px] w-full">
             <div className="flex flex-col md:gap-10 gap-[60px] items-center justify-start w-full">
-              <div className="flex md:flex-col flex-row md:gap-5 items-center justify-start w-full">
-                {/* <GoogleMap
-                  className="h-1 md:mt-0 mt-[423px] rounded-sm w-[12%]"
-                  showMarker={false}
-                ></GoogleMap> 
-                <Line className="h-[3px] md:ml-[0] ml-[842px] w-[11%]" />*/}
-                {/*<Img
-                  src="./src/assets/images/google_map/carte.webp"
-                  alt="map salon"
-                ></Img>
-              ></Img>*/}
-                <div className="flex mb-[236px] md:ml-[0] ml-[26px] px-4 py-6 relative w-[159px]">
-                <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <Marker position={position}>
-                    <Popup>
-                      A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                  </Marker>
+              
+              <div className="flex md:flex-col flex-row md:gap-5 items-start justify-start w-full" style={{maxHeight:"500px"}}>
+                <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '400px', width: '100%' }}>
+                    <TileLayer
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={position}>
+                      <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                      </Popup>
+                    </Marker>
+                    <Marker position={position2}>
+                      <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                      </Popup>
+                    </Marker>
                 </MapContainer>
               </div>
-              <div className="flex flex-col items-start justify-start w-full">
-                <div className="gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
 
+              <div  className="flex flex-col items-start justify-start w-full">
+              <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
+              
               { etablissements && etablissements.length > 0 ? (
               
               etablissements.map((etablissement, index) => (
-                <div key={index} className="flex flex-col items-start justify-start w-full">
-                  <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
-                    <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
+                
+                    <div key={index} className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
                       <Img
                         className="h-[260px] md:h-auto object-cover w-full"
                         src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
@@ -257,20 +129,117 @@ const ListMassageViewPage = () => {
                       />
                       <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
                         <div className="flex flex-col gap-[27px] items-start justify-start w-full">
-                          <div className="flex flex-row gap-3 items-center justify-start w-full">
-                            <Img
-                              className="h-6 w-6"
-                              src=""
-                              alt="eye"
-                            />
+                        <div className="flex flex-row gap-3 items-center justify-start w-full">
+                            
                             <Text
                               className="flex-1 text-base text-gray-900 w-auto"
                               size="txtManropeSemiBold16Gray900"
                             >
-                              Nom du salon {etablissement.name}
+                              {etablissement.name}
                             </Text>
                           </div>
                           <div className="flex flex-col gap-[21px] items-start justify-start w-full">
+                          
+                          { etablissement.prestataire.services && etablissement.prestataire.services.length > 0 ? (
+                          
+                          etablissement.prestataire.services.map((serv, index) => (
+                            <div key={index} className="flex flex-row gap-10 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                              <Img
+                                className="h-5 w-5"
+                                src="./src/assets/images/img_massage.svg"
+                                alt="volume"
+                              />
+                              <Text
+                                className="flex-1 text-base text-gray-700 w-auto"
+                                size="txtManropeSemiBold16Gray700"
+                              >
+                                {serv.nom}
+                              </Text>
+                            </div>
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
+                              <Img
+                                className="h-5 w-5"
+                                src="images/img_ticket.svg"
+                                alt="ticket"
+                              />
+                              <Text
+                                className="text-base text-gray-700 w-auto"
+                                size="txtManropeSemiBold16Gray700"
+                              >
+                                {serv.tarif}€
+                              </Text>
+                            </div>
+                          </div>
+                          ))
+                          ) : (
+                            <Text
+                                className="text-base text-gray-700 w-auto"
+                                size="txtManropeSemiBold16Gray700"
+                              >
+                                Pas de prestation
+                              </Text>
+                          )}
+                          
+                          
+                          
+                          
+                          
+                        </div>
+                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
+                          <Button
+                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
+                            shape="round"
+                            color="gray_900"
+                            size="sm"
+                            variant="fill"
+                          >
+                            <Link to={`/salon/${etablissement.id}`}>Voir plus de détails</Link>
+                          </Button>
+                          
+                        </div>
+
+                        </div>
+                      </div>
+                    </div>
+                
+              ))
+
+              ) : (
+                <Text
+                  className="flex-1 text-base text-gray-900 w-auto"
+                  size="txtManropeSemiBold16Gray900"
+                >
+                  Aucun résultat
+                </Text>
+              )}
+              </div>
+              </div>
+              {/* <div className="flex flex-col items-start justify-start w-full">
+                <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
+                  <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
+                    <Img
+                      className="h-[260px] md:h-auto object-cover w-full"
+                      src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
+                      alt="image"
+                    />
+                    <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
+                      <div className="flex flex-col gap-[27px] items-start justify-start w-full">
+                      <StarRating rating={3.5} />
+                        <div className="flex flex-row gap-3 items-center justify-start w-full">
+                          <Img
+                            className="h-6 w-6"
+                            src=""
+                            alt="eye"
+                          />
+                          <Text
+                            className="flex-1 text-base text-gray-900 w-auto"
+                            size="txtManropeSemiBold16Gray900"
+                          >
+                            Nom du salon
+                          </Text>
+                        </div>
+                        <div className="flex flex-col gap-[21px] items-start justify-start w-full">
                           <div className="flex flex-row gap-10 items-center justify-between w-full">
                             <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
                               <Img
@@ -340,112 +309,6 @@ const ListMassageViewPage = () => {
                           </Button>
                           
                         </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-
-              ) : (
-                <Text
-                  className="flex-1 text-base text-gray-900 w-auto"
-                  size="txtManropeSemiBold16Gray900"
-                >
-                  Aucun résultat
-                </Text>
-              )}
-
-
-              {/* <div className="flex flex-col items-start justify-start w-full">
-                <div className="md:gap-5 gap-6 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
-                  <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
-                    <Img
-                      className="h-[260px] md:h-auto object-cover w-full"
-                      src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
-                      alt="image"
-                    />
-                    <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
-                      <div className="flex flex-col gap-[27px] items-start justify-start w-full">
-                      <StarRating rating={3.5} />
-                        <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Text
-                            className="flex-1 text-base text-gray-900 w-auto"
-                            size="txtManropeSemiBold16Gray900"
-                          >
-                            Nom du salon
-                          </Text>
-                        </div>
-                        <div className="flex flex-col gap-[21px] items-start justify-start w-full">
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="volume"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_ticket.svg"
-                                alt="ticket"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="icon"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_settings_20.svg"
-                                alt="settings"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
-                          <Button
-                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
-                            shape="round"
-                            color="gray_900"
-                            size="sm"
-                            variant="fill"
-                          >
-                            Voir plus de détails
-                          </Button>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -459,6 +322,11 @@ const ListMassageViewPage = () => {
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                       <StarRating rating={4.5} />
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
+                          <Img
+                            className="h-6 w-6"
+                            src=""
+                            alt="eye"
+                          />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -483,7 +351,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -511,7 +379,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_21.svg"
@@ -521,7 +389,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                                prix
+                               prix
                               </Text>
                             </div>
                           </div>
@@ -536,6 +404,7 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
+                          
                         </div>
                       </div>
                     </div>
@@ -550,6 +419,11 @@ const ListMassageViewPage = () => {
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                       <StarRating rating={3.5} />
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
+                          <Img
+                            className="h-6 w-6"
+                            src=""
+                            alt="eye"
+                          />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -572,7 +446,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -600,7 +474,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_22.svg"
@@ -610,7 +484,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                                prix
+                               prix
                               </Text>
                             </div>
                           </div>
@@ -625,363 +499,11 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
+                          
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
-                      className="h-[260px] md:h-auto object-cover w-full"
-                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
-                      alt="image"
-                    />
-                    <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
-                      <div className="flex flex-col gap-[27px] items-start justify-start w-full">
-                        <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Text
-                            className="flex-1 text-base text-gray-900 w-auto"
-                            size="txtManropeSemiBold16Gray900"
-                          >
-                            Nom du salon
-                          </Text>
-                        </div>
-                        <div className="flex flex-col gap-[21px] items-start justify-start w-full">
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="volume"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_ticket.svg"
-                                alt="ticket"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="icon"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_settings_23.svg"
-                                alt="settings"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
-                          <Button
-                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
-                            shape="round"
-                            color="gray_900"
-                            size="sm"
-                            variant="fill"
-                          >
-                            Voir plus de détails
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
-                      className="h-[260px] md:h-auto object-cover w-full"
-                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
-                      alt="image"
-                    />
-                    <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
-                      <div className="flex flex-col gap-[27px] items-start justify-start w-full">
-                        <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Text
-                            className="flex-1 text-base text-gray-900 w-auto"
-                            size="txtManropeSemiBold16Gray900"
-                          >
-                            Nom du salon
-                          </Text>
-                        </div>
-                        <div className="flex flex-col gap-[21px] items-start justify-start w-full">
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="volume"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_ticket.svg"
-                                alt="ticket"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="icon"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_settings_24.svg"
-                                alt="settings"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
-                          <Button
-                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
-                            shape="round"
-                            color="gray_900"
-                            size="sm"
-                            variant="fill"
-                          >
-                            Voir plus de détails
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
-                      className="h-[260px] md:h-auto object-cover w-full"
-                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
-                      alt="image"
-                    />
-                    <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
-                      <div className="flex flex-col gap-[27px] items-start justify-start w-full">
-                        <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Text
-                            className="flex-1 text-base text-gray-900 w-auto"
-                            size="txtManropeSemiBold16Gray900"
-                          >
-                            Nom du salon
-                          </Text>
-                        </div>
-                        <div className="flex flex-col gap-[21px] items-start justify-start w-full">
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="volume"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_ticket.svg"
-                                alt="ticket"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="icon"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_settings_25.svg"
-                                alt="settings"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
-                          <Button
-                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
-                            shape="round"
-                            color="gray_900"
-                            size="sm"
-                            variant="fill"
-                          >
-                            Voir plus de détails
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
-                      className="h-[260px] md:h-auto object-cover w-full"
-                      src="./src/assets/images/exemple_list_salon/img3_salon.jpg"
-                      alt="image"
-                    />
-                    <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
-                      <div className="flex flex-col gap-[27px] items-start justify-start w-full">
-                        <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Text
-                            className="flex-1 text-base text-gray-900 w-auto"
-                            size="txtManropeSemiBold16Gray900"
-                          >
-                            Nom du salon
-                          </Text>
-                        </div>
-                        <div className="flex flex-col gap-[21px] items-start justify-start w-full">
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="volume"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_ticket.svg"
-                                alt="ticket"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="icon"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_settings_26.svg"
-                                alt="settings"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
-                          <Button
-                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
-                            shape="round"
-                            color="gray_900"
-                            size="sm"
-                            variant="fill"
-                          >
-                            Voir plus de détails
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
                   
                   <div className="flex flex-1 flex-col h-[612px] md:h-auto items-start justify-start w-full">
                     <Img
@@ -993,6 +515,11 @@ const ListMassageViewPage = () => {
                       <div className="flex flex-col gap-[27px] items-start justify-start w-full">
                       <StarRating rating={3.5} />
                         <div className="flex flex-row gap-3 items-center justify-start w-full">
+                          <Img
+                            className="h-6 w-6"
+                            src=""
+                            alt="eye"
+                          />
                           <Text
                             className="flex-1 text-base text-gray-900 w-auto"
                             size="txtManropeSemiBold16Gray900"
@@ -1015,7 +542,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_ticket.svg"
@@ -1043,7 +570,7 @@ const ListMassageViewPage = () => {
                                 type de massage
                               </Text>
                             </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
+                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
                               <Img
                                 className="h-5 w-5"
                                 src="images/img_settings_27.svg"
@@ -1053,7 +580,7 @@ const ListMassageViewPage = () => {
                                 className="text-base text-gray-700 w-auto"
                                 size="txtManropeSemiBold16Gray700"
                               >
-                                prix
+                               prix
                               </Text>
                             </div>
                           </div>
@@ -1068,94 +595,7 @@ const ListMassageViewPage = () => {
                           >
                             Voir plus de détails
                           </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col h-[512px] md:h-auto items-start justify-start w-full">
-                    <Img
-                      className="h-[260px] md:h-auto object-cover w-full"
-                      src="./src/assets/images/exemple_list_salon/img1_salon.jpg"
-                      alt="image"
-                    />
-                    <div className="bg-white-A700 border border-red-100 border-solid flex flex-col items-start justify-start px-5 py-[10px] rounded-bl-[10px] rounded-br-[10px] w-full">
-                      <div className="flex flex-col gap-[27px] items-start justify-start w-full">
-                        <div className="flex flex-row gap-3 items-center justify-start w-full">
-                          <Text
-                            className="flex-1 text-base text-gray-900 w-auto"
-                            size="txtManropeSemiBold16Gray900"
-                          >
-                            Nom du salon
-                          </Text>
-                        </div>
-                        <div className="flex flex-col gap-[21px] items-start justify-start w-full">
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="volume"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_ticket.svg"
-                                alt="ticket"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                          <div className="flex flex-row gap-10 items-center justify-between w-full">
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-start w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="./src/assets/images/img_massage.svg"
-                                alt="icon"
-                              />
-                              <Text
-                                className="flex-1 text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                type de massage
-                              </Text>
-                            </div>
-                            <div className="flex flex-1 flex-row gap-3 items-center justify-between w-full">
-                              <Img
-                                className="h-5 w-5"
-                                src="images/img_settings_28.svg"
-                                alt="settings"
-                              />
-                              <Text
-                                className="text-base text-gray-700 w-auto"
-                                size="txtManropeSemiBold16Gray700"
-                              >
-                                prix
-                              </Text>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-row gap-[31px] items-center justify-start w-full">
-                          <Button
-                            className="cursor-pointer flex-1 font-semibold h-12 text-base text-center w-full"
-                            shape="round"
-                            color="gray_900"
-                            size="sm"
-                            variant="fill"
-                          >
-                            Voir plus de détails
-                          </Button>
+                          
                         </div>
                       </div>
                     </div>
@@ -1210,24 +650,6 @@ const ListMassageViewPage = () => {
                   >
                     5
                   </Button>
-                  <Button
-                    className="cursor-pointer flex items-center justify-center min-w-[134px]"
-                    rightIcon={
-                      <Img
-                        className="h-4 mt-px mb-[5px] ml-1"
-                        src="./src/assets/images/img_arrowright.svg"
-                        alt="arrow_right"
-                      />
-                    }
-                    shape="round"
-                    color="transparent"
-                    size="sm"
-                    variant="outline"
-                  >
-                    <div className="font-semibold text-base text-left">
-                      Next Page
-                    </div>
-                  </Button>
                 </div>
                 <Button
                   className="cursor-pointer flex items-center justify-center min-w-[134px]"
@@ -1251,10 +673,6 @@ const ListMassageViewPage = () => {
             </div>
           </div>
         </div>
-        </div>
-      </div>
-      </div>
-      </div>
       </div>
     </>
   );

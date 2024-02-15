@@ -28,7 +28,7 @@ import MakeReservation from "./pages/MakeReservation.jsx";
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Login = lazy(() => import("./pages/Login"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const ListMassageViewPage = lazy(() => import("./pages/ListMassage"));
+const ListMassageViewPage = lazy(() => import("./pages/Massages/massages"));
 const CompagnyViewPage = lazy(() => import("./pages/Compagny"));
 const Register = lazy(() => import("./pages/Register"));
 const Planning = lazy(() => import("./pages/Prestataire/Salarie/Planning"));
