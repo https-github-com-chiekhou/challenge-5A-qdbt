@@ -5,23 +5,22 @@ on:
     branches:
       - dev
 
+# Définition des jobs
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  test:
+    # Utilisation de l'image Node.js pour exécuter les tests
+    docker:
+      - image: node:14
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          cd ./Front
+          npm install
+      # Exécution des tests Jest
+      - run:
+          name: Run Jest tests
+          command: npm run test
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '14'
-
-    - name: Install Dependencies
-      run: |
-        cd ./Front
-        npm install
 
     # - name: Build and Test
     #   run: |

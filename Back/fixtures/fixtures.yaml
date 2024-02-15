@@ -10,8 +10,8 @@ App\Entity\User:
 App\Entity\Creneau:
   creneau_{1..10}:
     day: '<dayOfWeek()>'
-    startTime: "<DateTime('H:i:s')>"
-    endTime: "<DateTime('H:i:s')>" 
+    startTime: "<DateTime()->format("d:m:Y:H:i:s")>"
+    endTime: "<DateTime()->format("d:m:Y:H:i:s")>" 
     salarie: '@salarie_*'
  
 
@@ -45,9 +45,9 @@ App\Entity\Reservation:
   reservation_{1..10}:
     status: "<randomElement(['Disponible', 'Non-Disponible'])>"
     commentaire: '<text()>'
-    date : "<dateTime()>" 
-    startTime: '<dateTime()>'
-    endTime: '<dateTime()>'
+    date : "<dateTime()->format("d:m:Y:H:i:s")>" 
+    startTime: '<dateTime()->format("d:m:Y:H:i:s")>'
+    endTime: '<dateTime()->format("d:m:Y:H:i:s")>'
     client : '@user_<rand(1, 10)>'
     salarie: '@salarie_<rand(1, 10)>'
     prestataire: '@prestataire_<rand(1, 10)>'

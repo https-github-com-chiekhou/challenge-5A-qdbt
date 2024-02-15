@@ -5,6 +5,7 @@ const Homepage = lazy(() => import("./pages/Homepage"));
 const Login = lazy(() => import("./pages/Login"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ListMassageViewPage = lazy(() => import("./pages/ListMassage"));
+const CompagnyViewPage = lazy(() => import("./pages/Compagny"));
 const Register = lazy(() => import("./pages/Register"));
 const Planning = lazy(() => import("./pages/Prestataire/Salarie/Planning"));
 const PlanningSalarie = lazy(() =>
@@ -61,6 +62,7 @@ const ProjectRoutes = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/salons" element={<ListMassageViewPage />} />
+          <Route path="/Compagny" element={<CompagnyViewPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
