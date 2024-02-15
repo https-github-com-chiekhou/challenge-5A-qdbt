@@ -34,31 +34,35 @@ class ModifyReservation extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(Reservation $reservation): Reservation
+    public function __invoke(Request $request, Reservation $reservation): Reservation
     {
         $currentDate = new \DateTimeImmutable();
+        $requestData = json_decode($request->getContent(), true);
 
         if ($reservation->getDate() >= $currentDate && $reservation->getStartTime() >= $currentDate && $reservation->getEndTime() >= $currentDate) {
-            // Mettre à jour la réservation avec les nouvelles valeurs
-            $reservation->setDate(/* Nouvelle date */);
-            $reservation->setStartTime(/* Nouvelle heure de début */);
-            $reservation->setEndTime(/* Nouvelle heure de fin */);
 
-            // Enregistrer les modifications dans la base de données
+            $reservation->setDate($requestData['date']);
+            $reservation->setStartTime($requestData['startTime']);
+            $reservation->setEndTime($requestData['endTime']);
+
             $this->entityManager->flush();
 
             $clientEmail = $this->email->create(
-                'eddygomet@gmail.com',
+                'api-platform@api.com',
                 $this->user->getEmail(),
-                'Modification de votre renddez vous pour la réservation n°' . $reservation->getId(),
+                'Modification de votre rendez-vous pour la réservation n°' . $reservation->getId(),
                 'Modification effectuée'
             );
-            // Retourner la réservation modifiée
+
+            $this->mailer->send($clientEmail);
         } else {
             // Gérer le cas où la date de réservation est antérieure à la date actuelle
             // Vous pouvez rejeter la modification ou effectuer d'autres actions nécessaires
         }
+
+        // Retourner la réservation modifiée
         return $reservation;
     }
+
 
 }

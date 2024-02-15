@@ -39,10 +39,6 @@ class CancelReservation extends AbstractController
      */
     public function __invoke(Reservation $reservation)
     {
-        // Supprimer l'entité de la base de données
-        $this->entityManager->remove($reservation);
-        $this->entityManager->flush();
-
         // Envoyer un e-mail pour notifier la suppression de l'objet
         $clientEmail = $this->email->create(
             'eddygomet@gmail.com',
@@ -50,6 +46,11 @@ class CancelReservation extends AbstractController
             'Annulation de la réservation n°' . $reservation->getId(),
             'Reservation annulée'
         );
+        $this->mailer->send($clientEmail);
+
+        // Supprimer l'entité de la base de données
+        $this->entityManager->remove($reservation);
+        $this->entityManager->flush();
 
         // Retourner une réponse, par exemple un code de succès HTTP 204
         return $this->json([], 204);

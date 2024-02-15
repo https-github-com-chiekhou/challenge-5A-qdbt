@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\HttpOperation;
-use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use App\Controller\CancelReservation;
-use App\Controller\CreateReservation;
 use App\Controller\GetReservation;
 use App\Controller\ModifyReservation;
 use App\Repository\ReservationRepository;
@@ -22,41 +23,28 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     security: 'is_granted("ROLE_USER")',
     normalizationContext: ['groups' => ['reservation:read']],
-    denormalizationContext: ['groups' => ['reservation:create', 'user:update']],
+    denormalizationContext: ['groups' => ['reservation:create', 'reservation:update']],
     operations: [
         new GetCollection(
+            uriTemplate: '/reservations/list',
             security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['reservation:read']],
             securityMessage: 'Sorry but you are not amdin.'
         ),
-        new HttpOperation(
-            method: Request::METHOD_POST,
-            security:'is_granted("ROLE_USER")',
-            uriTemplate: '/reservations',
-//            controller: CreateReservation::class,
-            description: 'Créer une réservation',
-            denormalizationContext: ['groups'=>['reservation:create']]
-        ),
-//        new HttpOperation(
-//            method: Request::METHOD_POST,
-//            security:'is_granted("ROLE_USER")',
-//            uriTemplate: '/prestataire/{id}/create-reservation',
-//            uriVariables: [
-//                'id' => new Link(fromClass: Prestataire::class, fromProperty: 'id', toProperty: 'prestataire')
-//            ],
-//            controller: CreateReservation::class,
-//            description: 'Créer une réservation depuis l\'id du salarié',
-//        ),
-        new HttpOperation(
-            method: Request::METHOD_PATCH,
+        new Delete(
             security: 'is_granted("ROLE_USER")',
-            uriTemplate: '/reservation/{id}/modify',
-            controller: ModifyReservation::class
-        ),
-        new HttpOperation(
-            method: Request::METHOD_DELETE,
-            security: 'is_granted("ROLE_USER")',
-            uriTemplate: '/reservation/{id}/cancel',
             controller: CancelReservation::class
+        ),
+        new Patch(
+            security: 'is_granted("ROLE_USER")',
+            controller: ModifyReservation::class,
+            denormalizationContext: ['groups' => ['reservation:update']]
+        ),
+        new Post(
+            security: 'is_granted("ROLE_USER")',
+            uriTemplate: '/reservations',
+            description: 'Créer une réservation',
+            denormalizationContext: ['groups' => ['reservation:create']]
         ),
         new HttpOperation(
             method: Request::METHOD_GET,
@@ -69,7 +57,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 )]
 class Reservation
 {
-    #[ApiProperty(identifier: true)]
+//    #[ApiProperty(identifier: true)]
     #[Groups(['reservation:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -77,23 +65,23 @@ class Reservation
     private ?int $id = null;
 
     #[Assert\NotBlank()]
-    #[Groups(['reservation:create', 'reservation:read', 'user:update'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[Groups(['reservation:create', 'reservation:read'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[Groups(['reservation:create', 'reservation:read'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date = null;
 
-    #[Groups(['reservation:create', 'reservation:read'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
-    #[Groups(['reservation:create', 'reservation:read'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
