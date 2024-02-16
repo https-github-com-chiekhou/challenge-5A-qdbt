@@ -80,3 +80,9 @@ button:focus-visible {
 #imageaccueil {
   max-width: 50%;
 }
+
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
