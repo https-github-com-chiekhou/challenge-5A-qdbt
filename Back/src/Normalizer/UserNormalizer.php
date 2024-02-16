@@ -50,12 +50,20 @@ class UserNormalizer
 
     private function isUserHimself($object)
     {
-        return $object->getPrenom() === $this->tokenStorage->getToken()->getPrenom();
+     
+        $token = $this->tokenStorage->getToken();
+    
+        if ($token && $token->getUser() instanceof User) {
+            $user = $token->getUser();
+            
+            return $user->getEmail() === $object->getEmail();
+        }
+        
+        return false;
     }
-
     private function passOn($object, $format, $context)
     {
-        if (!$this->serializer instanceof NormalizerInterface) {
+        if (!$this->normalizer instanceof NormalizerInterface) {
             throw new \LogicException(
                 sprintf(
                     'Cannot normalize object "%s" becouse the injected serializer is not a normalizer.',
@@ -66,6 +74,6 @@ class UserNormalizer
 
         $context[self::USER_ATTRIBUTE_NORMALIZER_ALREADY_CALLED] = true;
 
-        return $this->serializer->normalize($object, $format, $context);
+        return $this->normalizer->normalize($object, $format, $context);
     }
 }

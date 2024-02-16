@@ -134,7 +134,7 @@ const DayOffSalarie = () => {
                     >
                       <td className="px-6 py-4 text-sm">{dayOff.name}</td>
 
-                      <td className="px-6 py-4 text-sm">
+                      <td className="px-6 py-4 m-0 text-sm">
                         {new Date(dayOff.dateStart).toLocaleDateString([], {
                           day: "2-digit",
                           month: "2-digit",

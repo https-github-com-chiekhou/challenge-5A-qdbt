@@ -1,7 +1,7 @@
 #<<<<<<<<<<Start: PHP-FPM Image Target>>>>>>>>>>#
 FROM php:8.2-fpm-alpine as php
 
-RUN apk update
+RUN apk update 
 RUN apk add curl
 
 # Installing and enabling required PHP extension
@@ -54,6 +54,9 @@ RUN composer install --no-dev --no-scripts
 COPY . /srv/app/
 
 RUN APP_ENV=prod composer run auto-scripts
+# Installation de PHPUnit
+RUN wget -O phpunit https://phar.phpunit.de/phpunit-9.phar && chmod +x phpunit && mv phpunit /usr/local/bin/phpunit
+
 
 #<<<<<<<<<<End: PHP-FPM Image Target>>>>>>>>>>#
 

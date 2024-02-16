@@ -25,26 +25,35 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']]),
+        new GetCollection(security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') "),
+        new Get(security: "is_granted('ROLE_ADMIN') "),
+        new Post(security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') and is_granted('ROLE_PRESTATAIRE') ",
+        processor: UserPasswordHasher::class,
+         validationContext: ['groups' => ['Default', 'user:create']]),
         new Put(
-                // security: "is_granted('ROLE_USER') and object.owner == user",
+            security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') ",
                 uriTemplate: '/users/{id}/reset-password',
                 controller: ResetPassword::class,
                 denormalizationContext: ['groups' => ['put-reset-password']],
                 validationContext:[ 'groups' => [ "put-reset-password"]]
             ),
-        new Put(processor: UserPasswordHasher::class,
+        new Put(security: "is_granted('ROLE_ADMIN') ",processor: UserPasswordHasher::class,
         denormalizationContext: ['groups' => ['user:update']],),
-        new Patch(processor: UserPasswordHasher::class),
-        new Delete()
+        new Patch(processor: UserPasswordHasher::class,
+        security: "is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') "),
+        new Delete(security: "is_granted('ROLE_ADMIN') ")
     ],
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_PRESTATAIRE = 'ROLE_PRESTATAIRE';
+   
+
+    
     #[Groups(['user:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -140,13 +149,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Reservation::class)]
     private Collection $reservations;
 
-    #[Groups(['user:read'])]
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: FeedBack::class)]
-    private Collection $feedback;
-
+    
     #[Groups(['user:read'])]
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Comment::class)]
     private Collection $comments;
+
+    #[Groups(['user:read'])]
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: FeedBack::class)]
+    private Collection $feedback;
 
     public function __construct()
     {
@@ -372,35 +382,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Feedback>
-     */
-    public function getFeedback(): Collection
-    {
-        return $this->feedback;
-    }
-
-    public function addFeedback(FeedBack $feedback): static
-    {
-        if (!$this->feedback->contains($feedback)) {
-            $this->feedback->add($feedback);
-            $feedback->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFeedback(FeedBack $feedback): static
-    {
-        if ($this->feedback->removeElement($feedback)) {
-            // set the owning side to null (unless already changed)
-            if ($feedback->getClient() === $this) {
-                $feedback->setClient(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getIsValid(): ?bool
     {
@@ -450,6 +431,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getClient() === $this) {
                 $comment->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FeedBack>
+     */
+    public function getFeedBack(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedBack(FeedBack $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedack);
+            $feedback->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedBack(FeedBack $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getClient() === $this) {
+                $feedback->setClient(null);
             }
         }
 

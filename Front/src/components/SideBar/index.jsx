@@ -33,8 +33,8 @@ const SideBar = () => {
             {(userRole === "ROLE_PRESTATAIRE" && (
               <>
                 <a
-                  href="{{ path('app_dashboard') }}"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_dashboard' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  href="/prestataire"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -58,11 +58,11 @@ const SideBar = () => {
                       />
                     </svg>
                   </span>
-                  <span className="text-sm sidebar-label">Statistiques P</span>
+                  <span className="text-sm sidebar-label">Statistiques </span>
                 </a>
                 <a
                   href="/prestataire/salarie/list-salaries"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_admin_users' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -84,7 +84,7 @@ const SideBar = () => {
                 </a>
                 <a
                   href="/prestataire/salarie/planning"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_admin_support' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -107,7 +107,7 @@ const SideBar = () => {
 
                 <a
                   href="/prestataire/salarie/dayoff"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 {% if app.request.get('_route') starts with 'app_doctor_service' %} bg-indigo-600 text-white border-indigo-600 {% endif %}"
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -129,7 +129,7 @@ const SideBar = () => {
                 </a>
                 <a
                   href="/prestataire/etablissement"
-                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-indigo-600 text-white "
+                  className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4] "
                 >
                   <span className="flex h-10 w-10 items-center justify-center">
                     <svg
@@ -155,7 +155,7 @@ const SideBar = () => {
                 <>
                   <a
                     href="/admin/dashboard"
-                    className="flex items-center gap-1 rounded-md border border-gray-300 bg-indigo-600 text-white"
+                    className="flex items-center gap-1 rounded-md border border-gray-300 bg-[#d0e6f4]"
                   >
                     <span className="flex h-10 w-10 items-center justify-center">
                       <svg
@@ -176,8 +176,8 @@ const SideBar = () => {
                     <span className="text-sm sidebar-label">Utilisateurs</span>
                   </a>
                   <a
-                    href=""
-                    className="flex items-center gap-1 rounded-md border border-gray-300  bg-indigo-600 text-white "
+                    href="/admin"
+                    className="flex items-center gap-1 rounded-md border border-gray-300  bg-[#d0e6f4] "
                   >
                     <span className="flex h-10 w-10 items-center justify-center">
                       <svg
@@ -195,38 +195,15 @@ const SideBar = () => {
                         />
                       </svg>
                     </span>
-                    <span className="text-sm sidebar-label">
-                      Statistiques A
-                    </span>
+                    <span className="text-sm sidebar-label">Statistiques</span>
                   </a>
+
                   <div className="w-full py-3" style={{ height: "1px" }}>
                     <div
                       className="w-full bg-gray-300"
                       style={{ height: "1px" }}
                     ></div>
                   </div>
-                  {/* <a
-                    href="{{ path('app_logout') }}"
-                    className="flex items-center gap-1 rounded-md border border-red-300 text-red-600"
-                  >
-                    <span className="flex h-10 w-10 items-center justify-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="h-6 w-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-                        />
-                      </svg>
-                    </span>
-                    <span className="text-sm sidebar-label">Déconnecter</span>
-                  </a> */}
                 </>
               ))}
           </nav>

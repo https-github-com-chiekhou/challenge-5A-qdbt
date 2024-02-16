@@ -169,7 +169,7 @@ const Header1 = () => {
           </a>
 
           <a
-            href="#"
+            href="/compagny"
             className="flex items-center font-semibold leading-6 text-gray-900"
           >
             Company
@@ -201,7 +201,7 @@ const Header1 = () => {
 
               <a href="">
                 <button
-                  className="btn btn-danger bg-indigo-600 text-white"
+                  className="btn btn-danger bg-[#d0e6f4] text-white"
                   onClick={handleLogout}
                 >
                   Déconnexion

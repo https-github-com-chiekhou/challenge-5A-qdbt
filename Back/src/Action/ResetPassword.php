@@ -40,38 +40,38 @@ class ResetPassword
 
     public function __invoke(User $data)
     {
-        // $reset = new ResetPassword();
-        // $reset();
+        $reset = new ResetPassword();
+        $reset();
 
-        // /** @var UserInterface|null $currentUser */
-        // $currentUser = $this->security->getUser();
+        /** @var UserInterface|null $currentUser */
+        $currentUser = $this->security->getUser();
 
-        // $currentUserEmail = $currentUser->getEmail();
-        // $currentUserNom = $currentUser->getNom();
-        // $currentUserPrenom = $currentUser->getPrenom();
-        // $currentUserTelephone = $currentUser->getTelephone();
-        // $currentUserIsValid = $currentUser->getIsValid();
+        $currentUserEmail = $currentUser->getEmail();
+        $currentUserNom = $currentUser->getNom();
+        $currentUserPrenom = $currentUser->getPrenom();
+        $currentUserTelephone = $currentUser->getTelephone();
+        $currentUserIsValid = $currentUser->getIsValid();
         
 
-        // if($currentUser !== null){
+        if($currentUser !== null){
             $this->validator->validate($data);
-        // }
-        // else {
-        //     // L'utilisateur n'est pas authentifié, vous pouvez gérer en conséquence (par exemple, lancer une exception ou renvoyer une réponse d'erreur)
-        //     throw new \RuntimeException('L\'utilisateur n\'est pas authentifié. Impossible de réinitialiser le mot de passe.');
-        // }
+        }
+        else {
+            // L'utilisateur n'est pas authentifié, vous pouvez gérer en conséquence (par exemple, lancer une exception ou renvoyer une réponse d'erreur)
+            throw new \RuntimeException('L\'utilisateur n\'est pas authentifié. Impossible de réinitialiser le mot de passe.');
+        }
         $data->setPassword(
             $this->passwordHasher->hashPassword(
                 $data, $data->getNewPassword()
             )
         );
 
-        // $data->setPasswordChangeDate(time());
-        // $data->setEmail($currentUserEmail);
-        // $data->setNom($currentUserNom);
-        // $data->setPrenom($currentUserPrenom);
-        // $data->setTelephone($currentUserTelephone);
-        // $data->setIsValid($currentUserIsValid);
+        $data->setPasswordChangeDate(time());
+        $data->setEmail($currentUserEmail);
+        $data->setNom($currentUserNom);
+        $data->setPrenom($currentUserPrenom);
+        $data->setTelephone($currentUserTelephone);
+        $data->setIsValid($currentUserIsValid);
 
 
         

@@ -20,12 +20,12 @@ use ApiPlatform\Metadata\Delete;
     normalizationContext: ['groups' => ['salarie:read']],
     denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
-        new Put(denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Get(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Post(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
+        new Put(security: "is_granted('ROLE_PRESTATAIRE')",denormalizationContext: ['groups' => ['salarie:create', 'salarie:update']]),
+        new Patch(security: "is_granted('ROLE_PRESTATAIRE')"),
+        new Delete(security: "is_granted('ROLE_PRESTATAIRE')")
     ],
 )]
 #[ORM\Entity(repositoryClass: SalarieRepository::class)]

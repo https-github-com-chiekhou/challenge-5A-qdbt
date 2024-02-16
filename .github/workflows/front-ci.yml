@@ -1,0 +1,28 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - dev
+
+# Définition des jobs
+jobs:
+  test:
+    # Utilisation de l'image Node.js pour exécuter les tests
+    docker:
+      - image: node:14
+    steps:
+      - name: Install Dependencies
+        run: |
+          cd ./Front
+          npm install
+      # Exécution des tests Jest
+      - run:
+          name: Run Jest tests
+          command: npm run test
+
+
+    # - name: Build and Test
+    #   run: |
+    #     npm run build
+    #     npm test

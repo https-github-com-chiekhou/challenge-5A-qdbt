@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserInfoFromToken } from "../localStorage";
+import { getUserInfoFromToken, getItem } from "../localStorage";
 import { Link } from "react-router-dom";
 
 const Profil = () => {
@@ -11,11 +11,21 @@ const Profil = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
+        const token = getItem("token");
+        console.log(token);
         const userInfo = await getUserInfoFromToken();
+
+        console.log(userInfo);
 
         if (userInfo && userInfo.id) {
           const response = await fetch(
-            `http://localhost:8888/api/users/${userInfo.id}`
+            `http://localhost:8888/api/users/${userInfo.id}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
           );
 
           if (response.ok) {
