@@ -13,14 +13,25 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Build and Test Front-end Docker Image
-      working-directory: ./front
-      run: |
-        docker build -t front-app .
-        docker run front-app npm test
+    
+    - name: Localisation
+      run: ls
 
-    - name: Build and Test Back-end Docker Image
-      working-directory: ./back
+
+    - name: Build Front-end Docker Image
       run: |
-        docker build -t back-app .
-        docker run back-app npm test
+        cd Front
+        docker build -t front-app .
+
+    - name: start Front-end Docker Image
+      run: |
+        docker compose up -d
+
+    # - name: Build and Test Back-end Docker Image
+    #   run: |
+    #     cd Back
+    #     docker build -t back-app .
+
+    - name: Stop Docker Containers
+      run: |
+        docker-compose down

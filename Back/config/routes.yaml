@@ -1,5 +1,17 @@
-#controllers:
+# controllers:
 #    resource:
 #        path: ../src/Controller/
 #        namespace: App\Controller
 #    type: attribute
+
+auth:
+  path: /auth
+  methods: ['POST']
+
+logout:
+  path: /logout
+
+default_confirm_token:
+  path: /confirm-user/{token}
+  controller: App\Controller\ConfirmationUserController::confirmUser
+  methods: ['GET']

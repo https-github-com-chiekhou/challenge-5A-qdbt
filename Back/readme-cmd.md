@@ -49,3 +49,5 @@ If make is not enabled :
 > bin/console doctrine:migrations:migrate -n
 > bin/console hautelook:fixture:load -n
 ```
+
+docker compose exec phpunit
