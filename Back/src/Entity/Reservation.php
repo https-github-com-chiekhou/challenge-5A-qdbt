@@ -2,70 +2,107 @@
 
 namespace App\Entity;
 
-use App\Repository\ReservationRepository;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Put;
-use ApiPlatform\Metadata\Delete;
+use App\Controller\CancelReservation;
+use App\Controller\GetReservation;
+use App\Controller\ModifyReservation;
+use App\Repository\ReservationRepository;
+use App\ReservationModifiedProcessor;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ApiResource(
+    security: 'is_granted("ROLE_USER")',
     normalizationContext: ['groups' => ['reservation:read']],
     denormalizationContext: ['groups' => ['reservation:create', 'reservation:update']],
     operations: [
-        new GetCollection(),
-        new Get(),
-        new Post(denormalizationContext: ['groups' => ['reservation:create', 'reservation:update']]),
-        new Put(denormalizationContext: ['groups' => ['reservation:create', 'reservation:update']]),
-        new Patch(),
-        new Delete()
+        new GetCollection(
+            uriTemplate: '/reservations/list',
+            security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['reservation:read']],
+            securityMessage: 'Sorry but you are not amdin.'
+        ),
+        new Delete(
+            security: 'is_granted("ROLE_USER")',
+            controller: CancelReservation::class
+        ),
+        new Patch(
+            security: 'is_granted("ROLE_USER")',
+            controller: ModifyReservation::class,
+            denormalizationContext: ['groups' => ['reservation:update']],
+//            processor: ReservationModifiedProcessor::class
+        ),
+        new Post(
+            security: 'is_granted("ROLE_USER")',
+            uriTemplate: '/reservations',
+            description: 'Créer une réservation',
+            denormalizationContext: ['groups' => ['reservation:create']]
+        ),
+        new Get(
+            uriTemplate: '/reservations',
+            controller: GetReservation::class,
+            normalizationContext: ['groups' => ['reservation:read']],
+            security: 'is_granted("ROLE_USER")'
+        )
     ],
 )]
 class Reservation
 {
+//    #[ApiProperty(identifier: true)]
+    #[Groups(['reservation:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['reservation:create', 'reservation:update'])]
+    #[Assert\NotBlank()]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[Groups(['reservation:create', 'reservation:update'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[Groups(['reservation:create', 'reservation:update'])]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date = null;
 
-    #[Groups(['reservation:create', 'reservation:update'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
-    #[Groups(['reservation:create', 'reservation:update'])]
+    #[Groups(['reservation:create', 'reservation:read', 'reservation:update'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endTime = null;
 
+    #[Groups(['reservation:read'])]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[Assert\NotBlank()]
+    #[Groups(['reservation:create', 'reservation:read'])]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Salarie::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salarie $salarie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[Assert\NotBlank()]
+    #[Groups(['reservation:create', 'reservation:read'])]
+    #[ORM\ManyToOne(inversedBy: 'reservations', targetEntity: Prestataire::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Prestataire $prestataire = null;
-
 
 
     public function getId(): ?int
@@ -97,7 +134,18 @@ class Reservation
         return $this;
     }
 
-  
+    public function getDate(): ?\DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeImmutable $date): static
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
     public function getStartTime(): ?\DateTimeInterface
     {
         return $this->startTime;
@@ -154,18 +202,6 @@ class Reservation
     public function setPrestataire(?Prestataire $prestataire): static
     {
         $this->prestataire = $prestataire;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): static
-    {
-        $this->date = $date;
 
         return $this;
     }

@@ -2,13 +2,14 @@
 
 namespace App\Email;
 
+use AllowDynamicProperties;
 use App\Entity\User;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
-class Mailer
+#[AllowDynamicProperties] class Mailer
 {
    
     private $mailer;
